@@ -7,7 +7,6 @@ from enum import Enum
 import qfluentwidgets as qfw
 from ui.settings_ui.settings_audiovisual_ui import SettingsAudiovisualUI, sett_av_ui_cfg
 from app_config import AppEnums
-from app_const_var import AssetsPathTXT
 
 
 class SettingsAudiovisualLogic(SettingsAudiovisualUI):
@@ -25,7 +24,7 @@ class SettingsAudiovisualLogic(SettingsAudiovisualUI):
     def singal_connection(self):
         """信号连接函数"""
 
-        self.cfg.dark_light.valueChanged.connect(self.change_theme)  # type: ignore
+        self.cfg.DarkLight.valueChanged.connect(self.change_theme)  # type: ignore
 
     def change_theme(self, mode: Enum):
         """更改主题函数"""
@@ -43,7 +42,7 @@ class SettingsAudiovisualLogic(SettingsAudiovisualUI):
 
 def apply_theme_from_config():
     """根据配置文件中的 dark_light 设置应用全局主题"""
-    mode = sett_av_ui_cfg.dark_light.value
+    mode = sett_av_ui_cfg.DarkLight.value
     if mode == AppEnums.DarkLightEnum.LIGHT:
         qfw.setTheme(qfw.Theme.LIGHT)
     elif mode == AppEnums.DarkLightEnum.DARK:

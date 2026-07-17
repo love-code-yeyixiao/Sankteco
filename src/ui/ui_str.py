@@ -11,12 +11,6 @@ with open("config/app_config.json", "r", encoding="utf-8") as f:
     json_data = json.load(f)
     language_config = json_data["Language"]["language"]
 
-
-"""
-language_config = ui_str_cfg.get(ui_str_cfg.language)
-print(language_config)
-"""
-
 # 初始化gettext翻译
 gt = gettext.translation("messages", "locales", [language_config], fallback=True)
 

@@ -74,11 +74,12 @@ class AppEnums:
         HITOKOTO = "https://v1.hitokoto.cn/"
 
 
-class SettBasicUIConfig(qfw.QConfig):
-    """孙页面:基本( 首选项 的子页面)配置类"""
+class AppConfig(qfw.QConfig):
+    """应用配置类"""
 
+    # 孙页面:基本( 首选项 的子页面)配置类
     # 动画精美度
-    carton_beauty_level = qfw.OptionsConfigItem(
+    CartonBeautyLevel = qfw.OptionsConfigItem(
         AppConfigString.BASIC_GROUP,
         AppConfigString.BASIC_CARTON_BEAUTY_LEVEL_NAME,
         AppEnums.BChoooseCartonBeautyEnum.FANCY,
@@ -95,7 +96,7 @@ class SettBasicUIConfig(qfw.QConfig):
     )
 
     # 结果推送方式
-    show_result_way = qfw.OptionsConfigItem(
+    ShowResultWay = qfw.OptionsConfigItem(
         AppConfigString.BASIC_GROUP,
         AppConfigString.BASIC_SHOW_RESULT_WAY_NAME,
         AppEnums.FChooseShowResultWayEnum.MESSAGEBOX,
@@ -110,12 +111,9 @@ class SettBasicUIConfig(qfw.QConfig):
         restart=True,
     )
 
-
-class SettAvUIConfig(qfw.QConfig):
-    """孙页面:视听( 首选项 的子页面)配置类"""
-
+    # 孙页面:视听( 首选项 的子页面)配置类
     # 音乐开关
-    music_switch = qfw.ConfigItem(
+    MusicSwitch = qfw.ConfigItem(
         AppConfigString.AV_GROUP,
         AppConfigString.AV_MUSIC_SWITCH_NAME,
         False,
@@ -123,7 +121,7 @@ class SettAvUIConfig(qfw.QConfig):
     )
 
     # 音乐路径
-    music_path = qfw.ConfigItem(
+    MusicPath = qfw.ConfigItem(
         AppConfigString.AV_GROUP,
         AppConfigString.AV_MUSIC_PATH_NAME,
         AssetsPathTXT.APP_DEFAULT_MUSIC_PATH,
@@ -131,7 +129,7 @@ class SettAvUIConfig(qfw.QConfig):
     )
 
     # 音乐音量调节
-    music_volume = qfw.RangeConfigItem(
+    MusicVolume = qfw.RangeConfigItem(
         AppConfigString.AV_GROUP,
         AppConfigString.AV_MUSIC_VOLUME_NAME,
         80,
@@ -139,7 +137,7 @@ class SettAvUIConfig(qfw.QConfig):
     )
 
     # 音乐渐入效果
-    music_play_smoothly = qfw.RangeConfigItem(
+    MusicPlaySmoothly = qfw.RangeConfigItem(
         AppConfigString.AV_GROUP,
         AppConfigString.AV_MUSIC_PLAY_SMOOTHLY_NAME,
         0,
@@ -147,7 +145,7 @@ class SettAvUIConfig(qfw.QConfig):
     )
 
     # 音乐渐出效果
-    music_pause_smoothly = qfw.RangeConfigItem(
+    MusicPauseSmoothly = qfw.RangeConfigItem(
         AppConfigString.AV_GROUP,
         AppConfigString.AV_MUSIC_PAUSE_SMOOTHLY_NAME,
         0,
@@ -155,7 +153,7 @@ class SettAvUIConfig(qfw.QConfig):
     )
 
     # 音效开关
-    sound_switch = qfw.ConfigItem(
+    SoundSwitch = qfw.ConfigItem(
         AppConfigString.AV_GROUP,
         AppConfigString.AV_SOUND_SWITCH_NAME,
         True,
@@ -163,7 +161,7 @@ class SettAvUIConfig(qfw.QConfig):
     )
 
     # 音效路径
-    sound_path = qfw.ConfigItem(
+    SoundPath = qfw.ConfigItem(
         AppConfigString.AV_GROUP,
         AppConfigString.AV_SOUND_PATH_NAME,
         AssetsPath.APP_DEFAULT_SOUND_PATH,
@@ -171,7 +169,7 @@ class SettAvUIConfig(qfw.QConfig):
     )
 
     # 音效在何时播放
-    sound_play_time = qfw.OptionsConfigItem(
+    SoundPlayTime = qfw.OptionsConfigItem(
         AppConfigString.AV_GROUP,
         AppConfigString.AV_SOUND_PLAY_TIME_NAME,
         AppEnums.SoundPlayTimeEnum.ALL,
@@ -186,7 +184,7 @@ class SettAvUIConfig(qfw.QConfig):
     )
 
     # 朗读开关
-    read_switch = qfw.ConfigItem(
+    ReadSwitch = qfw.ConfigItem(
         AppConfigString.AV_GROUP,
         AppConfigString.AV_READ_SWITCH_NAME,
         True,
@@ -194,7 +192,7 @@ class SettAvUIConfig(qfw.QConfig):
     )
 
     # 在何时朗读
-    read_time = qfw.OptionsConfigItem(
+    ReadTime = qfw.OptionsConfigItem(
         AppConfigString.AV_GROUP,
         AppConfigString.AV_READ_TIME_NAME,
         AppEnums.ReadTimeEnum.ALL,
@@ -209,7 +207,7 @@ class SettAvUIConfig(qfw.QConfig):
     )
 
     # 深浅模式
-    dark_light = qfw.OptionsConfigItem(
+    DarkLight = qfw.OptionsConfigItem(
         AppConfigString.AV_GROUP,
         AppConfigString.AV_DARK_LIGHT_NAME,
         AppEnums.DarkLightEnum.AUTO,
@@ -224,7 +222,7 @@ class SettAvUIConfig(qfw.QConfig):
     )
 
     # 窗口效果
-    window_effort = qfw.OptionsConfigItem(
+    WindowEffort = qfw.OptionsConfigItem(
         AppConfigString.AV_GROUP,
         AppConfigString.AV_WINDOW_EFFORT_NAME,
         AppEnums.WindowEffortEnum.AUTO,
@@ -235,7 +233,7 @@ class SettAvUIConfig(qfw.QConfig):
     )
 
     #  API接口
-    hitokoto_api = qfw.OptionsConfigItem(
+    HitokotoApi = qfw.OptionsConfigItem(
         AppConfigString.AV_GROUP,
         AppConfigString.AV_HITOKOTO_API_NAME,
         AppEnums.HitokotoAPIEnum.HITOKOTO,
@@ -244,19 +242,16 @@ class SettAvUIConfig(qfw.QConfig):
     )
 
     # 刷新时间
-    hitokoto_renew_time = qfw.RangeConfigItem(
+    HitokotoRenewTime = qfw.RangeConfigItem(
         AppConfigString.AV_GROUP,
         AppConfigString.AV_HITOKOTO_RENEW_NAME,
         300,
         qfw.RangeValidator(0, 900),
     )
 
-
-class SettLangUIConfig(qfw.QConfig):
-    """孙页面:语言( 首选项 的子页面)配置类"""
-
+    # 孙页面:语言( 首选项 的子页面)配置类
     # 语言
-    language = qfw.OptionsConfigItem(
+    Language = qfw.OptionsConfigItem(
         AppConfigString.LANGUAGE_GROUP,
         AppConfigString.LANGUAGE_NAME,
         AppEnums.LanguageEnum.ZH_CN,

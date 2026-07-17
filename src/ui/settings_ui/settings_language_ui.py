@@ -12,10 +12,10 @@ import qfluentwidgets as qfw
 from qfluentwidgets import FluentIcon as FI
 from app_const_var import AssetsPathTXT
 from ui.ui_str import SettLangUIString
-from app_config import SettLangUIConfig
+from app_config import AppConfig
 
 # 加载配置文件
-sett_lang_ui_cfg = SettLangUIConfig()
+sett_lang_ui_cfg = AppConfig()
 qfw.qconfig.load(AssetsPathTXT.APP_CONFIG, sett_lang_ui_cfg)
 
 
@@ -54,7 +54,7 @@ class SettingsLanguageUI(QFrame):
 
         # 语言选择
         self.screen_language = qfw.ComboBoxSettingCard(
-            sett_lang_ui_cfg.language,
+            sett_lang_ui_cfg.Language,
             FI.LANGUAGE,
             SettLangUIString.SCREEN_LANGUAGE_TITLE,
             SettLangUIString.SCREEN_LANGUAGE_CONTEXT,

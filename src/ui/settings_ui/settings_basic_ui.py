@@ -9,11 +9,11 @@ import qfluentwidgets as qfw
 from qfluentwidgets import FluentIcon as FI
 from app_const_var import AssetsPathTXT
 from ui.ui_str import SettBasicUIString
-from app_config import SettBasicUIConfig
+from app_config import AppConfig
 
 
 # 加载配置文件
-sett_basic_ui_cfg = SettBasicUIConfig()
+sett_basic_ui_cfg = AppConfig()
 qfw.qconfig.load(AssetsPathTXT.APP_CONFIG, sett_basic_ui_cfg)
 
 
@@ -121,7 +121,7 @@ class BasicChooseSettingGroup(QWidget):
 
         # 动画精美度
         self.carton_beauty_level_card = qfw.ComboBoxSettingCard(
-            sett_basic_ui_cfg.carton_beauty_level,
+            sett_basic_ui_cfg.CartonBeautyLevel,
             FI.CLOUD,
             SettBasicUIString.CARTON_BEAUTY_LEVEL_CARD_TITLE,
             SettBasicUIString.CARTON_BEAUTY_LEVEL_CARD_CONTEXT,
@@ -150,7 +150,7 @@ class FastChooseSettingGroup(QWidget):
 
         # 结果推送
         self.show_result_way = qfw.OptionsSettingCard(
-            sett_basic_ui_cfg.show_result_way,
+            sett_basic_ui_cfg.ShowResultWay,
             FI.INFO,
             SettBasicUIString.SHOW_RESULT_WAY_CARD_TITLE,
             SettBasicUIString.SHOW_RESULT_WAY_CARD_CONTEXT,

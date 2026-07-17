@@ -14,11 +14,11 @@ import qfluentwidgets as qfw
 from qfluentwidgets import FluentIcon as FI
 from app_const_var import AssetsPathTXT
 from ui.ui_str import SettAvUIString
-from app_config import SettAvUIConfig
+from app_config import AppConfig
 
 
 # 加载配置文件
-sett_av_ui_cfg = SettAvUIConfig()
+sett_av_ui_cfg = AppConfig()
 qfw.qconfig.load(AssetsPathTXT.APP_CONFIG, sett_av_ui_cfg)
 
 
@@ -61,7 +61,7 @@ class MusicSettingGroup(QWidget):
             FI.MUSIC,
             SettAvUIString.MUSIC_SWITCH_CARD_TITLE,
             SettAvUIString.MUSIC_SWITCH_CARD_CONTEXT,
-            sett_av_ui_cfg.music_switch,
+            sett_av_ui_cfg.MusicSwitch,
         )
 
         # 音乐文件
@@ -74,7 +74,7 @@ class MusicSettingGroup(QWidget):
 
         # 音量调节
         self.music_volume_card = qfw.RangeSettingCard(
-            sett_av_ui_cfg.music_volume,
+            sett_av_ui_cfg.MusicVolume,
             FI.VOLUME,
             SettAvUIString.MUSIC_VOLUME_CARD_TITLE,
             SettAvUIString.MUSIC_VOLUME_CARD_CONTEXT,
@@ -82,7 +82,7 @@ class MusicSettingGroup(QWidget):
 
         # 渐入效果
         self.music_play_smoothly_card = qfw.RangeSettingCard(
-            sett_av_ui_cfg.music_play_smoothly,
+            sett_av_ui_cfg.MusicPlaySmoothly,
             FI.ZOOM_IN,
             SettAvUIString.MUSIC_PLAY_SMOOTHLY_CARD_TITLE,
             SettAvUIString.MUSIC_PLAY_SMOOTHLY_CARD_CONTEXT,
@@ -90,7 +90,7 @@ class MusicSettingGroup(QWidget):
 
         # 渐出效果
         self.music_pause_smoothly_card = qfw.RangeSettingCard(
-            sett_av_ui_cfg.music_pause_smoothly,
+            sett_av_ui_cfg.MusicPauseSmoothly,
             FI.ZOOM_OUT,
             SettAvUIString.MUSIC_PAUSE_SMOOTHLY_CARD_TITLE,
             SettAvUIString.MUSIC_PAUSE_SMOOTHLY_CARD_CONTEXT,
@@ -129,7 +129,7 @@ class SoundSettingGroup(QWidget):
             FI.RINGER,
             SettAvUIString.SOUND_SWITCH_CARD_TITLE,
             SettAvUIString.SOUND_SWITCH_CARD_CONTEXT,
-            sett_av_ui_cfg.sound_switch,
+            sett_av_ui_cfg.SoundSwitch,
         )
 
         # 音效路径
@@ -142,7 +142,7 @@ class SoundSettingGroup(QWidget):
 
         # 音效在何时播放
         self.sound_play_time_card = qfw.OptionsSettingCard(
-            sett_av_ui_cfg.sound_play_time,
+            sett_av_ui_cfg.SoundPlayTime,
             FI.RINGER,
             SettAvUIString.SOUND_PLAY_TIME_CARD_TITLE,
             texts=[
@@ -184,12 +184,12 @@ class ReadSettingGroup(QWidget):
             FI.SPEAKERS,
             SettAvUIString.READ_SWITCH_CARD_TITLE,
             SettAvUIString.READ_SWITCH_CARD_CONTEXT,
-            sett_av_ui_cfg.read_switch,
+            sett_av_ui_cfg.ReadSwitch,
         )
 
         # 在何时朗读
         self.read_time_card = qfw.OptionsSettingCard(
-            sett_av_ui_cfg.read_time,
+            sett_av_ui_cfg.ReadTime,
             FI.RINGER,
             SettAvUIString.READ_TIME_CARD_TITLE,
             texts=[
@@ -225,7 +225,7 @@ class ThemeSettingGroup(QWidget):
 
         # 深浅模式
         self.dark_light_card = qfw.ComboBoxSettingCard(
-            sett_av_ui_cfg.dark_light,
+            sett_av_ui_cfg.DarkLight,
             FI.RINGER,
             SettAvUIString.THEME_DARK_LIGHT_CARD_TITLE,
             SettAvUIString.THEME_DARK_LIGHT_CARD_CONTEXT,
@@ -238,7 +238,7 @@ class ThemeSettingGroup(QWidget):
 
         # 窗口效果
         self.window_effort_card = qfw.ComboBoxSettingCard(
-            sett_av_ui_cfg.window_effort,
+            sett_av_ui_cfg.WindowEffort,
             FI.RINGER,
             SettAvUIString.THEME_WINDOW_EFFORT_CARD_TITLE,
             SettAvUIString.THEME_WINDOW_EFFORT_CARD_CONTEXT,
@@ -274,7 +274,7 @@ class HitokotoSettingGroup(QWidget):
 
         # API接口
         self.api_web_card = qfw.ComboBoxSettingCard(
-            sett_av_ui_cfg.hitokoto_api,
+            sett_av_ui_cfg.HitokotoApi,
             FI.RINGER,
             SettAvUIString.HITOKOTO_API_CARD_TITLE,
             SettAvUIString.HITOKOTO_API_CARD_CONTEXT,
@@ -283,7 +283,7 @@ class HitokotoSettingGroup(QWidget):
 
         # 刷新时间
         self.renew_time = qfw.RangeSettingCard(
-            sett_av_ui_cfg.hitokoto_renew_time,
+            sett_av_ui_cfg.HitokotoRenewTime,
             FI.DATE_TIME,
             SettAvUIString.HITOKOTO_RENEW_TIME_CARD_TITLE,
             SettAvUIString.HITOKOTO_RENEW_TIME_CARD_CONTEXT,
