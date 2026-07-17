@@ -9,7 +9,7 @@ import emoji
 # 读取配置文件以获取语言配置
 with open("config/app_config.json", "r", encoding="utf-8") as f:
     json_data = json.load(f)
-    language_config = json_data["Language"]["language"]
+    language_config = json_data["Language"]["Language"]
 
 # 初始化gettext翻译
 gt = gettext.translation("messages", "locales", [language_config], fallback=True)

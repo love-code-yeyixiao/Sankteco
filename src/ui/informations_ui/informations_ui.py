@@ -142,46 +142,6 @@ class SupportCardGroup(qfw.GroupHeaderCardWidget):
         group.setSeparatorVisible(True)
 
 
-class UpdateCardGroup(qfw.GroupHeaderCardWidget):
-    """更新 部分，继承自 上下分组布局卡片 GroupHeaderCardWidget
-    引用时可作 UpdateCard"""
-
-    def __init__(self, parent=None):
-        super().__init__(parent)
-
-        # 选项卡组基本设置
-        self.setTitle(InfoUIString.UPDATECARD_TITLE)
-        self.setBorderRadius(8)
-
-        # 更新通道下拉框
-        self.update_pipe_combobox = qfw.ComboBox()
-        self.update_pipe_combobox_item = [
-            InfoUIString.UPDATECARD_PIPE_RELEASE,
-            InfoUIString.UPDATECARD_PIPE_BETA,
-        ]
-        self.update_pipe_combobox.addItems(self.update_pipe_combobox_item)
-
-        # 更新状态
-        self.update_status_check_button = qfw.PushButton(
-            icon=FI.CHECKBOX, text=InfoUIString.UPDATECARD_UPDATESTATUS
-        )
-
-        # 添加分组到组件中
-        self.addGroup(
-            FI.SETTING,
-            InfoUIString.UPDATECARD_PIPEGROUP_TITLE,
-            InfoUIString.UPDATECARD_PIPEGROUP_DETAIL,
-            self.update_pipe_combobox,
-        )
-        group = self.addGroup(
-            qfw.InfoBarIcon.SUCCESS,
-            InfoUIString.UPDATECARD_VERSTATUSGROUP_TITLE,
-            BasicString.APP_VERSION,
-            self.update_status_check_button,
-        )
-        group.setSeparatorVisible(True)
-
-
 class InformationUI(QFrame):
     """子页面基础ui类"""
 
@@ -192,13 +152,11 @@ class InformationUI(QFrame):
         # 初始化卡片组件
         self.information_board_card = InformationBoardCardGroup(self)
         self.support_card = SupportCardGroup(self)
-        self.update_card = UpdateCardGroup(self)
 
         # 组件布局
         self.main_layout = QVBoxLayout(self)
         self.main_layout.addWidget(self.information_board_card)
         self.main_layout.addWidget(self.support_card)
-        self.main_layout.addWidget(self.update_card)
 
         # 连接 支持 部分帮助文档按钮点击信号
         self.support_card.offline_document_button.clicked.connect(
