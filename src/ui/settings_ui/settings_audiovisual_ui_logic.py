@@ -1,6 +1,6 @@
 """
-孙页面:视听( 首选项 的子页面)的逻辑文件, 
-引用时可作 SettAvLogic / subsubpage_setting_audiovisual_logic
+孙页面:视听( 首选项 的子页面)的UI逻辑文件, 
+引用时可作 SettAvUILogic / subsubpage_setting_audiovisual_ui_logic
 """
 
 from enum import Enum
@@ -9,9 +9,9 @@ from ui.settings_ui.settings_audiovisual_ui import SettingsAudiovisualUI, sett_a
 from app_config import AppEnums
 
 
-class SettingsAudiovisualLogic(SettingsAudiovisualUI):
-    """孙页面:视听( 首选项 的子页面)的基础逻辑类,
-    引用时可作 SettAvLogic / setting_audiovisual_logic"""
+class SettingsAudiovisualUILogic(SettingsAudiovisualUI):
+    """孙页面:视听( 首选项 的子页面)的UI基础逻辑类,
+    引用时可作 SettAvUILogic / setting_audiovisual_ui_logic"""
 
     def __init__(self, parent=None):
         super().__init__(parent)

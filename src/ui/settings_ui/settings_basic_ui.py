@@ -4,7 +4,15 @@
 引用时可作 SettBasicUI / subsubpage_setting_basic
 """
 
-from PySide2.QtWidgets import QFrame, QVBoxLayout, QHBoxLayout, QWidget
+from typing import Union, List
+from PySide2.QtWidgets import (
+    QFrame,
+    QVBoxLayout,
+    QHBoxLayout,
+    QWidget,
+    QTableWidgetItem,
+    QHeaderView,
+)
 import qfluentwidgets as qfw
 from qfluentwidgets import FluentIcon as FI
 from app_const_var import AssetsPathTXT
@@ -17,69 +25,203 @@ sett_basic_ui_cfg = AppConfig()
 qfw.qconfig.load(AssetsPathTXT.APP_CONFIG, sett_basic_ui_cfg)
 
 
-class NowNamelistSettingCard(qfw.ExpandGroupSettingCard):
-    """当前名单设置组 选项卡, 从属于 名单 部分,
-    继承自 手风琴设置组卡片 ExpandGroupSettingCard,
-    引用时可作 NowNamelistSett"""
+class AskNewNamelistID(qfw.MessageBoxBase):
+    """询问新名单的标识符, 继承自 对话框基类 MessageBoxBase,
+    引用时可作 AskNewID"""
+
+    def __init__(self, parent=None):
+        super().__init__(parent)
+
+        # 标题
+        self.title_label = qfw.SubtitleLabel("键入新名单标识符", self)
+
+        # 输入框
+        self.input_lineedit = qfw.LineEdit(self)
+        self.input_lineedit.setPlaceholderText(
+            "以英文字母、汉字、数字组成, 不能以数字开头"
+        )
+        self.input_lineedit.setClearButtonEnabled(True)
+
+        # 添加控件进布局
+        self.viewLayout.addWidget(self.title_label)
+        self.viewLayout.addWidget(self.input_lineedit)
+        self.widget.setMinimumWidth(450)
+
+
+class NowNamelistCard(qfw.SettingCard):
+    """当前名单 卡片, 从属于 名单 部分,
+    继承自 设置卡基类 SettingCard,
+    引用时可作 NowNamelistCard"""
 
     def __init__(self, parent=None):
         super().__init__(
-            FI.DOCUMENT,
+            FI.PEOPLE,
             SettBasicUIString.NOW_NAMELIST_CARD_TITLE,
-            SettBasicUIString.NOW_NAMELIST_CARD_CONTENT,
+            SettBasicUIString.NOW_NAMELIST_CARD_CONTEXT,
             parent,
         )
+
+        # 下拉框
+        self.now_namelist_card_list = qfw.ComboBox()
+        self.now_namelist_card_list_item: List[str] = []
+        self.now_namelist_card_list.addItems(self.now_namelist_card_list_item)
+
+        # 调整布局边距、添加控件进布局
+        self.hBoxLayout.setMargin(16)
+        self.hBoxLayout.addWidget(self.now_namelist_card_list)
+
+
+class NamelistSettingCard(qfw.SimpleCardWidget):
+    """名单操作 卡片, 从属于 名单 部分,
+    继承自 简单卡片组件 SimpleCardWidget,
+    引用时可作 NamelistSettCard"""
+
+    def __init__(self, parent=None):
+        super().__init__(parent)
+
+        # 初始化布局
+        self.hboxlayout = QHBoxLayout(self)
 
         # 初始化控件
         self.init_widgets()
 
-        # 添加控件至组布局
-        self.add_widget_to_group(
-            self.choose_namelist_label, self.choose_namelist_combobox
-        )
-        self.add_widget_to_group(
-            self.now_namelist_detail_label, self.now_namelist_detail_button
-        )
-        self.add_widget_to_group(self.sign_namelist_label, self.sign_namelist_button)
+        # 添加控件进布局
+        self.hboxlayout.addStretch(1)
+        self.hboxlayout.addWidget(self.refresh_namelist_button)
+        self.hboxlayout.addWidget(self.add_new_namelist_button)
+        self.hboxlayout.addWidget(self.rename_namelist_button)
+        self.hboxlayout.addWidget(self.del_namelist_button)
+        self.hboxlayout.addWidget(self.import_namelist_button)
+        self.hboxlayout.addWidget(self.export_namelist_button)
+        self.hboxlayout.addStretch(1)
 
     def init_widgets(self):
         """初始化控件"""
-        # 选择名单
-        self.choose_namelist_combobox = qfw.ComboBox()
-        self.choose_namelist_label = qfw.BodyLabel(
-            SettBasicUIString.NOW_NAMELIST_CARD_CHOOSE_LABEL
+
+        # 刷新名单
+        self.refresh_namelist_button = qfw.PushButton(
+            FI.SYNC,
+            SettBasicUIString.REFRESH_NAMELIST_BUTTON_TEXT,
         )
 
-        # 管理名单内容
-        self.now_namelist_detail_button = qfw.PushButton(
-            SettBasicUIString.NOW_NAMELIST_CARD_DETAIL_BUTTON
+        # 新建名单
+        self.add_new_namelist_button = qfw.PushButton(
+            FI.ADD,
+            SettBasicUIString.ADD_NEW_NAMELIST_BUTTON_TEXT,
         )
-        self.now_namelist_detail_label = qfw.BodyLabel(
-            SettBasicUIString.NOW_NAMELIST_CARD_DETAIL_LABEL
+
+        # 重命名名单
+        self.rename_namelist_button = qfw.PushButton(
+            FI.PENCIL_INK,
+            SettBasicUIString.RENAME_NAMELIST_BUTTON_TEXT,
         )
-        self.now_namelist_detail_button.setFixedWidth(100)
 
-        # 标记名单
-        self.sign_namelist_button = qfw.PushButton(
-            SettBasicUIString.NOW_NAMELIST_CRAD_SIGN_BUTTON
+        # 删除名单
+        self.del_namelist_button = qfw.PushButton(
+            FI.DELETE,
+            SettBasicUIString.DEL_NAMELIST_BUTTON_TEXT,
         )
-        self.sign_namelist_label = qfw.BodyLabel(
-            SettBasicUIString.NOW_NAMELIST_CARD_SIGN_LABEL
+
+        # 导入名单
+        self.import_namelist_button = qfw.PrimaryPushButton(
+            FI.SEARCH,
+            SettBasicUIString.IMPORT_NAMELIST_BUTTON_TEXT,
         )
-        self.sign_namelist_button.setFixedWidth(100)
 
-    def add_widget_to_group(self, added_label, added_widget):
-        """添加控件至水平布局并加入设置卡组"""
-        widget = QWidget()
-        widget.setFixedHeight(60)
+        # 导出名单
+        self.export_namelist_button = qfw.PrimaryPushButton(
+            FI.SAVE_AS,
+            SettBasicUIString.EXPORT_NAMELIST_BUTTON_TEXT,
+        )
 
-        layout = QHBoxLayout(widget)
 
-        layout.addWidget(added_label)
-        layout.addWidget(added_widget)
+class NameTableWidget(QWidget):
+    """名单表格, 从属于 名单 部分,
+    引用时可作 NameTableWidget"""
 
-        # 添加组件到设置卡组
-        self.addGroupWidget(widget)
+    def __init__(self, parent=None):
+        super().__init__(parent)
+
+        # 初始化控件
+        self.init_widgets()
+
+        # 初始化布局
+        self.hboxlayout = QHBoxLayout(self)
+
+        # 添加控件进布局
+        self.hboxlayout.addWidget(self.name_table_widget)
+
+    def init_widgets(self):
+        """初始化控件"""
+
+        # 初始化表格、起用边框、设置圆角、禁止换行
+        self.name_table_widget = qfw.TableWidget(self)
+        self.name_table_widget.setBorderVisible(True)
+        self.name_table_widget.setBorderRadius(8)
+        self.name_table_widget.setWordWrap(False)
+
+        # 设置列数与初始行数
+        self.name_table_widget_row = 0
+        self.name_table_widget_column = 6
+        self.name_table_widget.setRowCount(self.name_table_widget_row)
+        self.name_table_widget.setColumnCount(self.name_table_widget_column)
+
+        # 设置水平表头并隐藏垂直表头
+        self.name_table_widget.setHorizontalHeaderLabels(
+            ["存在?", "学号", "姓名", "性别", "小组", "标签"]
+        )
+        self.name_table_widget.verticalHeader().hide()
+
+        # 表格数据
+        self.name_table_widget_data = []
+
+        # 刷新表格列宽
+        self.refresh_table_column_width()
+
+    def add_item(
+        self,
+        no: Union[str, int],
+        name: str,
+        gender: str,
+        group: Union[str, int],
+        tip: str,
+        is_exist: bool = True,
+    ):
+        """添加单项数据"""
+
+        self.name_table_widget_row += 1
+        self.name_table_widget.setRowCount(self.name_table_widget_row)
+        self.name_table_widget_data.append([is_exist, no, name, gender, group, tip])
+
+        self.refresh_items()
+
+    def refresh_items(self):
+        """刷新表格数据"""
+
+        # 先清除表格行数以清空数据, 再设置新行数
+        self.name_table_widget.setRowCount(0)
+        self.name_table_widget.setRowCount(self.name_table_widget_row)
+
+        # 添加数据到表格
+        for i, data in enumerate(self.name_table_widget_data):
+            for j in range(self.name_table_widget_column):
+                self.name_table_widget.setItem(i, j, QTableWidgetItem(data[j]))
+
+        self.refresh_table_column_width()
+
+    def refresh_table_column_width(self):
+        """刷新表格列宽"""
+
+        # 获取表格列宽模式
+        header = self.name_table_widget.horizontalHeader()
+
+        # 根据内容自适应(学号, 姓名, 组别, 标签)
+        for i in [1, 2, 4, 5]:
+            header.setSectionResizeMode(i, QHeaderView.ResizeToContents)  # type: ignore
+
+        # 自动拉伸(存在, 性别)
+        header.setSectionResizeMode(0, QHeaderView.ResizeToContents)  # type: ignore
+        header.setSectionResizeMode(3, QHeaderView.ResizeToContents)  # type: ignore
 
 
 class NamelistSettingGroup(QWidget):
@@ -92,20 +234,15 @@ class NamelistSettingGroup(QWidget):
         # 初始化垂直布局
         self.vboxlayout = QVBoxLayout(self)
 
-        # 多名单管理
-        self.namelists_create_card = qfw.PushSettingCard(
-            text=SettBasicUIString.NAMELISTS_CREATE_CARD_TEXT,
-            icon=FI.ROBOT,
-            title=SettBasicUIString.NAMELISTS_CREATE_CARD_TITLE,
-            content=SettBasicUIString.NAMELISTS_CREATE_CARD_CONTENT,
-        )
+        # 初始化各控件
+        self.now_namelist_card = NowNamelistCard(self)
+        self.namelist_setting_card = NamelistSettingCard(self)
+        self.name_table_widget = NameTableWidget(self)
 
-        # 当前名单设置组
-        self.now_namelist_groupcard = NowNamelistSettingCard(self)
-
-        # 设置布局
-        self.vboxlayout.addWidget(self.namelists_create_card)
-        self.vboxlayout.addWidget(self.now_namelist_groupcard)
+        # 添加控件进布局
+        self.vboxlayout.addWidget(self.now_namelist_card)
+        self.vboxlayout.addWidget(self.namelist_setting_card)
+        self.vboxlayout.addWidget(self.name_table_widget)
         self.setLayout(self.vboxlayout)
 
 

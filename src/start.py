@@ -6,7 +6,7 @@
 import sys
 from PySide2.QtWidgets import QApplication
 from ui.main_ui import MainWindow
-from ui.settings_ui.settings_audiovisual_logic import apply_theme_from_config
+from ui.settings_ui.settings_audiovisual_ui_logic import apply_theme_from_config
 
 
 if __name__ == "__main__":

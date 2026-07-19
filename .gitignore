@@ -3,6 +3,7 @@
 *.exe
 *.code-workspace
 config/*
+namelists/*
 src/test/*
 build/*
 dist/*

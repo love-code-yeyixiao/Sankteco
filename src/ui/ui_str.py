@@ -42,7 +42,8 @@ class BasicString:
     # 项目本体信息
     APP_NAME = "Sankteco"
     APP_FULL_NAME = "祈福Sankteco"
-    APP_VERSION = "Version Dev"
+    APP_PLATFORM = "Python"
+    APP_VERSION = "VERSION Dev"
     APP_VERSION_TYPE = "Dev"
     APP_COPYTYPE = "Copyleft, GPL-3.0, ĈTEL, 2023~2026."
 
@@ -147,19 +148,17 @@ class SettBasicUIString:
     """首选项-基本 孙页面字符串, 仅包含 setting_basic_ui.py 相关字符串, 不包含隶属于主程序多UI交互的字符串"""
 
     # 名单 部分
-    # 多名单管理
-    NAMELISTS_CREATE_CARD_TEXT = _("管理")
-    NAMELISTS_CREATE_CARD_TITLE = _("多名单")
-    NAMELISTS_CREATE_CARD_CONTENT = _("创建或管理不同名单以供便携使用")
+    # 当前名单
+    NOW_NAMELIST_CARD_TITLE = _("当前名单")
+    NOW_NAMELIST_CARD_CONTEXT = _("选择要管理的名单")
 
-    # 当前名单设置组
-    NOW_NAMELIST_CARD_TITLE = _("设置当前名单")
-    NOW_NAMELIST_CARD_CONTENT = _("选择要管理的名单并配置")
-    NOW_NAMELIST_CARD_CHOOSE_LABEL = _("选择要管理的名单")
-    NOW_NAMELIST_CARD_DETAIL_BUTTON = _("管理")
-    NOW_NAMELIST_CARD_DETAIL_LABEL = _("管理当前选择的名单之内容")
-    NOW_NAMELIST_CRAD_SIGN_BUTTON = _("添加")
-    NOW_NAMELIST_CARD_SIGN_LABEL = _("为所选的名单添加标记")
+    # 名单操作
+    REFRESH_NAMELIST_BUTTON_TEXT = _("刷新")
+    ADD_NEW_NAMELIST_BUTTON_TEXT = _("新建名单")
+    RENAME_NAMELIST_BUTTON_TEXT = _("重命名名单")
+    DEL_NAMELIST_BUTTON_TEXT = _("删除名单")
+    IMPORT_NAMELIST_BUTTON_TEXT = _("导入...")
+    EXPORT_NAMELIST_BUTTON_TEXT = _("导出...")
 
     # 普通抽选 部分
     # 动画精美度

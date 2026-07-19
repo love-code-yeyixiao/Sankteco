@@ -79,6 +79,7 @@ class AppConfigString:
 
     # 基本 类字符串
     BASIC_GROUP = "Basic"
+    BASIC_NAMELISTS_NAME = "NameLists"
     BASIC_CARTON_BEAUTY_LEVEL_NAME = "CartonBeautyLevel"
     BASIC_SHOW_RESULT_WAY_NAME = "ShowResultWay"
 
