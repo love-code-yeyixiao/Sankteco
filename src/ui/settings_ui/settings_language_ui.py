@@ -10,7 +10,7 @@ from PySide2.QtWidgets import (
 )
 import qfluentwidgets as qfw
 from qfluentwidgets import FluentIcon as FI
-from app_const_var import AssetsPathTXT
+from app_const_var import AssetsPathTXT, WebUrl
 from ui.ui_str import SettLangUIString
 from app_config import AppConfig
 
@@ -66,7 +66,7 @@ class SettingsLanguageUI(QFrame):
 
         # 加入翻译计划
         self.join_translation = qfw.HyperlinkCard(
-            AssetsPathTXT.JOIN_TRANSLATION_LINK,
+            WebUrl.JOIN_TRANSLATION_LINK,
             SettLangUIString.JOIN_TRANSLATION_HYPERLINK_TEXT,
             FI.CLOUD,
             SettLangUIString.JOIN_TRANSLATION_TITLE,

@@ -33,12 +33,14 @@ class AskNewNamelistID(qfw.MessageBoxBase):
         super().__init__(parent)
 
         # 标题
-        self.title_label = qfw.SubtitleLabel("键入新名单标识符", self)
+        self.title_label = qfw.SubtitleLabel(
+            SettBasicUIString.ASK_NEW_ID_MSG_TITLE, self
+        )
 
         # 输入框
         self.input_lineedit = qfw.LineEdit(self)
         self.input_lineedit.setPlaceholderText(
-            "以英文字母、汉字、数字组成, 不能以数字开头"
+            SettBasicUIString.ASK_NEW_ID_MSG_LINEEDIT_TEXT
         )
         self.input_lineedit.setClearButtonEnabled(True)
 
@@ -154,11 +156,12 @@ class NameTableWidget(QWidget):
     def init_widgets(self):
         """初始化控件"""
 
-        # 初始化表格、起用边框、设置圆角、禁止换行
+        # 初始化表格、起用边框、设置圆角、禁止换行、右键响应
         self.name_table_widget = qfw.TableWidget(self)
         self.name_table_widget.setBorderVisible(True)
         self.name_table_widget.setBorderRadius(8)
         self.name_table_widget.setWordWrap(False)
+        self.name_table_widget.setSelectRightClickedRow(True)
 
         # 设置列数与初始行数
         self.name_table_widget_row = 0
@@ -168,15 +171,19 @@ class NameTableWidget(QWidget):
 
         # 设置水平表头并隐藏垂直表头
         self.name_table_widget.setHorizontalHeaderLabels(
-            ["存在?", "学号", "姓名", "性别", "小组", "标签"]
+            [
+                SettBasicUIString.NAMETABLE_HEADER_LABEL_EXIST,
+                SettBasicUIString.NAMETABLE_HEADER_LABEL_NO,
+                SettBasicUIString.NAMETABLE_HEADER_LABEL_NAME,
+                SettBasicUIString.NAMETABLE_HEADER_LABEL_GENDER,
+                SettBasicUIString.NAMETABLE_HEADER_LABEL_GROUP,
+                SettBasicUIString.NAMETABLE_HEADER_LABEL_TIP,
+            ]
         )
         self.name_table_widget.verticalHeader().hide()
 
         # 表格数据
         self.name_table_widget_data = []
-
-        # 刷新表格列宽
-        self.refresh_table_column_width()
 
     def add_item(
         self,
@@ -189,9 +196,13 @@ class NameTableWidget(QWidget):
     ):
         """添加单项数据"""
 
+        # 判断数据并转为文本
+        exist = "True" if is_exist else "False"
+        no = str(no)
+        group = str(group)
+
         self.name_table_widget_row += 1
-        self.name_table_widget.setRowCount(self.name_table_widget_row)
-        self.name_table_widget_data.append([is_exist, no, name, gender, group, tip])
+        self.name_table_widget_data.append([exist, no, name, gender, group, tip])
 
         self.refresh_items()
 
@@ -215,13 +226,14 @@ class NameTableWidget(QWidget):
         # 获取表格列宽模式
         header = self.name_table_widget.horizontalHeader()
 
-        # 根据内容自适应(学号, 姓名, 组别, 标签)
-        for i in [1, 2, 4, 5]:
-            header.setSectionResizeMode(i, QHeaderView.ResizeToContents)  # type: ignore
+        # 设置所有列先根据内容调整宽度
+        header.setSectionResizeMode(QHeaderView.ResizeToContents)
 
-        # 自动拉伸(存在, 性别)
-        header.setSectionResizeMode(0, QHeaderView.ResizeToContents)  # type: ignore
-        header.setSectionResizeMode(3, QHeaderView.ResizeToContents)  # type: ignore
+        # 开启 "拉伸最后一列" 功能
+        header.setStretchLastSection(True)
+
+        # 重新计算第3列
+        self.name_table_widget.resizeColumnToContents(2)
 
 
 class NamelistSettingGroup(QWidget):

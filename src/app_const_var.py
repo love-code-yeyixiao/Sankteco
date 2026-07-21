@@ -30,9 +30,9 @@ class AssetsPathTXT:
     # 默认音效
     APP_DEFAULT_SOUND_PATH = "assets/sounds/notice.wav"
 
-    # 链接
-    # 加入翻译计划( 语言 孙页面)
-    JOIN_TRANSLATION_LINK = ""
+    # 文本文件
+    # 名单
+    APP_NAMELISTS_FOLDER = "namelists/"
 
 
 class AssetsPath:
@@ -61,6 +61,9 @@ class WebUrl:
     # 一言API接口
     HITOKOTO_API_URL = "https://v1.hitokoto.cn/"
     HITOKOTO_API_URL_WITH_FORMAT = "https://v1.hitokoto.cn/?c=i&encode=text"
+
+    # 加入翻译计划( 语言 孙页面)
+    JOIN_TRANSLATION_LINK = ""
 
 
 """
@@ -99,3 +102,23 @@ class AppConfigString:
     AV_WINDOW_EFFORT_NAME = "WindowEffort"
     AV_HITOKOTO_API_NAME = "HitokotoApi"
     AV_HITOKOTO_RENEW_NAME = "HitokotoRenewTime"
+
+
+class LogicFilesString:
+    """逻辑文件的字符串"""
+
+    # add_import_export_namelist.py
+    AIENAMELIST_HEADER_EXIST = "Exist?"
+    AIENAMELIST_HEADER_NO = "No."
+    AIENAMELIST_HEADER_NAME = "Name"
+    AIENAMELIST_HEADER_GENDER = "Gender"
+    AIENAMELIST_HEADER_GROUP = "Group"
+    AIENAMELIST_HEADER_TIP = "Tip"
+    AIENAMELIST_HEADER = [
+        AIENAMELIST_HEADER_EXIST,
+        AIENAMELIST_HEADER_NO,
+        AIENAMELIST_HEADER_NAME,
+        AIENAMELIST_HEADER_GENDER,
+        AIENAMELIST_HEADER_GROUP,
+        AIENAMELIST_HEADER_TIP,
+    ]

@@ -148,6 +148,10 @@ class SettBasicUIString:
     """首选项-基本 孙页面字符串, 仅包含 setting_basic_ui.py 相关字符串, 不包含隶属于主程序多UI交互的字符串"""
 
     # 名单 部分
+    # 询问新名单的标识符对话框
+    ASK_NEW_ID_MSG_TITLE = _("键入新名单标识符")
+    ASK_NEW_ID_MSG_LINEEDIT_TEXT = _("以英文字母、汉字、数字组成, 不能以数字开头")
+
     # 当前名单
     NOW_NAMELIST_CARD_TITLE = _("当前名单")
     NOW_NAMELIST_CARD_CONTEXT = _("选择要管理的名单")
@@ -159,6 +163,14 @@ class SettBasicUIString:
     DEL_NAMELIST_BUTTON_TEXT = _("删除名单")
     IMPORT_NAMELIST_BUTTON_TEXT = _("导入...")
     EXPORT_NAMELIST_BUTTON_TEXT = _("导出...")
+
+    # 名单表格
+    NAMETABLE_HEADER_LABEL_EXIST = _("存在?")
+    NAMETABLE_HEADER_LABEL_NO = _("学号")
+    NAMETABLE_HEADER_LABEL_NAME = _("姓名")
+    NAMETABLE_HEADER_LABEL_GENDER = _("性别")
+    NAMETABLE_HEADER_LABEL_GROUP = _("小组")
+    NAMETABLE_HEADER_LABEL_TIP = _("标签")
 
     # 普通抽选 部分
     # 动画精美度
