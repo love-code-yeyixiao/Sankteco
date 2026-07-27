@@ -1,6 +1,6 @@
 """
 孙页面:基本( 首选项 的子页面)的UI逻辑文件, 
-引用时可作 SettBasicUILogic / subsubpage_setting_basic_ui_logic
+引用时可作 SettBasicUILogic / settings_basic_ui_logic
 """
 
 from pathlib import Path

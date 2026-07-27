@@ -1,6 +1,6 @@
 """
 子页面：信息，
-此页面包含了本项目的相关信息，包含三部分：信息板、支持，
+此页面包含了本项目的相关信息，包含两部分：信息板、支持，
 引用时可作 InfoUI / information_ui
 """
 
@@ -12,7 +12,6 @@ from PySide2.QtWidgets import (
 from PySide2.QtCore import Qt
 import qfluentwidgets as qfw
 from qfluentwidgets import FluentIcon as FI
-from app_const_var import AssetsPathTXT
 from ui.ui_str import InfoUIString, BasicString
 
 
@@ -93,7 +92,6 @@ class InformationBoardCardGroup(qfw.ElevatedCardWidget):
 
         # 项目详细图
         self.app_detailed_image = ImageViewer()
-        self.app_detailed_image.setPixmap(AssetsPathTXT.APP_DETAILEDIMAGE_PATH)
 
         # 项目信息
         self.infotext_bodylabel = qfw.StrongBodyLabel(BasicString.APP_FULL_NAME, self)
@@ -157,11 +155,3 @@ class InformationUI(QFrame):
         self.main_layout = QVBoxLayout(self)
         self.main_layout.addWidget(self.information_board_card)
         self.main_layout.addWidget(self.support_card)
-
-        # 连接 支持 部分帮助文档按钮点击信号
-        self.support_card.offline_document_button.clicked.connect(
-            lambda: ShowInfobar.offline_button_infobar(self, self)
-        )
-        self.support_card.online_document_button.clicked.connect(
-            lambda: ShowInfobar.online_button_infobar(self, self)
-        )

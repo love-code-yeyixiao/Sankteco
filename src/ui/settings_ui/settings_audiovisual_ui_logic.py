@@ -1,6 +1,6 @@
 """
 孙页面:视听( 首选项 的子页面)的UI逻辑文件, 
-引用时可作 SettAvUILogic / subsubpage_setting_audiovisual_ui_logic
+引用时可作 SettAvUILogic / setting_audiovisual_ui_logic
 """
 
 from enum import Enum
@@ -45,10 +45,14 @@ def apply_theme_from_config():
     mode = sett_av_ui_cfg.DarkLight.value
     if mode == AppEnums.DarkLightEnum.LIGHT:
         qfw.setTheme(qfw.Theme.LIGHT)
+        return "LIGHT"
     elif mode == AppEnums.DarkLightEnum.DARK:
         qfw.setTheme(qfw.Theme.DARK)
+        return "DARK"
     elif mode == AppEnums.DarkLightEnum.AUTO:
         qfw.setTheme(qfw.Theme.AUTO)
+        return "DARK" if (qfw.theme() == qfw.Theme.DARK) else "LIGHT"
     else:
         # 默认深色主题
         qfw.setTheme(qfw.Theme.DARK)
+        return "DARK"

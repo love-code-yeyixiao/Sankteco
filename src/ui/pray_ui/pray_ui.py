@@ -134,7 +134,7 @@ class PrayQuickSettingGroup(QWidget):
         self.gridlayout.addWidget(self.start_pray_button, 0, 0, 1, 1)  # type: ignore
         self.gridlayout.addWidget(self.pray_namelist_choose_combobox, 0, 1, 1, 1)  # type: ignore
         self.gridlayout.addWidget(self.pray_algorithm_combobox, 0, 2, 1, 1)  # type: ignore
-        self.gridlayout.addLayout(self.spnum_hboxlayout, 0, 3, 1, 1)  # type: ignore
+        self.gridlayout.addWidget(self.spnum_widget, 0, 3, 1, 1)  # type: ignore
 
         # 第二行
         self.gridlayout.addWidget(self.pray_sex_combobox, 1, 0, 1, 1)  # type: ignore
@@ -180,7 +180,10 @@ class PrayQuickSettingGroup(QWidget):
         self.pray_algorithm_combobox.addItems(self.pray_algorithm_list)
 
     def set_pray_number_layout_method(self):
-        """设置祈福人数水平布局, 引用时简写为 spnum"""
+        """设置祈福人数水平布局控件, 引用时简写为 spnum"""
+
+        # 初始化控件
+        self.spnum_widget = QWidget()
 
         # 初始化水平布局
         self.spnum_hboxlayout = QHBoxLayout(self)
@@ -210,6 +213,7 @@ class PrayQuickSettingGroup(QWidget):
 
         # 设置布局
         set_widget_to_layout(self.spnum_widget_list, self.spnum_hboxlayout)
+        self.spnum_widget.setLayout(self.spnum_hboxlayout)
 
         # 更新数量显示
         self.pray_number_subtract_button.clicked.connect(

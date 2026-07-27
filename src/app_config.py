@@ -165,7 +165,7 @@ class AppConfig(qfw.QConfig):
         AppConfigString.AV_GROUP,
         AppConfigString.AV_SOUND_PATH_NAME,
         AssetsPath.APP_DEFAULT_SOUND_PATH,
-        qfw.FolderValidator(),
+        qfw.ConfigValidator(),
     )
 
     # 音效在何时播放

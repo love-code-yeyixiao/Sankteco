@@ -47,9 +47,15 @@ class BasicString:
     APP_VERSION_TYPE = "Dev"
     APP_COPYTYPE = "Copyleft, GPL-3.0, ĈTEL, 2023~2026."
 
+    # 窗口标题信息
+    APP_MAINWINDOW_TITLE = f"{APP_FULL_NAME} - {APP_VERSION}"
+    APP_DOCSRUI_TITLE = APP_MAINWINDOW_TITLE + ":" + _("文档阅读")
+
 
 class PrayUIString:
-    """祈福 子页面字符串, 仅包含 pray_ui.py 相关字符串, 不包含隶属于主程序多UI交互的字符串"""
+    """祈福 子页面字符串,
+    仅包含 pray_ui.py 相关字符串,
+    不包含隶属于主程序多UI交互的字符串"""
 
     # 一言显示 部分
     HITOKOTO_SHOW_LABEL_DEFAUT = _("旗开得胜，一举夺魁！")
@@ -79,7 +85,9 @@ class PrayUIString:
 
 
 class InfoUIString:
-    """信息 子页面字符串, 仅包含 imformations_ui.py 相关字符串, 不包含隶属于主程序多UI交互的字符串"""
+    """信息 子页面字符串,
+    仅包含 imformations_ui.py 相关字符串,
+    不包含隶属于主程序多UI交互的字符串"""
 
     # ShowInfobar 类
     SHOWINFOBAR_OFFLINE_TITLE = _("错误！")
@@ -107,7 +115,9 @@ class InfoUIString:
 
 
 class SettUIString:
-    """首选项 子页面字符串, 仅包含 settings_ui.py 相关字符串, 不包含隶属于主程序多UI交互的字符串"""
+    """首选项 子页面字符串,
+    仅包含 settings_ui.py 相关字符串,
+    不包含隶属于主程序多UI交互的字符串"""
 
     # 提示文本
     TIP_TITLE = _("在此处调整程序设置")
@@ -145,7 +155,9 @@ class SettUIString:
 
 
 class SettBasicUIString:
-    """首选项-基本 孙页面字符串, 仅包含 setting_basic_ui.py 相关字符串, 不包含隶属于主程序多UI交互的字符串"""
+    """首选项-基本 孙页面字符串,
+    仅包含 setting_basic_ui.py 相关字符串,
+    不包含隶属于主程序多UI交互的字符串"""
 
     # 名单 部分
     # 询问新名单的标识符对话框
@@ -201,7 +213,9 @@ class SettBasicUIString:
 
 
 class SettAvUIString:
-    """首选项-视听 孙页面字符串, 仅包含 setting_audiovisual_ui.py 相关字符串, 不包含隶属于主程序多UI交互的字符串"""
+    """首选项-视听 孙页面字符串,
+    仅包含 setting_audiovisual_ui.py 相关字符串,
+    不包含隶属于主程序多UI交互的字符串"""
 
     # 音乐 部分
     # 音乐开关
@@ -270,7 +284,7 @@ class SettAvUIString:
     # API接口
     HITOKOTO_API_CARD_TITLE = _("一言API")
     HITOKOTO_API_CARD_CONTEXT = _("调整一言所使用的API接口地址")
-    HITOKOTO_API_CARD_TEXT_HITOKOTO = f"一言(https://v1.hitokoto.cn/)"
+    HITOKOTO_API_CARD_TEXT_HITOKOTO = _(f"一言(https://v1.hitokoto.cn/)")
 
     # 刷新时间
     HITOKOTO_RENEW_TIME_CARD_TITLE = _("刷新时间")
@@ -292,7 +306,9 @@ class SettAvUIString:
 
 
 class SettLangUIString:
-    """首选项-语言 孙页面字符串, 仅包含 setting_language_ui.py 相关字符串, 不包含隶属于主程序多UI交互的字符串"""
+    """首选项-语言 孙页面字符串,
+    仅包含 setting_language_ui.py 相关字符串,
+    不包含隶属于主程序多UI交互的字符串"""
 
     # 语言选择
     SCREEN_LANGUAGE_TITLE = _("显示语言")
@@ -307,8 +323,20 @@ class SettLangUIString:
     JOIN_TRANSLATION_HYPERLINK_TEXT = _("跳转")
 
 
+class DocsRUIString:
+    """首选项-语言 孙页面字符串,
+    仅包含 setting_language_ui.py 相关字符串,
+    不包含隶属于主程序多UI交互的字符串"""
+
+    # 当前文档
+    NOW_DOC_CARD_TITLE = _("当前文档")
+    NOW_DOC_CARD_CONTEXT = _("选择要查看的文档")
+
+
 class MainUIString:
-    """主页面 字符串, 包含 main_ui.py 相关字符串, 包含隶属于主程序多UI交互的字符串"""
+    """主页面 字符串,
+    包含 main_ui.py 相关字符串,
+    包含隶属于主程序多UI交互的字符串"""
 
     # 子页面对象名
     SUBPAGE_INFORMATION_OBJNAME = "subpage_information"

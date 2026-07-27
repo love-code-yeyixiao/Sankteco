@@ -15,10 +15,12 @@ class AssetsPathTXT:
 
     # 图片
     # 图标
-    APP_ICON_PATH = "assets/icon/app_icon.png"
+    APP_ICON_DARK_PATH = "assets/icons/app_icon_dark.png"
+    APP_ICON_LIGHT_PATH = "assets/icons/app_icon_light.png"
 
     # 项目详细图
-    APP_DETAILEDIMAGE_PATH = "assets/images/app_detailed_image.png"
+    APP_DETAILEDIMAGE_DARK_PATH = "assets/images/app_detailed_image_dark.png"
+    APP_DETAILEDIMAGE_LIGHT_PATH = "assets/images/app_detailed_image_light.png"
 
     # 配置文件
     APP_CONFIG = "config/app_config.json"
@@ -33,6 +35,9 @@ class AssetsPathTXT:
     # 文本文件
     # 名单
     APP_NAMELISTS_FOLDER = "namelists/"
+
+    # 文档
+    APP_DOCS_FOLDER = "docs/"
 
 
 class AssetsPath:

@@ -9,6 +9,7 @@ from qfluentwidgets import FluentWindow
 from qfluentwidgets import FluentIcon as FI
 from app_const_var import AssetsPathTXT
 from .ui_str import MainUIString, BasicString
+from ui.settings_ui.settings_audiovisual_ui_logic import apply_theme_from_config
 
 
 class MainWindow(FluentWindow):
@@ -34,16 +35,22 @@ class MainWindow(FluentWindow):
 
     async def import_information_ui(self):
         """导入并重命名 信息 子页面的协程"""
-        from ui.informations_ui.informations_ui import InformationUI
+        from ui.informations_ui.informations_ui_logic import InformationUILogic
 
-        self.information_ui = InformationUI(self)
+        self.information_ui = InformationUILogic(self)
         self.information_ui.setObjectName(MainUIString.SUBPAGE_INFORMATION_OBJNAME)
+
+        # 设置文档阅读页面图标
+        if self.information_ui.docs_reader_ui != None:
+            self.information_ui.docs_reader_ui.setWindowIconText(self.windowIconText())
 
     async def import_settings_ui(self):
         """导入并重命名 设置 子页面其及所有孙页面的协程"""
         from ui.settings_ui.settings_ui import SettingsUI
         from ui.settings_ui.settings_basic_ui_logic import SettingsBasicUILogic
-        from ui.settings_ui.settings_audiovisual_ui_logic import SettingsAudiovisualUILogic
+        from ui.settings_ui.settings_audiovisual_ui_logic import (
+            SettingsAudiovisualUILogic,
+        )
         from ui.settings_ui.settings_language_ui import SettingsLanguageUI
 
         # 设置 子页面
@@ -132,9 +139,23 @@ class MainWindow(FluentWindow):
         """初始化窗口设置"""
         from PySide2.QtGui import QIcon
 
+        app_detailed_image = (
+            self.information_ui.information_board_card.app_detailed_image
+        )
+
+        # 检查窗口主题模式
+        theme_mode = apply_theme_from_config()
+
+        # 判断图标与详细图的深浅
+        if theme_mode == "DARK":
+            self.setWindowIcon(QIcon(AssetsPathTXT.APP_ICON_DARK_PATH))  # type: ignore
+            app_detailed_image.setPixmap(AssetsPathTXT.APP_DETAILEDIMAGE_DARK_PATH)
+        else:
+            self.setWindowIcon(QIcon(AssetsPathTXT.APP_ICON_LIGHT_PATH))  # type: ignore
+            app_detailed_image.setPixmap(AssetsPathTXT.APP_DETAILEDIMAGE_LIGHT_PATH)
+
         # 设置窗口大小
         self.resize(1080, 768)
-        # 设置窗口图标
-        self.setWindowIcon(QIcon(AssetsPathTXT.APP_ICON_PATH))  # type: ignore
+
         # 设置窗口标题
-        self.setWindowTitle(f"{BasicString.APP_FULL_NAME} - {BasicString.APP_VERSION}")
+        self.setWindowTitle(BasicString.APP_MAINWINDOW_TITLE)
