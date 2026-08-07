@@ -15,10 +15,15 @@
 > 例如我们要产生0~9之间的随机整数，像彩票摇奖那样，把10个质地和大小相同的号码球放入摇奖器中，充分搅拌后摇出一个球，这个球上的号码就称为随机数。计算器或计算机产生的随机数是按照确定的算法产生的数，具有周期性（周期很长），它们具有类似随机数的性质。因此， **计算器或计算机产生的随机数不是真正的随机数**  ，我们称它们为 **伪随机数** 。
 > 
 > ——《普通高中教科书 人教版 数学 必修二》
+>
+
+> [!NOTE]
+>
+> 从2026年8月7日开始，祈福Sankteco 的 GitHub 仓库所有权正式转移到 [SECTL](https://github.com/SECTL) 。
 
 ## 如何使用？
 
-1. 确认你的操作系统并在 [Release页面](https://github.com/CTELaboratorio/Sankteco/releases) 下载对应文件。
+1. 确认你的操作系统并在 [Release页面](https://github.com/SECTL/Sankteco/releases) 下载对应文件。
 
 2. 安装/解压缩到合适的目录。
 
@@ -41,10 +46,6 @@
 
 ## 关于
 
-Copyleft, GPL-3.0, ĈTEL, 2023~2026.
+Copyleft, GPL-3.0, SECTL, 2023~2026.
 
 尝试联系我们？联系 Sankteco@outlook.com ！
-
-加入讨论？请加入QQ频道！
-
-
