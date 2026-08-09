@@ -227,7 +227,7 @@ class NameTableWidget(QWidget):
         header = self.name_table_widget.horizontalHeader()
 
         # 设置所有列先根据内容调整宽度
-        header.setSectionResizeMode(QHeaderView.ResizeToContents)
+        header.setSectionResizeMode(QHeaderView.ResizeToContents)  # type: ignore
 
         # 开启 "拉伸最后一列" 功能
         header.setStretchLastSection(True)
@@ -354,14 +354,14 @@ class SettingsBasicUI(QFrame):
         )
 
         # 连接信号并初始化当前标签页
-        self.stackedWidget.currentChanged.connect(self.on_current_index_changed)
+        self.stackedWidget.currentChanged.connect(self.on_current_index_changed)  # type: ignore
         self.stackedWidget.setCurrentWidget(self.namelist_interface)
         self.pivot.setCurrentItem(self.namelist_interface.objectName())
 
         # 调整布局
         self.vboxlayout.setContentsMargins(QMargins(30, 30, 30, 30))
         self.vboxlayout.addWidget(self.pivot)
-        self.vboxlayout.setAlignment(self.pivot, Qt.AlignCenter)
+        self.vboxlayout.setAlignment(self.pivot, Qt.AlignCenter)  # type: ignore
         self.vboxlayout.addWidget(self.stackedWidget)
 
     def add_sub_interface(self, widget: QWidget, objectName: str, text: str):

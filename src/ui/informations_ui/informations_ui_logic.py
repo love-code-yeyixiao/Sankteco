@@ -25,11 +25,11 @@ class InformationUILogic(InformationUI):
         """信号连接函数"""
 
         # 连接 支持 部分帮助文档按钮点击信号
-        self.support_card.offline_document_button.clicked.connect(
+        self.support_card.offline_document_button.clicked.connect(  # type: ignore
             self.open_docs_reader_ui
         )
-        self.support_card.online_document_button.clicked.connect(
-            lambda: ShowInfobar.online_button_infobar(self, self)
+        self.support_card.online_document_button.clicked.connect(  # type: ignore
+            lambda: ShowInfobar.online_button_infobar(self, self)  # type: ignore
         )
 
     def open_docs_reader_ui(self):
@@ -45,13 +45,16 @@ class InformationUILogic(InformationUI):
         docs_reader_ui = DocsRUILogic()
 
         # 设为独立无边框窗口
-        docs_reader_ui.setWindowFlags(Qt.Window | Qt.FramelessWindowHint)
+        docs_reader_ui.setWindowFlags(Qt.Window | Qt.FramelessWindowHint)  # type: ignore
 
         # 关闭时自动删除
-        docs_reader_ui.setAttribute(Qt.WA_DeleteOnClose)
+        docs_reader_ui.setAttribute(Qt.WA_DeleteOnClose)  # type: ignore
 
         # 窗口销毁时清空引用
-        docs_reader_ui.destroyed.connect(self._on_docs_reader_destroyed)
+        docs_reader_ui.destroyed.connect(self._on_docs_reader_destroyed)  # type: ignore
+
+        # 初始化图标
+        docs_reader_ui.setWindowIcon(self.windowIcon())
 
         # 保存引用
         self.docs_reader_ui = docs_reader_ui

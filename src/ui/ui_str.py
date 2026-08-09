@@ -4,34 +4,22 @@ UI字符串文件
 """
 
 import gettext, json
-import emoji
+from app_const_var import AssetsPathTXT, LogicFilesString
 
 # 读取配置文件以获取语言配置
-with open("config/app_config.json", "r", encoding="utf-8") as f:
+with open(AssetsPathTXT.APP_CONFIG, "r", encoding="utf-8") as f:
     json_data = json.load(f)
-    language_config = json_data["Language"]["Language"]
+    language_config = json_data[LogicFilesString.LANG_JSON_1][
+        LogicFilesString.LANG_JSON_2
+    ]
 
 # 初始化gettext翻译
-gt = gettext.translation("messages", "locales", [language_config], fallback=True)
-
-# 获取基础翻译
-_base = gt.gettext
-
-
-def translate(text: str) -> str:
-    """翻译字符串并正确处理emoji"""
-
-    # 先获取翻译
-    translated = _base(text)
-
-    # 检测语言配置是否为emoji, 如果是则使用emoji短代码进行处理
-    if language_config == "emoji":
-        return emoji.emojize(translated, language="alias")
-    return translated
-
-
-# 重定向_变量为translate函数
-_ = translate
+_ = gettext.translation(
+    LogicFilesString.LANG_DOMAIN,
+    LogicFilesString.LANG_LOCALEDIR,
+    [language_config],
+    fallback=True,
+).gettext
 
 
 class BasicString:
@@ -45,7 +33,7 @@ class BasicString:
     APP_PLATFORM = "Python"
     APP_VERSION = "VERSION Dev"
     APP_VERSION_TYPE = "Dev"
-    APP_COPYTYPE = "Copyleft, GPL-3.0, ĈTEL, 2023~2026."
+    APP_COPYTYPE = "Copyleft, GPL-3.0, SECTL, 2023~2026."
 
     # 窗口标题信息
     APP_MAINWINDOW_TITLE = f"{APP_FULL_NAME} - {APP_VERSION}"
@@ -211,6 +199,20 @@ class SettBasicUIString:
     B_CHOOSE_SETT_GR_NAVNAME = _("普通抽选")
     F_CHOOSE_SETT_GR_NAVNAME = _("快速抽选")
 
+    # 导入名单部分
+    # 导入名单对话框
+    IMPORT_NAMELIST_DIALOG_TITLE = _("选择一个名单文件")
+    EXPORT_NAMELIST_DIALOG_TITLE = _("选择一个储存名单文件的位置")
+    NAMELIST_DIALOG_FILTER_TXT = _("文本文件")
+    NAMELIST_DIALOG_FILTER_JSON = _("JSON文件")
+    NAMELIST_DIALOG_FILTER_YAML = _("YAML配置文件")
+    NAMELIST_DIALOG_FILTER_CSV = _("逗号分隔符文件")
+    NAMELIST_DIALOG_FILTER_XLSX_XLS_ODS = _("电子表格文档")
+    NAMELIST_DIALOG_FILTER_XLSX = _("Excel2007~365电子表格文档")
+    NAMELIST_DIALOG_FILTER_XLS = _("Excel97~2003电子表格文档")
+    NAMELIST_DIALOG_FILTER_ODS = _("开放电子表格文档格式")
+    NAMELIST_DIALOG_FILTER_QR = _("二维码")
+
 
 class SettAvUIString:
     """首选项-视听 孙页面字符串,
@@ -284,7 +286,7 @@ class SettAvUIString:
     # API接口
     HITOKOTO_API_CARD_TITLE = _("一言API")
     HITOKOTO_API_CARD_CONTEXT = _("调整一言所使用的API接口地址")
-    HITOKOTO_API_CARD_TEXT_HITOKOTO = _(f"一言(https://v1.hitokoto.cn/)")
+    HITOKOTO_API_CARD_TEXT_HITOKOTO = _("一言") + "https://v1.hitokoto.cn/"
 
     # 刷新时间
     HITOKOTO_RENEW_TIME_CARD_TITLE = _("刷新时间")

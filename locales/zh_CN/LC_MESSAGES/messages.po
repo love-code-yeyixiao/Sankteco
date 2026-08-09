@@ -2,476 +2,549 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-05-24 14:45+0800\n"
-"PO-Revision-Date: 2026-05-24 14:49+0800\n"
+"POT-Creation-Date: 2026-08-09 20:25+0800\n"
+"PO-Revision-Date: 2026-08-09 20:26+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.18.0\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.0.1\n"
 
-#: src/ui_str.py:67
+#: src/ui/ui_str.py:40
+msgid "文档阅读"
+msgstr "文档阅读"
+
+#: src/ui/ui_str.py:49
 msgid "旗开得胜，一举夺魁！"
 msgstr "旗开得胜，一举夺魁！"
 
-#: src/ui_str.py:70
+#: src/ui/ui_str.py:52
 msgid "别紧张"
 msgstr "别紧张"
 
-#: src/ui_str.py:73 src/ui_str.py:328
+#: src/ui/ui_str.py:55 src/ui/ui_str.py:353
 msgid "祈福"
 msgstr "祈福"
 
-#: src/ui_str.py:74
+#: src/ui/ui_str.py:56
 msgid "请选择名单"
 msgstr "请选择名单"
 
-#: src/ui_str.py:75
+#: src/ui/ui_str.py:57
 msgid "Python原生随机算法"
 msgstr "Python原生随机算法"
 
-#: src/ui_str.py:76
+#: src/ui/ui_str.py:58
 msgid "SecRandom算法"
 msgstr "SecRandom算法"
 
-#: src/ui_str.py:79
+#: src/ui/ui_str.py:61
 msgid "所有性别"
 msgstr "所有性别"
 
-#: src/ui_str.py:80
+#: src/ui/ui_str.py:62
 msgid "男"
 msgstr "男"
 
-#: src/ui_str.py:81
+#: src/ui/ui_str.py:63
 msgid "女"
 msgstr "女"
 
-#: src/ui_str.py:82
+#: src/ui/ui_str.py:64
 msgid "非二元性别"
 msgstr "非二元性别"
 
-#: src/ui_str.py:83
+#: src/ui/ui_str.py:65
 msgid "请选择组别"
 msgstr "请选择组别"
 
-#: src/ui_str.py:84
+#: src/ui/ui_str.py:66
 msgid "请选择标签"
 msgstr "请选择标签"
 
-#: src/ui_str.py:85
+#: src/ui/ui_str.py:67
 msgid "重置抽选"
 msgstr "重置抽选"
 
-#: src/ui_str.py:88
+#: src/ui/ui_str.py:70
 msgid "总数: "
 msgstr "总数: "
 
-#: src/ui_str.py:89
+#: src/ui/ui_str.py:71
 msgid "剩余: "
 msgstr "剩余: "
 
-#: src/ui_str.py:90
+#: src/ui/ui_str.py:72
 msgid "占位符"
 msgstr "占位符"
 
-#: src/ui_str.py:97
+#: src/ui/ui_str.py:81
 msgid "错误！"
 msgstr "错误！"
 
-#: src/ui_str.py:98
+#: src/ui/ui_str.py:82
 msgid "无法找到离线文档！"
 msgstr "无法找到离线文档！"
 
-#: src/ui_str.py:99
+#: src/ui/ui_str.py:83
 msgid "警告！"
 msgstr "警告！"
 
-#: src/ui_str.py:100
+#: src/ui/ui_str.py:84
 msgid "无法连接到服务器！"
 msgstr "无法连接到服务器！"
 
-#: src/ui_str.py:103
+#: src/ui/ui_str.py:87
 msgid "支持"
 msgstr "支持"
 
-#: src/ui_str.py:104 src/ui_str.py:105
+#: src/ui/ui_str.py:88 src/ui/ui_str.py:89
 msgid "查看"
 msgstr "查看"
 
-#: src/ui_str.py:106
+#: src/ui/ui_str.py:90
 msgid "离线帮助文档"
 msgstr "离线帮助文档"
 
-#: src/ui_str.py:107
+#: src/ui/ui_str.py:91
 msgid "查看保存于本地的帮助文档, 如果有的话"
 msgstr "查看保存于本地的帮助文档,如果有的话"
 
-#: src/ui_str.py:108
+#: src/ui/ui_str.py:92
 msgid "在线帮助文档"
 msgstr "在线帮助文档"
 
-#: src/ui_str.py:109
+#: src/ui/ui_str.py:93
 msgid "访问项目官网获取在线帮助文档"
 msgstr "访问项目官网获取在线帮助文档"
 
-#: src/ui_str.py:112 src/ui_str.py:150
+#: src/ui/ui_str.py:96 src/ui/ui_str.py:136
 msgid "更新"
 msgstr "更新"
 
-#: src/ui_str.py:113
+#: src/ui/ui_str.py:97
 msgid "正式版"
 msgstr "正式版"
 
-#: src/ui_str.py:114
+#: src/ui/ui_str.py:98
 msgid "测试版"
 msgstr "测试版"
 
-#: src/ui_str.py:115
+#: src/ui/ui_str.py:99
 msgid "检查更新"
 msgstr "检查更新"
 
-#: src/ui_str.py:116
+#: src/ui/ui_str.py:100
 msgid "更新通道"
 msgstr "更新通道"
 
-#: src/ui_str.py:117
+#: src/ui/ui_str.py:101
 msgid "选择项目从何通道进行更新"
 msgstr "选择项目从何通道进行更新"
 
-#: src/ui_str.py:118
+#: src/ui/ui_str.py:102
 msgid "当前版本已是最新版本"
 msgstr "当前版本已是最新版本"
 
-#: src/ui_str.py:125
+#: src/ui/ui_str.py:111
 msgid "在此处调整程序设置"
 msgstr "在此处调整程序设置"
 
-#: src/ui_str.py:126
+#: src/ui/ui_str.py:112
 msgid "从下面的孙页面中选择其一以更改相关选项"
 msgstr "从下面的孙页面中选择其一以更改相关选项"
 
-#: src/ui_str.py:129 src/ui_str.py:134 src/ui_str.py:139 src/ui_str.py:144
-#: src/ui_str.py:149 src/ui_str.py:154 src/ui_str.py:309
+#: src/ui/ui_str.py:115 src/ui/ui_str.py:120 src/ui/ui_str.py:125
+#: src/ui/ui_str.py:130 src/ui/ui_str.py:135 src/ui/ui_str.py:140
+#: src/ui/ui_str.py:322
 msgid "跳转"
 msgstr "跳转"
 
-#: src/ui_str.py:130 src/ui_str.py:331
+#: src/ui/ui_str.py:116 src/ui/ui_str.py:356
 msgid "基本"
 msgstr "基本"
 
-#: src/ui_str.py:131
+#: src/ui/ui_str.py:117
 msgid "更改基本设置"
 msgstr "更改基本设置"
 
-#: src/ui_str.py:135 src/ui_str.py:332
+#: src/ui/ui_str.py:121 src/ui/ui_str.py:357
 msgid "视听"
 msgstr "视听"
 
-#: src/ui_str.py:136
+#: src/ui/ui_str.py:122
 msgid "更改背景音乐、音效、朗读等设置"
 msgstr "更改背景音乐、音效、朗读等设置"
 
-#: src/ui_str.py:140
+#: src/ui/ui_str.py:126
 msgid "联动"
 msgstr "联动"
 
-#: src/ui_str.py:141
+#: src/ui/ui_str.py:127
 msgid "更改与课表软件的联动设置"
 msgstr "更改与课表软件的联动设置"
 
-#: src/ui_str.py:145 src/ui_str.py:333
+#: src/ui/ui_str.py:131 src/ui/ui_str.py:358
 msgid "语言"
 msgstr "语言"
 
-#: src/ui_str.py:146
+#: src/ui/ui_str.py:132
 msgid "更改界面显示语言"
 msgstr "更改界面显示语言"
 
-#: src/ui_str.py:151
+#: src/ui/ui_str.py:137
 msgid "更新程序"
 msgstr "更新程序"
 
-#: src/ui_str.py:155
+#: src/ui/ui_str.py:141
 msgid "调试"
 msgstr "调试"
 
-#: src/ui_str.py:156
+#: src/ui/ui_str.py:142
 msgid "高级调试选项"
 msgstr "高级调试选项"
 
-#: src/ui_str.py:164 src/ui_str.py:172
-msgid "管理"
-msgstr "管理"
+#: src/ui/ui_str.py:152
+msgid "键入新名单标识符"
+msgstr "键入新名单标识符"
 
-#: src/ui_str.py:165
-msgid "多名单"
-msgstr "多名单"
+#: src/ui/ui_str.py:153
+msgid "以英文字母、汉字、数字组成, 不能以数字开头"
+msgstr "以英文字母、汉字、数字组成, 不能以数字开头"
 
-#: src/ui_str.py:166
-msgid "创建或管理不同名单以供便携使用"
-msgstr "创建或管理不同名单以供便携使用"
+#: src/ui/ui_str.py:156
+msgid "当前名单"
+msgstr "当前名单"
 
-#: src/ui_str.py:169
-msgid "设置当前名单"
-msgstr "设置当前名单"
-
-#: src/ui_str.py:170
-msgid "选择要管理的名单并配置"
-msgstr "选择要管理的名单并配置"
-
-#: src/ui_str.py:171
+#: src/ui/ui_str.py:157
 msgid "选择要管理的名单"
 msgstr "选择要管理的名单"
 
-#: src/ui_str.py:173
-msgid "管理当前选择的名单之内容"
-msgstr "管理当前选择的名单之内容"
+#: src/ui/ui_str.py:160
+msgid "刷新"
+msgstr "刷新"
 
-#: src/ui_str.py:174
-msgid "添加"
-msgstr "添加"
+#: src/ui/ui_str.py:161
+msgid "新建名单"
+msgstr "新建名单"
 
-#: src/ui_str.py:175
-msgid "为所选的名单添加标记"
-msgstr "为所选的名单添加标记"
+#: src/ui/ui_str.py:162
+msgid "重命名名单"
+msgstr "重命名名单"
 
-#: src/ui_str.py:179
+#: src/ui/ui_str.py:163
+msgid "删除名单"
+msgstr "删除名单"
+
+#: src/ui/ui_str.py:164
+msgid "导入..."
+msgstr "导入..."
+
+#: src/ui/ui_str.py:165
+msgid "导出..."
+msgstr "导出..."
+
+#: src/ui/ui_str.py:168
+msgid "存在?"
+msgstr "存在?"
+
+#: src/ui/ui_str.py:169
+msgid "学号"
+msgstr "学号"
+
+#: src/ui/ui_str.py:170
+msgid "姓名"
+msgstr "姓名"
+
+#: src/ui/ui_str.py:171
+msgid "性别"
+msgstr "性别"
+
+#: src/ui/ui_str.py:172
+msgid "小组"
+msgstr "小组"
+
+#: src/ui/ui_str.py:173
+msgid "标签"
+msgstr "标签"
+
+#: src/ui/ui_str.py:177
 msgid "动画精美度"
 msgstr "动画精美度"
 
-#: src/ui_str.py:180
+#: src/ui/ui_str.py:178
 msgid "调节抽选时的动画精美程度"
 msgstr "调节抽选时的动画精美程度"
 
-#: src/ui_str.py:181
+#: src/ui/ui_str.py:179
 msgid "华丽"
 msgstr "华丽"
 
-#: src/ui_str.py:182
+#: src/ui/ui_str.py:180
 msgid "精美"
 msgstr "精美"
 
-#: src/ui_str.py:183
+#: src/ui/ui_str.py:181
 msgid "一般"
 msgstr "一般"
 
-#: src/ui_str.py:184
+#: src/ui/ui_str.py:182
 msgid "快速"
 msgstr "快速"
 
-#: src/ui_str.py:188
+#: src/ui/ui_str.py:186
 msgid "结果推送方式"
 msgstr "结果推送方式"
 
-#: src/ui_str.py:189
+#: src/ui/ui_str.py:187
 msgid "选择快速抽选的结果应怎样显示"
 msgstr "选择快速抽选的结果应怎样显示"
 
-#: src/ui_str.py:190
+#: src/ui/ui_str.py:188
 msgid "显示在ClassIsland"
 msgstr "显示在ClassIsland"
 
-#: src/ui_str.py:191
+#: src/ui/ui_str.py:189
 msgid "显示在ClassWidget"
 msgstr "显示在ClassWidget"
 
-#: src/ui_str.py:192
+#: src/ui/ui_str.py:190
 msgid "显示在临时弹窗"
 msgstr "显示在临时弹窗"
 
-#: src/ui_str.py:200
+#: src/ui/ui_str.py:198
 msgid "名单"
 msgstr "名单"
 
-#: src/ui_str.py:201
+#: src/ui/ui_str.py:199
 msgid "普通抽选"
 msgstr "普通抽选"
 
-#: src/ui_str.py:202
+#: src/ui/ui_str.py:200
 msgid "快速抽选"
 msgstr "快速抽选"
 
-#: src/ui_str.py:210
+#: src/ui/ui_str.py:204
+msgid "选择一个名单文件"
+msgstr "选择一个名单文件"
+
+#: src/ui/ui_str.py:205
+msgid "选择一个储存名单文件的位置"
+msgstr "选择一个储存名单文件的位置"
+
+#: src/ui/ui_str.py:206
+msgid "文本文件"
+msgstr "文本文件"
+
+#: src/ui/ui_str.py:207
+msgid "JSON文件"
+msgstr "JSON文件"
+
+#: src/ui/ui_str.py:208
+msgid "YAML配置文件"
+msgstr "YAML配置文件"
+
+#: src/ui/ui_str.py:209
+msgid "逗号分隔符文件"
+msgstr "逗号分隔符文件"
+
+#: src/ui/ui_str.py:210
+msgid "电子表格文档"
+msgstr "电子表格文档"
+
+#: src/ui/ui_str.py:211
+msgid "二维码"
+msgstr "二维码"
+
+#: src/ui/ui_str.py:221
 msgid "音乐开关"
 msgstr "音乐开关"
 
-#: src/ui_str.py:211
+#: src/ui/ui_str.py:222
 msgid "控制是否在普通抽选时播放背景音乐"
 msgstr "控制是否在普通抽选时播放背景音乐"
 
-#: src/ui_str.py:214
+#: src/ui/ui_str.py:225
 msgid "音乐文件"
 msgstr "音乐文件"
 
-#: src/ui_str.py:215
+#: src/ui/ui_str.py:226
 msgid "选择要启用的音乐文件"
 msgstr "选择要启用的音乐文件"
 
-#: src/ui_str.py:216 src/ui_str.py:238
+#: src/ui/ui_str.py:227 src/ui/ui_str.py:249
 msgid "选择"
 msgstr "选择"
 
-#: src/ui_str.py:219
+#: src/ui/ui_str.py:230
 msgid "音乐音量"
 msgstr "音乐音量"
 
-#: src/ui_str.py:220
+#: src/ui/ui_str.py:231
 msgid "调节音乐在播放时的音量"
 msgstr "调节音乐在播放时的音量"
 
-#: src/ui_str.py:223
+#: src/ui/ui_str.py:234
 msgid "音乐渐入效果"
 msgstr "音乐渐入效果"
 
-#: src/ui_str.py:224
+#: src/ui/ui_str.py:235
 msgid "调整音乐播放时渐入效果持续的秒数(s)"
 msgstr "调整音乐播放时渐入效果持续的秒数(s)"
 
-#: src/ui_str.py:227
+#: src/ui/ui_str.py:238
 msgid "音乐渐出效果"
 msgstr "音乐渐出效果"
 
-#: src/ui_str.py:228
+#: src/ui/ui_str.py:239
 msgid "调整音乐播放时渐出效果持续的秒数(s)"
 msgstr "调整音乐播放时渐出效果持续的秒数(s)"
 
-#: src/ui_str.py:232
+#: src/ui/ui_str.py:243
 msgid "音效开关"
 msgstr "音效开关"
 
-#: src/ui_str.py:233
+#: src/ui/ui_str.py:244
 msgid "控制是否在点名结束后播放抽选音效"
 msgstr "控制是否在点名结束后播放抽选音效"
 
-#: src/ui_str.py:236
+#: src/ui/ui_str.py:247
 msgid "音效路径"
 msgstr "音效路径"
 
-#: src/ui_str.py:237
+#: src/ui/ui_str.py:248
 msgid "选择要启用的音效文件"
 msgstr "选择要启用的音效文件"
 
-#: src/ui_str.py:241
+#: src/ui/ui_str.py:252
 msgid "音效在何时播放"
 msgstr "音效在何时播放"
 
-#: src/ui_str.py:242 src/ui_str.py:253
+#: src/ui/ui_str.py:253 src/ui/ui_str.py:264
 msgid "仅普通抽选后"
 msgstr "仅普通抽选后"
 
-#: src/ui_str.py:243 src/ui_str.py:254
+#: src/ui/ui_str.py:254 src/ui/ui_str.py:265
 msgid "仅快速抽选后"
 msgstr "仅快速抽选后"
 
-#: src/ui_str.py:244 src/ui_str.py:255
+#: src/ui/ui_str.py:255 src/ui/ui_str.py:266
 msgid "两者后"
 msgstr "两者后"
 
-#: src/ui_str.py:248
+#: src/ui/ui_str.py:259
 msgid "朗读开关"
 msgstr "朗读开关"
 
-#: src/ui_str.py:249
+#: src/ui/ui_str.py:260
 msgid "控制是否在点名结束后朗读被抽中的名字"
 msgstr "控制是否在点名结束后朗读被抽中的名字"
 
-#: src/ui_str.py:252
+#: src/ui/ui_str.py:263
 msgid "在何时朗读"
 msgstr "在何时朗读"
 
-#: src/ui_str.py:259
+#: src/ui/ui_str.py:270
 msgid "深浅模式"
 msgstr "深浅模式"
 
-#: src/ui_str.py:260
+#: src/ui/ui_str.py:271
 msgid "选择程序显示时的深浅色模式"
 msgstr "选择程序显示时的深浅色模式"
 
-#: src/ui_str.py:261
+#: src/ui/ui_str.py:272
 msgid "深色"
 msgstr "深色"
 
-#: src/ui_str.py:262
+#: src/ui/ui_str.py:273
 msgid "浅色"
 msgstr "浅色"
 
-#: src/ui_str.py:263 src/ui_str.py:269
+#: src/ui/ui_str.py:274 src/ui/ui_str.py:280
 msgid "跟随系统"
 msgstr "跟随系统"
 
-#: src/ui_str.py:266
+#: src/ui/ui_str.py:277
 msgid "窗口效果"
 msgstr "窗口效果"
 
-#: src/ui_str.py:267
+#: src/ui/ui_str.py:278
 msgid "调整程序窗口的显示效果"
 msgstr "调整程序窗口的显示效果"
 
-#: src/ui_str.py:268
+#: src/ui/ui_str.py:279
 msgid "Mica"
 msgstr "Mica"
 
-#: src/ui_str.py:273
+#: src/ui/ui_str.py:284
 msgid "一言API"
 msgstr "一言API"
 
-#: src/ui_str.py:274
+#: src/ui/ui_str.py:285
 msgid "调整一言所使用的API接口地址"
 msgstr "调整一言所使用的API接口地址"
 
-#: src/ui_str.py:278
-msgid "刷新时间"
-msgstr "刷新时间"
-
-#: src/ui_str.py:279
-msgid "调整一言的刷新时间(s)"
-msgstr "调整一言的刷新时间(s)"
-
-#: src/ui_str.py:289
-msgid "音乐"
-msgstr "音乐"
-
-#: src/ui_str.py:290
-msgid "音效"
-msgstr "音效"
-
-#: src/ui_str.py:291
-msgid "朗读"
-msgstr "朗读"
-
-#: src/ui_str.py:292
-msgid "主题"
-msgstr "主题"
-
-#: src/ui_str.py:293
+#: src/ui/ui_str.py:286 src/ui/ui_str.py:304
 msgid "一言"
 msgstr "一言"
 
-#: src/ui_str.py:300
+#: src/ui/ui_str.py:289
+msgid "刷新时间"
+msgstr "刷新时间"
+
+#: src/ui/ui_str.py:290
+msgid "调整一言的刷新时间(s)"
+msgstr "调整一言的刷新时间(s)"
+
+#: src/ui/ui_str.py:300
+msgid "音乐"
+msgstr "音乐"
+
+#: src/ui/ui_str.py:301
+msgid "音效"
+msgstr "音效"
+
+#: src/ui/ui_str.py:302
+msgid "朗读"
+msgstr "朗读"
+
+#: src/ui/ui_str.py:303
+msgid "主题"
+msgstr "主题"
+
+#: src/ui/ui_str.py:313
 msgid "显示语言"
 msgstr "显示语言"
 
-#: src/ui_str.py:301
+#: src/ui/ui_str.py:314
 msgid "选择将在屏幕上显示的语言"
 msgstr "选择将在屏幕上显示的语言"
 
-#: src/ui_str.py:307
+#: src/ui/ui_str.py:320
 msgid "加入翻译计划"
 msgstr "加入翻译计划"
 
-#: src/ui_str.py:308
+#: src/ui/ui_str.py:321
 msgid "加入项目的在线翻译工程, 为本地化做出贡献"
 msgstr "加入项目的在线翻译工程,为本地化做出贡献"
 
-#: src/ui_str.py:326
+#: src/ui/ui_str.py:331
+msgid "当前文档"
+msgstr "当前文档"
+
+#: src/ui/ui_str.py:332
+msgid "选择要查看的文档"
+msgstr "选择要查看的文档"
+
+#: src/ui/ui_str.py:351
 msgid "信息"
 msgstr "信息"
 
-#: src/ui_str.py:327
+#: src/ui/ui_str.py:352
 msgid "首选项"
 msgstr "首选项"
 
@@ -489,3 +562,27 @@ msgstr "首选项"
 
 #~ msgid "信息板"
 #~ msgstr "信息板"
+
+#~ msgid "管理"
+#~ msgstr "管理"
+
+#~ msgid "多名单"
+#~ msgstr "多名单"
+
+#~ msgid "创建或管理不同名单以供便携使用"
+#~ msgstr "创建或管理不同名单以供便携使用"
+
+#~ msgid "选择要管理的名单并配置"
+#~ msgstr "选择要管理的名单并配置"
+
+#~ msgid "管理当前选择的名单之内容"
+#~ msgstr "管理当前选择的名单之内容"
+
+#~ msgid "添加"
+#~ msgstr "添加"
+
+#~ msgid "为所选的名单添加标记"
+#~ msgstr "为所选的名单添加标记"
+
+#~ msgid "一言(https://v1.hitokoto.cn/)"
+#~ msgstr "一言(https://v1.hitokoto.cn/)"

@@ -33,11 +33,11 @@ class ImageViewer(QGraphicsView):
         # 创建一个 QGraphicsPixmapItem 对象，用于显示图片
         self.imageItem = QGraphicsPixmapItem()  # type: ignore
 
-        self.scene.addItem(self.imageItem)
-        self.setScene(self.scene)
+        self.scene.addItem(self.imageItem)  # type: ignore
+        self.setScene(self.scene)  # type: ignore
 
         # 启用平滑变换
-        self.setRenderHint(QPainter.SmoothPixmapTransform)
+        self.setRenderHint(QPainter.SmoothPixmapTransform)  # type: ignore
 
     def setPixmap(self, pic: str):
         from PySide2.QtGui import QPixmap
@@ -100,7 +100,7 @@ class InformationBoardCardGroup(qfw.ElevatedCardWidget):
         # 组件布局
         self.vboxlayout = QVBoxLayout(self)
         self.vboxlayout.addWidget(self.app_detailed_image)
-        self.vboxlayout.setAlignment(self.app_detailed_image, Qt.AlignCenter)
+        self.vboxlayout.setAlignment(self.app_detailed_image, Qt.AlignCenter)  # type: ignore
         self.vboxlayout.addWidget(self.infotext_bodylabel)
         self.vboxlayout.addWidget(self.infotext_captionlabel)
 

@@ -12,6 +12,7 @@ from ui.settings_ui.settings_basic_ui import (
     sett_basic_ui_cfg,
 )
 from logic.add_import_export_namelist import AIENamelist
+from ui.ui_str import SettBasicUIString
 from app_const_var import LogicFilesString, AssetsPathTXT
 
 
@@ -62,18 +63,23 @@ class SettingsBasicUILogic(SettingsBasicUI):
         )
 
         # 刷新名单
-        namelist_setting_card.refresh_namelist_button.clicked.connect(
+        namelist_setting_card.refresh_namelist_button.clicked.connect(  # type: ignore
             self.namelist_interface.name_table_widget.refresh_items
         )
 
         # 新建名单
-        namelist_setting_card.add_new_namelist_button.clicked.connect(
+        namelist_setting_card.add_new_namelist_button.clicked.connect(  # type: ignore
             self.add_new_namelist
         )
 
         # 导入名单
-        namelist_setting_card.import_namelist_button.clicked.connect(
+        namelist_setting_card.import_namelist_button.clicked.connect(  # type: ignore
             self.import_namelist
+        )
+
+        # 导出名单
+        namelist_setting_card.export_namelist_button.clicked.connect(  # type: ignore
+            self.export_namelist
         )
 
     def add_new_namelist(self):
@@ -98,7 +104,9 @@ class SettingsBasicUILogic(SettingsBasicUI):
             ui.now_namelist_card_list.addItems(ui.now_namelist_card_list_item)
 
             # 选中新添加的名单 (最后一项)
-            ui.now_namelist_card_list.setCurrentIndex(ui.now_namelist_card_list.count() - 1)
+            ui.now_namelist_card_list.setCurrentIndex(
+                ui.now_namelist_card_list.count() - 1
+            )
 
             # 加载名单
             self.load_namelist_from_dataset(new_namelist_data)
@@ -110,20 +118,24 @@ class SettingsBasicUILogic(SettingsBasicUI):
 
         # 创建对话框实例
         import_namelist_dialog = QFileDialog(self)
-        import_namelist_dialog.setWindowTitle("选择一个名单文件")
+        import_namelist_dialog.setWindowTitle(
+            SettBasicUIString.IMPORT_NAMELIST_DIALOG_TITLE
+        )
 
         # 设置文件过滤器
         import_namelist_dialog.setNameFilters(
             [
-                "文本文件 (*.txt)",
-                "JSON (*.json)",
-                "逗号分隔符文件 (*.csv)",
-                "Excel电子表格文档 (*.xlsx *.xls)",
+                f"{SettBasicUIString.NAMELIST_DIALOG_FILTER_TXT} (*.txt)",
+                f"{SettBasicUIString.NAMELIST_DIALOG_FILTER_JSON} (*.json)",
+                f"{SettBasicUIString.NAMELIST_DIALOG_FILTER_YAML} (*.yaml)",
+                f"{SettBasicUIString.NAMELIST_DIALOG_FILTER_CSV} (*.csv)",
+                f"{SettBasicUIString.NAMELIST_DIALOG_FILTER_XLSX_XLS_ODS} (*.xlsx *.xls *.ods)",
+                f"{SettBasicUIString.NAMELIST_DIALOG_FILTER_QR} (*.png)",
             ]
         )
 
         # 设置为 "打开" 模式
-        import_namelist_dialog.setAcceptMode(QFileDialog.AcceptOpen)
+        import_namelist_dialog.setAcceptMode(QFileDialog.AcceptOpen)  # type: ignore
 
         # 显示对话框并获取名单路径
         if import_namelist_dialog.exec_():
@@ -145,6 +157,53 @@ class SettingsBasicUILogic(SettingsBasicUI):
                     self.load_namelist_from_dataset(dataset)
                 else:
                     print("导入失败：文件格式不支持或无有效表头")
+
+    def export_namelist(self):
+        """导出名单"""
+
+        ui = self.namelist_interface.now_namelist_card
+        now_namelist = ui.now_namelist_card_list_item[
+            ui.now_namelist_card_list.currentIndex()
+        ]
+        now_namelist_data = AIENamelist.json_to_dataset(now_namelist)
+
+        # 创建对话框实例
+        export_namelist_dialog = QFileDialog(self)
+        export_namelist_dialog.setWindowTitle(
+            SettBasicUIString.EXPORT_NAMELIST_DIALOG_TITLE
+        )
+
+        # 设置文件过滤器
+        export_namelist_dialog.setNameFilters(
+            [
+                f"{SettBasicUIString.NAMELIST_DIALOG_FILTER_TXT} (*.txt)",
+                f"{SettBasicUIString.NAMELIST_DIALOG_FILTER_JSON} (*.json)",
+                f"{SettBasicUIString.NAMELIST_DIALOG_FILTER_YAML} (*.yaml)",
+                f"{SettBasicUIString.NAMELIST_DIALOG_FILTER_CSV} (*.csv)",
+                f"{SettBasicUIString.NAMELIST_DIALOG_FILTER_XLSX} (*.xlsx)",
+                f"{SettBasicUIString.NAMELIST_DIALOG_FILTER_XLS} (*.xls)",
+                f"{SettBasicUIString.NAMELIST_DIALOG_FILTER_ODS} (*.ods)",
+                f"{SettBasicUIString.NAMELIST_DIALOG_FILTER_QR} (*.png)",
+            ]
+        )
+
+        # 设置默认后缀
+        export_namelist_dialog.setDefaultSuffix("json")
+
+        # 设置为 "导出" 模式
+        export_namelist_dialog.setAcceptMode(QFileDialog.AcceptSave)  # type: ignore
+
+        # 显示对话框并获取名单路径
+        if export_namelist_dialog.exec_():
+            selected_files = export_namelist_dialog.selectedFiles()[0] if export_namelist_dialog.selectedFiles() else ""
+            if not selected_files:
+                return
+            selected_ext = self.get_ext_from_filter(export_namelist_dialog.selectedNameFilter())
+            # FIXME:判断是否无后缀
+            if selected_ext and not selected_files.endswith(f".{selected_ext}"):
+                namelist_path = selected_files + f".{selected_ext}"
+            namelist_path = selected_files
+            AIENamelist.export_namelist(now_namelist_data, namelist_path)
 
     def load_namelist_from_dataset(self, namelist_data: tablib.Dataset):
         """从 tablib.Dataset 中加载名单"""
@@ -202,3 +261,15 @@ class SettingsBasicUILogic(SettingsBasicUI):
                 print(f"加载名单数据出错: {e}")
         else:
             print(f"无法加载文件: {namelist_path}")
+            
+    def get_ext_from_filter(self, filter: str) -> str:
+        """从过滤器提取扩展名"""
+        import re
+        
+        # 匹配过滤器后缀并取首个
+        match = re.search(r"\(\*\.([^)\s]+)", filter)
+        if match:
+            ext = match.group(1).split(";")[0]
+            return ext
+        return ""
+        

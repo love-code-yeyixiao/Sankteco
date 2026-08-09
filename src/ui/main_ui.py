@@ -5,11 +5,14 @@
 """
 
 import asyncio
-from qfluentwidgets import FluentWindow
+from enum import Enum
+from typing import Union
+from qfluentwidgets import FluentWindow, qconfig
 from qfluentwidgets import FluentIcon as FI
 from app_const_var import AssetsPathTXT
-from .ui_str import MainUIString, BasicString
-from ui.settings_ui.settings_audiovisual_ui_logic import apply_theme_from_config
+from app_config import AppConfig
+from ui.ui_str import MainUIString, BasicString
+from ui.ui_loading import get_theme_from_config, apply_theme_from_config
 
 
 class MainWindow(FluentWindow):
@@ -18,6 +21,10 @@ class MainWindow(FluentWindow):
     def __init__(self):
         """初始化主窗口"""
         super().__init__()
+
+        # 加载配置文件
+        self.cfg = AppConfig()
+        qconfig.load(AssetsPathTXT.APP_CONFIG, self.cfg)
 
         # 运行导入子页面的asyncio程序
         asyncio.run(self.import_ui())
@@ -28,10 +35,8 @@ class MainWindow(FluentWindow):
         # 初始化导航栏
         self.init_navigation()
 
-        # 连接设置子页面信号
-        self.settings_ui.to_basic_card.clicked.connect(lambda: self.switchTo(self.settings_basic_ui))  # type: ignore
-        self.settings_ui.to_audiovisual_card.clicked.connect(lambda: self.switchTo(self.settings_audiovisual_ui))  # type: ignore
-        self.settings_ui.to_language_card.clicked.connect(lambda: self.switchTo(self.settings_language_ui))  # type: ignore
+        # 初始化信号连接函数
+        self.singal_connection()
 
     async def import_information_ui(self):
         """导入并重命名 信息 子页面的协程"""
@@ -137,25 +142,53 @@ class MainWindow(FluentWindow):
 
     def init_window(self):
         """初始化窗口设置"""
-        from PySide2.QtGui import QIcon
 
-        app_detailed_image = (
-            self.information_ui.information_board_card.app_detailed_image
-        )
-
-        # 检查窗口主题模式
-        theme_mode = apply_theme_from_config()
-
-        # 判断图标与详细图的深浅
-        if theme_mode == "DARK":
-            self.setWindowIcon(QIcon(AssetsPathTXT.APP_ICON_DARK_PATH))  # type: ignore
-            app_detailed_image.setPixmap(AssetsPathTXT.APP_DETAILEDIMAGE_DARK_PATH)
-        else:
-            self.setWindowIcon(QIcon(AssetsPathTXT.APP_ICON_LIGHT_PATH))  # type: ignore
-            app_detailed_image.setPixmap(AssetsPathTXT.APP_DETAILEDIMAGE_LIGHT_PATH)
+        # 初始化应用全局主题
+        self._apply_theme()
 
         # 设置窗口大小
         self.resize(1080, 768)
 
         # 设置窗口标题
         self.setWindowTitle(BasicString.APP_MAINWINDOW_TITLE)
+
+    def singal_connection(self):
+        """信号连接函数"""
+
+        # 连接设置子页面信号
+        self.settings_ui.to_basic_card.clicked.connect(lambda: self.switchTo(self.settings_basic_ui))  # type: ignore
+        self.settings_ui.to_audiovisual_card.clicked.connect(lambda: self.switchTo(self.settings_audiovisual_ui))  # type: ignore
+        self.settings_ui.to_language_card.clicked.connect(lambda: self.switchTo(self.settings_language_ui))  # type: ignore
+
+        # 连接视听孙页面主题更改信号
+        self.cfg.DarkLight.valueChanged.connect(self._apply_theme)  # type: ignore
+
+    def _apply_theme(self, mode: Union[Enum, None] = None):
+        """设置应用全局主题"""
+        from PySide2.QtGui import QIcon
+
+        # 持久化写入配置文件
+        qconfig.save()
+
+        # 防止 mode 未被正确赋值
+        if mode == None:
+            mode = self.cfg.DarkLight.value
+
+        # 变更图标主题
+        theme_mode = get_theme_from_config()
+        if theme_mode == "DARK":
+            self.setWindowIcon(QIcon(AssetsPathTXT.APP_ICON_DARK_PATH))  # type: ignore
+            # 变更文档阅读器图标主题
+            if self.information_ui.docs_reader_ui != None:
+                self.information_ui.docs_reader_ui.setWindowIcon(QIcon(AssetsPathTXT.APP_ICON_DARK_PATH))  # type: ignore
+        else:
+            self.setWindowIcon(QIcon(AssetsPathTXT.APP_ICON_LIGHT_PATH))  # type: ignore
+            # 变更文档阅读器图标主题
+            if self.information_ui.docs_reader_ui != None:
+                self.information_ui.docs_reader_ui.setWindowIcon(QIcon(AssetsPathTXT.APP_ICON_LIGHT_PATH))  # type: ignore
+
+        # 变更详细图主题
+        app_detailed_image = (
+            self.information_ui.information_board_card.app_detailed_image
+        )
+        apply_theme_from_config(app_detailed_image, mode)

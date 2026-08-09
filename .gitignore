@@ -9,3 +9,5 @@ build/*
 dist/*
 start.build/*
 start.dist/*
+venv/*
+O:/*

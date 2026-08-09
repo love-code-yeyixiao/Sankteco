@@ -3,11 +3,7 @@
 引用时可作 DocsRUILogic / docs_reader_ui_logic
 """
 
-import json
-import os
-from PySide2.QtCore import QTimer
 from ui.docs_reader_ui.docs_reader_ui import DocsRUI
-from app_const_var import AssetsPathTXT
 
 
 class DocsRUILogic(DocsRUI):
@@ -16,6 +12,7 @@ class DocsRUILogic(DocsRUI):
 
     def __init__(self, parent=None):
         super().__init__(parent)
+        from PySide2.QtCore import QTimer
 
         # 初始化信号连接
         self.singal_connection()
@@ -43,6 +40,8 @@ class DocsRUILogic(DocsRUI):
 
     def on_now_doc_changed(self, index: int):
         """文档切换事件处理函数"""
+        import json, os
+        from app_const_var import AssetsPathTXT
 
         try:
             now_doc_list = self.docs_combobox.now_doc_card_list

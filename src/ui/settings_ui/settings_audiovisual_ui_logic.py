@@ -3,10 +3,7 @@
 引用时可作 SettAvUILogic / setting_audiovisual_ui_logic
 """
 
-from enum import Enum
-import qfluentwidgets as qfw
 from ui.settings_ui.settings_audiovisual_ui import SettingsAudiovisualUI, sett_av_ui_cfg
-from app_config import AppEnums
 
 
 class SettingsAudiovisualUILogic(SettingsAudiovisualUI):
@@ -24,35 +21,4 @@ class SettingsAudiovisualUILogic(SettingsAudiovisualUI):
     def singal_connection(self):
         """信号连接函数"""
 
-        self.cfg.DarkLight.valueChanged.connect(self.change_theme)  # type: ignore
-
-    def change_theme(self, mode: Enum):
-        """更改主题函数"""
-
-        if mode == AppEnums.DarkLightEnum.LIGHT:
-            qfw.setTheme(qfw.Theme.LIGHT)
-        elif mode == AppEnums.DarkLightEnum.DARK:
-            qfw.setTheme(qfw.Theme.DARK)
-        elif mode == AppEnums.DarkLightEnum.AUTO:
-            qfw.setTheme(qfw.Theme.AUTO)
-
-        # 持久化配置
-        qfw.qconfig.save()
-
-
-def apply_theme_from_config():
-    """根据配置文件中的 dark_light 设置应用全局主题"""
-    mode = sett_av_ui_cfg.DarkLight.value
-    if mode == AppEnums.DarkLightEnum.LIGHT:
-        qfw.setTheme(qfw.Theme.LIGHT)
-        return "LIGHT"
-    elif mode == AppEnums.DarkLightEnum.DARK:
-        qfw.setTheme(qfw.Theme.DARK)
-        return "DARK"
-    elif mode == AppEnums.DarkLightEnum.AUTO:
-        qfw.setTheme(qfw.Theme.AUTO)
-        return "DARK" if (qfw.theme() == qfw.Theme.DARK) else "LIGHT"
-    else:
-        # 默认深色主题
-        qfw.setTheme(qfw.Theme.DARK)
-        return "DARK"
+        pass

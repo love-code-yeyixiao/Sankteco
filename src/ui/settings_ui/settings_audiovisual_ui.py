@@ -341,14 +341,14 @@ class SettingsAudiovisualUI(QFrame):
         )
 
         # 连接信号并初始化当前标签页
-        self.stackedWidget.currentChanged.connect(self.on_current_index_changed)
+        self.stackedWidget.currentChanged.connect(self.on_current_index_changed)  # type: ignore
         self.stackedWidget.setCurrentWidget(self.music_interface)
         self.pivot.setCurrentItem(self.music_interface.objectName())
 
         # 调整布局
         self.vboxlayout.setContentsMargins(QMargins(30, 30, 30, 30))
         self.vboxlayout.addWidget(self.pivot)
-        self.vboxlayout.setAlignment(self.pivot, Qt.AlignCenter)
+        self.vboxlayout.setAlignment(self.pivot, Qt.AlignCenter)  # type: ignore
         self.vboxlayout.addWidget(self.stackedWidget)
 
     def add_sub_interface(self, widget: QWidget, objectName: str, text: str):

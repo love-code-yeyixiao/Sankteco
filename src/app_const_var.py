@@ -127,3 +127,12 @@ class LogicFilesString:
         AIENAMELIST_HEADER_GROUP,
         AIENAMELIST_HEADER_TIP,
     ]
+
+    # ui_str.py
+    # gettext 键名
+    LANG_DOMAIN = "messages"
+    LANG_LOCALEDIR = "locales"
+
+    # json 键名
+    LANG_JSON_1 = "Language"
+    LANG_JSON_2 = "Language"
