@@ -1,0 +1,11 @@
+{
+    "id": "com.sankteco.plugin_demo",
+    "name": "Sankteco示例插件",
+    "generation": "1",
+    "version": "1.0.0",
+    "description": "这是一个用于测试的插件",
+    "author": "Sankteco",
+    "icon": "INFO",
+    "entry": "main.py",
+    "parent_route": null
+}

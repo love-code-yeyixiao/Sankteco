@@ -37,6 +37,9 @@ class MainWindow(FluentWindow):
 
         # 初始化信号连接函数
         self.singal_connection()
+        
+        # 插件系统集成
+        self._init_plugin_system()
 
     async def import_information_ui(self):
         """导入并重命名 信息 子页面的协程"""
@@ -192,3 +195,60 @@ class MainWindow(FluentWindow):
             self.information_ui.information_board_card.app_detailed_image
         )
         apply_theme_from_config(app_detailed_image, mode)
+        
+    def _init_plugin_system(self):
+        """初始化插件系统（扫描、加载、注册）"""
+        from pathlib import Path
+        from PySide2.QtWidgets import QWidget
+        from plugin.scanner import PluginScanner
+        from plugin.loader import PluginLoader
+        from plugin.context import PluginContext
+        
+        # 1. 准备
+        plugins_dir = Path(__file__).parent.parent.parent / "plugins"
+        self.plugin_context = PluginContext(self, self.cfg)
+        
+        # 2. 扫描
+        scanner = PluginScanner(plugins_dir)
+        plugin_infos = scanner.scan()
+        
+        # 3. 加载
+        loader = PluginLoader()
+        loader.load_all(plugin_infos)
+        
+        # 4. 注册到主窗口（调用 register 获取 Widget）
+        for info in plugin_infos:
+            plugin_id = info.get("id")
+            if not plugin_id:
+                continue
+            
+            register_func = loader.get_register_func(plugin_id)
+            if not register_func:
+                continue
+            
+            try:
+                # 调用插件的 register 函数，传入 context
+                widget = register_func(self.plugin_context)
+                
+                # 如果插件返回了 QWidget，添加到导航栏
+                if widget is not None and isinstance(widget, QWidget):
+                    # 从 plugin.json 读取元数据
+                    icon_name = info.get("icon", "APPLICATION")
+                    plugin_name = info.get("name", "未命名插件")
+                    parent_route = info.get("parent_route")  # 可能是 None
+                    
+                    # 使用 context 添加页面
+                    self.plugin_context.add_page(
+                        widget=widget,
+                        icon=icon_name,
+                        text=plugin_name,
+                        position="bottom",
+                        parent_route=parent_route
+                    )
+                    print(f"✅ 插件 {plugin_name} 已添加到导航栏")
+                    
+            except Exception as e:
+                print(f"注册插件 {plugin_id} 时发生错误: {e}")
+        
+        # 保存 loader 供后续热重载使用
+        self.plugin_loader = loader
