@@ -226,7 +226,7 @@ class MainWindow(FluentWindow):
         if loaded_count == 0:
             print("没有发现任何插件")
             return
-        
+
         # 3. 添加插件商店页面到导航栏并调用侧边栏加载
         self.plugin_store_page = PluginStorePage(loader, self)
         self.plugin_store_page.setObjectName("plugin_store_page")
@@ -236,7 +236,7 @@ class MainWindow(FluentWindow):
         self.plugin_widgets = {}
 
         # 注意：loader.load_all_plugins() 会自动跳过 .disabled 的插件
-    
+
         # 注册每个插件到主窗口（只注册已启用的）
         for plugin_id in loader.get_all_plugin_ids():
             # 只有加载成功的插件才会在 get_all_plugin_ids() 中

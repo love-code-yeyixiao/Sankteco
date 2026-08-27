@@ -161,7 +161,7 @@ class PluginStorePage(QWidget):
         """卸载请求 → 发送信号，由主窗口处理 UI 更新"""
         # 只发送信号，不直接操作主窗口
         self.plugin_uninstall_requested.emit(plugin_id)  # type: ignore
-            
+
     def _update_card_state(self, plugin_id: str, is_active: bool):
         """更新卡片状态（由主窗口调用）"""
         card = self._cards.get(plugin_id)
