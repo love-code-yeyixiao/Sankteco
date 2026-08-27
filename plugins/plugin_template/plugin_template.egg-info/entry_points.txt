@@ -1,0 +1,2 @@
+[sankteco.plugin]
+plugin_template = plugin_template.main:register

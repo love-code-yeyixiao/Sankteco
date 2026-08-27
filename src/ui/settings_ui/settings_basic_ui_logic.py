@@ -195,10 +195,16 @@ class SettingsBasicUILogic(SettingsBasicUI):
 
         # 显示对话框并获取名单路径
         if export_namelist_dialog.exec_():
-            selected_files = export_namelist_dialog.selectedFiles()[0] if export_namelist_dialog.selectedFiles() else ""
+            selected_files = (
+                export_namelist_dialog.selectedFiles()[0]
+                if export_namelist_dialog.selectedFiles()
+                else ""
+            )
             if not selected_files:
                 return
-            selected_ext = self.get_ext_from_filter(export_namelist_dialog.selectedNameFilter())
+            selected_ext = self.get_ext_from_filter(
+                export_namelist_dialog.selectedNameFilter()
+            )
             # FIXME:判断是否无后缀
             if selected_ext and not selected_files.endswith(f".{selected_ext}"):
                 namelist_path = selected_files + f".{selected_ext}"
@@ -261,15 +267,14 @@ class SettingsBasicUILogic(SettingsBasicUI):
                 print(f"加载名单数据出错: {e}")
         else:
             print(f"无法加载文件: {namelist_path}")
-            
+
     def get_ext_from_filter(self, filter: str) -> str:
         """从过滤器提取扩展名"""
         import re
-        
+
         # 匹配过滤器后缀并取首个
         match = re.search(r"\(\*\.([^)\s]+)", filter)
         if match:
             ext = match.group(1).split(";")[0]
             return ext
         return ""
-        

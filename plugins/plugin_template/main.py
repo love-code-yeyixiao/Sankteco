@@ -1,6 +1,12 @@
-"""
-插件入口模板文件
-"""
+# 插件元数据（必须定义）
+__plugin_meta__ = {
+    "name": "Sankteco示例插件",
+    "version": "1.0.0",
+    "description": "这是一个用于测试的插件",
+    "author": "Sankteco",
+    "icon": "INFO",
+}
+
 
 def register(context):
     """
@@ -11,17 +17,18 @@ def register(context):
     from PySide2.QtWidgets import QWidget, QLabel, QVBoxLayout
     from PySide2.QtCore import Qt
 
-    # 示例：创建一个简单的页面
+    # 获取插件专属数据目录
+    data_dir = context.get_plugin_data_dir()
+    print(f"插件数据目录: {data_dir}")
+
     widget = QWidget()
-    widget.setObjectName("demo_plugin_page")  # 重要：路由键必须唯一
+    widget.setObjectName("demo_plugin_page")
     layout = QVBoxLayout(widget)
     layout.addWidget(QLabel("Hello from Plugin!"))
 
-    # 可以在这里连接 context 提供的信号
-    # context.student_selected.connect(lambda name: print(f"点名了: {name}"))
-
     return widget
 
-# 可选：插件卸载前的清理函数（约定名称，非必须）
+
 def unregister(context):
+    """插件卸载前的清理函数（可选）"""
     print("插件正在卸载...")
