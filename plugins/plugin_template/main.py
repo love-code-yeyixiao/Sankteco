@@ -1,10 +1,14 @@
 # 插件元数据（必须定义）
 __plugin_meta__ = {
+    "id": "plugin_template",
     "name": "Sankteco示例插件",
+    "generation": 1,
     "version": "1.0.0",
     "description": "这是一个用于测试的插件",
     "author": "Sankteco",
     "icon": "INFO",
+    "entry": "main.py",
+    "parent_route": None
 }
 
 
@@ -15,7 +19,6 @@ def register(context):
     :return: 返回一个 QWidget 实例（作为页面），或者返回 None（纯后台插件）
     """
     from PySide2.QtWidgets import QWidget, QLabel, QVBoxLayout
-    from PySide2.QtCore import Qt
 
     # 获取插件专属数据目录
     data_dir = context.get_plugin_data_dir()

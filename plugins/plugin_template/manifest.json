@@ -1,7 +1,7 @@
 {
     "id": "plugin_template",
     "name": "Sankteco示例插件",
-    "generation": "1",
+    "generation": 1,
     "version": "1.0.0",
     "description": "这是一个用于测试的插件",
     "author": "Sankteco",
