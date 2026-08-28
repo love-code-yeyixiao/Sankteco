@@ -53,7 +53,7 @@ class PluginLoader:
 
     def _get_data_dir(self) -> Path:
         """获取用户数据目录（跨平台）"""
-        data_dir = QStandardPaths.writableLocation(QStandardPaths.AppDataLocation) # type: ignore
+        data_dir = QStandardPaths.writableLocation(QStandardPaths.AppDataLocation)  # type: ignore
         plugin_data_dir = Path(data_dir) / "plugins" / "data"
         plugin_data_dir.mkdir(parents=True, exist_ok=True)
         logger.info(f"插件数据目录: {plugin_data_dir}")
@@ -267,7 +267,7 @@ class PluginLoader:
         if manifest_json.exists():
             return manifest_json
         return None
-    
+
     def _get_plugin_dir_by_id(self, plugin_id: str) -> Optional[Path]:
         """
         根据 plugin_id 查找对应的本地插件目录

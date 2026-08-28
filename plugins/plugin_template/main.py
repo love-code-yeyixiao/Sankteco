@@ -8,7 +8,7 @@ __plugin_meta__ = {
     "author": "Sankteco",
     "icon": "INFO",
     "entry": "main.py",
-    "parent_route": None
+    "parent_route": None,
 }
 
 
