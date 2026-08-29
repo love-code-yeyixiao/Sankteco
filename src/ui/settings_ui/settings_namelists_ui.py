@@ -1,10 +1,11 @@
 """
-孙页面:基本( 首选项 的子页面), 
-此页面包含了本项目基本的可调整设置选项, 包含三个部分:名单, 普通抽选, 快速抽选, 
-引用时可作 SettBasicUI / subsubpage_setting_basic
+子页面: 名单管理( 首选项 的子页面), 
+此页面包含了名单的相关管理与设置,
+引用时可作 SettNLUI / settings_namelists_ui
 """
 
 from typing import Union, List
+
 from PySide2.QtWidgets import (
     QFrame,
     QVBoxLayout,
@@ -13,16 +14,32 @@ from PySide2.QtWidgets import (
     QTableWidgetItem,
     QHeaderView,
 )
+from PySide2.QtCore import Signal, QObject
 import qfluentwidgets as qfw
 from qfluentwidgets import FluentIcon as FI
+
 from app_const_var import AssetsPathTXT
-from ui.ui_str import SettBasicUIString
+from ui.ui_str import SettNLUIString
 from app_config import AppConfig
 
 
 # 加载配置文件
-sett_basic_ui_cfg = AppConfig()
-qfw.qconfig.load(AssetsPathTXT.APP_CONFIG, sett_basic_ui_cfg)
+sett_nl_ui_cfg = AppConfig()
+qfw.qconfig.load(AssetsPathTXT.APP_CONFIG, sett_nl_ui_cfg)
+
+
+class NLSignals(QObject):
+    """初始化名单操作信号"""
+
+    refresh_namelist = Signal()
+    add_new_namelist = Signal()
+    rename_namelist = Signal()
+    del_namelist = Signal()
+    import_namelist = Signal()
+    export_namelist = Signal()
+
+
+nlsignals = NLSignals()
 
 
 class AskNewNamelistID(qfw.MessageBoxBase):
@@ -33,14 +50,12 @@ class AskNewNamelistID(qfw.MessageBoxBase):
         super().__init__(parent)
 
         # 标题
-        self.title_label = qfw.SubtitleLabel(
-            SettBasicUIString.ASK_NEW_ID_MSG_TITLE, self
-        )
+        self.title_label = qfw.SubtitleLabel(SettNLUIString.ASK_NEW_ID_MSG_TITLE, self)
 
         # 输入框
         self.input_lineedit = qfw.LineEdit(self)
         self.input_lineedit.setPlaceholderText(
-            SettBasicUIString.ASK_NEW_ID_MSG_LINEEDIT_TEXT
+            SettNLUIString.ASK_NEW_ID_MSG_LINEEDIT_TEXT
         )
         self.input_lineedit.setClearButtonEnabled(True)
 
@@ -58,8 +73,8 @@ class NowNamelistCard(qfw.SettingCard):
     def __init__(self, parent=None):
         super().__init__(
             FI.PEOPLE,
-            SettBasicUIString.NOW_NAMELIST_CARD_TITLE,
-            SettBasicUIString.NOW_NAMELIST_CARD_CONTEXT,
+            SettNLUIString.NOW_NAMELIST_CARD_TITLE,
+            SettNLUIString.NOW_NAMELIST_CARD_CONTEXT,
             parent,
         )
 
@@ -103,37 +118,86 @@ class NamelistSettingCard(qfw.SimpleCardWidget):
         # 刷新名单
         self.refresh_namelist_button = qfw.PushButton(
             FI.SYNC,
-            SettBasicUIString.REFRESH_NAMELIST_BUTTON_TEXT,
+            SettNLUIString.REFRESH_NAMELIST_BUTTON_TEXT,
         )
 
         # 新建名单
         self.add_new_namelist_button = qfw.PushButton(
             FI.ADD,
-            SettBasicUIString.ADD_NEW_NAMELIST_BUTTON_TEXT,
+            SettNLUIString.ADD_NEW_NAMELIST_BUTTON_TEXT,
         )
 
         # 重命名名单
         self.rename_namelist_button = qfw.PushButton(
             FI.PENCIL_INK,
-            SettBasicUIString.RENAME_NAMELIST_BUTTON_TEXT,
+            SettNLUIString.RENAME_NAMELIST_BUTTON_TEXT,
         )
 
         # 删除名单
         self.del_namelist_button = qfw.PushButton(
             FI.DELETE,
-            SettBasicUIString.DEL_NAMELIST_BUTTON_TEXT,
+            SettNLUIString.DEL_NAMELIST_BUTTON_TEXT,
         )
 
         # 导入名单
         self.import_namelist_button = qfw.PrimaryPushButton(
             FI.SEARCH,
-            SettBasicUIString.IMPORT_NAMELIST_BUTTON_TEXT,
+            SettNLUIString.IMPORT_NAMELIST_BUTTON_TEXT,
         )
 
         # 导出名单
         self.export_namelist_button = qfw.PrimaryPushButton(
             FI.SAVE_AS,
-            SettBasicUIString.EXPORT_NAMELIST_BUTTON_TEXT,
+            SettNLUIString.EXPORT_NAMELIST_BUTTON_TEXT,
+        )
+
+
+class NamelistSettingBar(qfw.CommandBar):
+    """名单操作 卡片,
+    继承自 命令栏 CommandBar,
+    引用时可作 NamelistSettBar"""
+
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        from PySide2.QtCore import Qt
+
+        # 右侧显示文本
+        self.setToolButtonStyle(Qt.ToolButtonTextBesideIcon)  # type: ignore
+
+        # 添加动作
+        self.addActions(
+            [
+                qfw.Action(
+                    FI.SYNC,
+                    SettNLUIString.REFRESH_NAMELIST_BUTTON_TEXT,
+                    triggered=lambda: nlsignals.refresh_namelist.emit(),
+                ),
+                qfw.Action(
+                    FI.ADD,
+                    SettNLUIString.ADD_NEW_NAMELIST_BUTTON_TEXT,
+                    triggered=lambda: nlsignals.add_new_namelist.emit(),
+                ),
+                qfw.Action(
+                    FI.PENCIL_INK,
+                    SettNLUIString.RENAME_NAMELIST_BUTTON_TEXT,
+                    triggered=lambda: nlsignals.rename_namelist.emit(),
+                ),
+                qfw.Action(
+                    FI.DELETE,
+                    SettNLUIString.DEL_NAMELIST_BUTTON_TEXT,
+                    triggered=lambda: nlsignals.del_namelist.emit(),
+                ),
+                qfw.Action(
+                    FI.SEARCH,
+                    SettNLUIString.IMPORT_NAMELIST_BUTTON_TEXT,
+                    triggered=lambda: nlsignals.import_namelist.emit(),
+                ),
+                qfw.Action(
+                    FI.SAVE_AS,
+                    SettNLUIString.EXPORT_NAMELIST_BUTTON_TEXT,
+                    triggered=lambda: nlsignals.export_namelist.emit(),
+                ),
+            ]
         )
 
 
@@ -172,12 +236,12 @@ class NameTableWidget(QWidget):
         # 设置水平表头并隐藏垂直表头
         self.name_table_widget.setHorizontalHeaderLabels(
             [
-                SettBasicUIString.NAMETABLE_HEADER_LABEL_EXIST,
-                SettBasicUIString.NAMETABLE_HEADER_LABEL_NO,
-                SettBasicUIString.NAMETABLE_HEADER_LABEL_NAME,
-                SettBasicUIString.NAMETABLE_HEADER_LABEL_GENDER,
-                SettBasicUIString.NAMETABLE_HEADER_LABEL_GROUP,
-                SettBasicUIString.NAMETABLE_HEADER_LABEL_TIP,
+                SettNLUIString.NAMETABLE_HEADER_LABEL_EXIST,
+                SettNLUIString.NAMETABLE_HEADER_LABEL_NO,
+                SettNLUIString.NAMETABLE_HEADER_LABEL_NAME,
+                SettNLUIString.NAMETABLE_HEADER_LABEL_GENDER,
+                SettNLUIString.NAMETABLE_HEADER_LABEL_GROUP,
+                SettNLUIString.NAMETABLE_HEADER_LABEL_TIP,
             ]
         )
         self.name_table_widget.verticalHeader().hide()
@@ -236,149 +300,27 @@ class NameTableWidget(QWidget):
         self.name_table_widget.resizeColumnToContents(2)
 
 
-class NamelistSettingGroup(QWidget):
-    """名单 部分, 继承自 QWidget,
-    引用时可作 NamelistSettGr"""
-
-    def __init__(self):
-        super().__init__()
-
-        # 初始化垂直布局
-        self.vboxlayout = QVBoxLayout(self)
-
-        # 初始化各控件
-        self.now_namelist_card = NowNamelistCard(self)
-        self.namelist_setting_card = NamelistSettingCard(self)
-        self.name_table_widget = NameTableWidget(self)
-
-        # 添加控件进布局
-        self.vboxlayout.addWidget(self.now_namelist_card)
-        self.vboxlayout.addWidget(self.namelist_setting_card)
-        self.vboxlayout.addWidget(self.name_table_widget)
-        self.setLayout(self.vboxlayout)
-
-
-class BasicChooseSettingGroup(QWidget):
-    """普通抽选 部分, 继承自 QWidget,
-    引用时可作 BChooseSettGr"""
-
-    def __init__(self):
-        super().__init__()
-
-        # 初始化垂直布局
-        self.vboxlayout = QVBoxLayout(self)
-
-        # 动画精美度
-        self.carton_beauty_level_card = qfw.ComboBoxSettingCard(
-            sett_basic_ui_cfg.CartonBeautyLevel,
-            FI.CLOUD,
-            SettBasicUIString.CARTON_BEAUTY_LEVEL_CARD_TITLE,
-            SettBasicUIString.CARTON_BEAUTY_LEVEL_CARD_CONTEXT,
-            [
-                SettBasicUIString.CARTON_BEAUTY_LEVEL_CARD_TEXTS_AMAZED,
-                SettBasicUIString.CARTON_BEAUTY_LEVEL_CARD_TEXTS_BEAUTY,
-                SettBasicUIString.CARTON_BEAUTY_LEVEL_CARD_TEXTS_BASIC,
-                SettBasicUIString.CARTON_BEAUTY_LEVEL_CARD_TEXTS_FAST,
-            ],
-        )
-
-        # 设置布局
-        self.vboxlayout.addWidget(self.carton_beauty_level_card)
-        self.setLayout(self.vboxlayout)
-
-
-class FastChooseSettingGroup(QWidget):
-    """快速抽选 部分, 继承自 QWidget,
-    引用时可作 FChooseSettGr"""
-
-    def __init__(self):
-        super().__init__()
-
-        # 初始化垂直布局
-        self.vboxlayout = QVBoxLayout(self)
-
-        # 结果推送
-        self.show_result_way = qfw.OptionsSettingCard(
-            sett_basic_ui_cfg.ShowResultWay,
-            FI.INFO,
-            SettBasicUIString.SHOW_RESULT_WAY_CARD_TITLE,
-            SettBasicUIString.SHOW_RESULT_WAY_CARD_CONTEXT,
-            [
-                SettBasicUIString.SHOW_RESULT_WAY_CARD_TEXTS_CI,
-                SettBasicUIString.SHOW_RESULT_WAY_CARD_TEXTS_CW,
-                SettBasicUIString.SHOW_RESULT_WAY_CARD_TEXTS_DIALOG,
-            ],
-        )
-
-        # 设置布局
-        self.vboxlayout.addWidget(self.show_result_way)
-        self.setLayout(self.vboxlayout)
-
-
-class SettingsBasicUI(QFrame):
-    """孙页面:基本( 首选项 的子页面)的基础UI类,
-    此页面包含了本项目基本的可调整设置选项, 包含三个部分:名单, 普通抽选, 快速抽选,
-    引用时可作 SettBasicUI / settings_basic"""
+class SettNLUI(QFrame):
+    """子页面: 名单管理( 首选项 的子页面)的基础UI类,
+    此页面包含了名单的相关管理与设置,
+    引用时可作 SettNLUI / settings_namelists_ui"""
 
     def __init__(self, parent=None):
         super().__init__(parent)
 
-        from PySide2.QtCore import Qt, QMargins
-        from PySide2.QtWidgets import QStackedWidget
-
-        # 初始化顶部导航栏与多页面, 初始化布局
-        self.pivot = qfw.Pivot(self)
-        self.stackedWidget = QStackedWidget(self)
+        # 初始化垂直布局
         self.vboxlayout = QVBoxLayout(self)
+        self.vboxlayout.setMargin(32)
 
-        # 添加各项的卡片组
-        self.namelist_interface = NamelistSettingGroup()
-        self.basic_choose_interface = BasicChooseSettingGroup()
-        self.fast_choose_interface = FastChooseSettingGroup()
+        # 初始化各控件
+        self.frame_title = qfw.SubtitleLabel(SettNLUIString.FRAME_TITLE)
+        self.now_namelist_card = NowNamelistCard(self)
+        self.namelist_setting_card = NamelistSettingBar(self)
+        self.name_table_widget = NameTableWidget(self)
 
-        # 添加标签页
-        self.add_sub_interface(
-            self.namelist_interface,
-            SettBasicUIString.NAMELIST_SETT_GR_OBJNAME,
-            SettBasicUIString.NAMELIST_SETT_GR_NAVNAME,
-        )
-        self.add_sub_interface(
-            self.basic_choose_interface,
-            SettBasicUIString.B_CHOOSE_SETT_GR_OBJNAME,
-            SettBasicUIString.B_CHOOSE_SETT_GR_NAVNAME,
-        )
-        self.add_sub_interface(
-            self.fast_choose_interface,
-            SettBasicUIString.F_CHOOSE_SETT_GR_OBJNAME,
-            SettBasicUIString.F_CHOOSE_SETT_GR_NAVNAME,
-        )
-
-        # 连接信号并初始化当前标签页
-        self.stackedWidget.currentChanged.connect(self.on_current_index_changed)  # type: ignore
-        self.stackedWidget.setCurrentWidget(self.namelist_interface)
-        self.pivot.setCurrentItem(self.namelist_interface.objectName())
-
-        # 调整布局
-        self.vboxlayout.setContentsMargins(QMargins(30, 30, 30, 30))
-        self.vboxlayout.addWidget(self.pivot)
-        self.vboxlayout.setAlignment(self.pivot, Qt.AlignCenter)  # type: ignore
-        self.vboxlayout.addWidget(self.stackedWidget)
-
-    def add_sub_interface(self, widget: QWidget, objectName: str, text: str):
-        """添加子页面"""
-
-        widget.setObjectName(objectName)
-        self.stackedWidget.addWidget(widget)
-
-        # 使用全局唯一的 objectName 作为路由键
-        self.pivot.addItem(
-            routeKey=objectName,
-            text=text,
-            onClick=lambda: self.stackedWidget.setCurrentWidget(widget),
-        )
-
-    def on_current_index_changed(self, index):
-        """将多页面的切换信号连接到顶部导航栏显示"""
-
-        widget = self.stackedWidget.widget(index)
-        self.pivot.setCurrentItem(widget.objectName())
+        # 添加控件进布局
+        self.vboxlayout.addWidget(self.frame_title)
+        self.vboxlayout.addWidget(self.now_namelist_card)
+        self.vboxlayout.addWidget(self.namelist_setting_card)
+        self.vboxlayout.addWidget(self.name_table_widget)
+        self.setLayout(self.vboxlayout)

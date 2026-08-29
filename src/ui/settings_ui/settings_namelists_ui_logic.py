@@ -1,29 +1,32 @@
 """
-孙页面:基本( 首选项 的子页面)的UI逻辑文件, 
-引用时可作 SettBasicUILogic / settings_basic_ui_logic
+子页面: 名单管理( 首选项 的子页面)的UI逻辑文件, 
+引用时可作 SettNLUILogic / settings_namelists_ui_logic
 """
 
 from pathlib import Path
+
 import tablib
 from PySide2.QtWidgets import QFileDialog
-from ui.settings_ui.settings_basic_ui import (
+
+from ui.settings_ui.settings_namelists_ui import (
     AskNewNamelistID,
-    SettingsBasicUI,
-    sett_basic_ui_cfg,
+    SettNLUI,
+    sett_nl_ui_cfg,
+    nlsignals,
 )
 from logic.add_import_export_namelist import AIENamelist
-from ui.ui_str import SettBasicUIString
+from ui.ui_str import SettNLUIString
 from app_const_var import LogicFilesString, AssetsPathTXT
 
 
-class SettingsBasicUILogic(SettingsBasicUI):
-    """孙页面:基本( 首选项 的子页面)的UI基础逻辑类,
-    引用时可作 SettBasicUILogic / subsubpage_setting_basic_ui_logic"""
+class SettNLUILogic(SettNLUI):
+    """子页面: 名单管理( 首选项 的子页面)的UI基础逻辑类,
+    引用时可作 SettNLUILogic / settings_namelists_ui_logic"""
 
     def __init__(self, parent=None):
         super().__init__(parent)
 
-        self.cfg = sett_basic_ui_cfg
+        self.cfg = sett_nl_ui_cfg
 
         # 初始化信号连接函数
         self.singal_connection()
@@ -32,7 +35,7 @@ class SettingsBasicUILogic(SettingsBasicUI):
         self.load_namelists_list()
 
     def load_namelists_list(self):
-        ui = self.namelist_interface.now_namelist_card
+        ui = self.now_namelist_card
 
         # 匹配 Sankteco 名单文件
         namelist_folder_path = Path(AssetsPathTXT.APP_NAMELISTS_FOLDER).glob("*.json")
@@ -50,10 +53,7 @@ class SettingsBasicUILogic(SettingsBasicUI):
     def singal_connection(self):
         """信号连接函数"""
 
-        now_namelist_card_list = (
-            self.namelist_interface.now_namelist_card.now_namelist_card_list
-        )
-        namelist_setting_card = self.namelist_interface.namelist_setting_card
+        now_namelist_card_list = self.now_namelist_card.now_namelist_card_list
 
         # 当前名单下拉框
         now_namelist_card_list.currentIndexChanged.connect(  # type: ignore
@@ -63,30 +63,22 @@ class SettingsBasicUILogic(SettingsBasicUI):
         )
 
         # 刷新名单
-        namelist_setting_card.refresh_namelist_button.clicked.connect(  # type: ignore
-            self.namelist_interface.name_table_widget.refresh_items
-        )
+        nlsignals.refresh_namelist.connect(self.name_table_widget.refresh_items)
 
         # 新建名单
-        namelist_setting_card.add_new_namelist_button.clicked.connect(  # type: ignore
-            self.add_new_namelist
-        )
+        nlsignals.add_new_namelist.connect(self.add_new_namelist)
 
         # 导入名单
-        namelist_setting_card.import_namelist_button.clicked.connect(  # type: ignore
-            self.import_namelist
-        )
+        nlsignals.import_namelist.connect(self.import_namelist)
 
         # 导出名单
-        namelist_setting_card.export_namelist_button.clicked.connect(  # type: ignore
-            self.export_namelist
-        )
+        nlsignals.export_namelist.connect(self.export_namelist)
 
     def add_new_namelist(self):
         """新建名单"""
 
         new_namelist_ID = None
-        ui = self.namelist_interface.now_namelist_card
+        ui = self.now_namelist_card
 
         # 调用新名单标识符对话框
         ask_ID_msg = AskNewNamelistID(self)
@@ -114,23 +106,23 @@ class SettingsBasicUILogic(SettingsBasicUI):
     def import_namelist(self):
         """导入名单"""
 
-        ui = self.namelist_interface.now_namelist_card
+        ui = self.now_namelist_card
 
         # 创建对话框实例
         import_namelist_dialog = QFileDialog(self)
         import_namelist_dialog.setWindowTitle(
-            SettBasicUIString.IMPORT_NAMELIST_DIALOG_TITLE
+            SettNLUIString.IMPORT_NAMELIST_DIALOG_TITLE
         )
 
         # 设置文件过滤器
         import_namelist_dialog.setNameFilters(
             [
-                f"{SettBasicUIString.NAMELIST_DIALOG_FILTER_TXT} (*.txt)",
-                f"{SettBasicUIString.NAMELIST_DIALOG_FILTER_JSON} (*.json)",
-                f"{SettBasicUIString.NAMELIST_DIALOG_FILTER_YAML} (*.yaml)",
-                f"{SettBasicUIString.NAMELIST_DIALOG_FILTER_CSV} (*.csv)",
-                f"{SettBasicUIString.NAMELIST_DIALOG_FILTER_XLSX_XLS_ODS} (*.xlsx *.xls *.ods)",
-                f"{SettBasicUIString.NAMELIST_DIALOG_FILTER_QR} (*.png)",
+                f"{SettNLUIString.NAMELIST_DIALOG_FILTER_TXT} (*.txt)",
+                f"{SettNLUIString.NAMELIST_DIALOG_FILTER_JSON} (*.json)",
+                f"{SettNLUIString.NAMELIST_DIALOG_FILTER_YAML} (*.yaml)",
+                f"{SettNLUIString.NAMELIST_DIALOG_FILTER_CSV} (*.csv)",
+                f"{SettNLUIString.NAMELIST_DIALOG_FILTER_XLSX_XLS_ODS} (*.xlsx *.xls *.ods)",
+                f"{SettNLUIString.NAMELIST_DIALOG_FILTER_QR} (*.png)",
             ]
         )
 
@@ -161,7 +153,7 @@ class SettingsBasicUILogic(SettingsBasicUI):
     def export_namelist(self):
         """导出名单"""
 
-        ui = self.namelist_interface.now_namelist_card
+        ui = self.now_namelist_card
         now_namelist = ui.now_namelist_card_list_item[
             ui.now_namelist_card_list.currentIndex()
         ]
@@ -170,20 +162,20 @@ class SettingsBasicUILogic(SettingsBasicUI):
         # 创建对话框实例
         export_namelist_dialog = QFileDialog(self)
         export_namelist_dialog.setWindowTitle(
-            SettBasicUIString.EXPORT_NAMELIST_DIALOG_TITLE
+            SettNLUIString.EXPORT_NAMELIST_DIALOG_TITLE
         )
 
         # 设置文件过滤器
         export_namelist_dialog.setNameFilters(
             [
-                f"{SettBasicUIString.NAMELIST_DIALOG_FILTER_TXT} (*.txt)",
-                f"{SettBasicUIString.NAMELIST_DIALOG_FILTER_JSON} (*.json)",
-                f"{SettBasicUIString.NAMELIST_DIALOG_FILTER_YAML} (*.yaml)",
-                f"{SettBasicUIString.NAMELIST_DIALOG_FILTER_CSV} (*.csv)",
-                f"{SettBasicUIString.NAMELIST_DIALOG_FILTER_XLSX} (*.xlsx)",
-                f"{SettBasicUIString.NAMELIST_DIALOG_FILTER_XLS} (*.xls)",
-                f"{SettBasicUIString.NAMELIST_DIALOG_FILTER_ODS} (*.ods)",
-                f"{SettBasicUIString.NAMELIST_DIALOG_FILTER_QR} (*.png)",
+                f"{SettNLUIString.NAMELIST_DIALOG_FILTER_TXT} (*.txt)",
+                f"{SettNLUIString.NAMELIST_DIALOG_FILTER_JSON} (*.json)",
+                f"{SettNLUIString.NAMELIST_DIALOG_FILTER_YAML} (*.yaml)",
+                f"{SettNLUIString.NAMELIST_DIALOG_FILTER_CSV} (*.csv)",
+                f"{SettNLUIString.NAMELIST_DIALOG_FILTER_XLSX} (*.xlsx)",
+                f"{SettNLUIString.NAMELIST_DIALOG_FILTER_XLS} (*.xls)",
+                f"{SettNLUIString.NAMELIST_DIALOG_FILTER_ODS} (*.ods)",
+                f"{SettNLUIString.NAMELIST_DIALOG_FILTER_QR} (*.png)",
             ]
         )
 
@@ -214,7 +206,7 @@ class SettingsBasicUILogic(SettingsBasicUI):
     def load_namelist_from_dataset(self, namelist_data: tablib.Dataset):
         """从 tablib.Dataset 中加载名单"""
 
-        ui = self.namelist_interface.name_table_widget
+        ui = self.name_table_widget
 
         # 先清空表格内容
         ui.name_table_widget.setRowCount(0)
@@ -239,7 +231,7 @@ class SettingsBasicUILogic(SettingsBasicUI):
 
     def load_namelist_from_json(self, namelist_path: str):
         """从 JSON 文件中加载名单"""
-        ui = self.namelist_interface.name_table_widget
+        ui = self.name_table_widget
 
         # 先清空表格
         ui.name_table_widget.setRowCount(0)

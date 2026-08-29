@@ -94,7 +94,7 @@ class InformationBoardCardGroup(qfw.ElevatedCardWidget):
         self.app_detailed_image = ImageViewer()
 
         # 项目信息
-        self.infotext_bodylabel = qfw.StrongBodyLabel(BasicString.APP_FULL_NAME, self)
+        self.infotext_bodylabel = qfw.StrongBodyLabel(BasicString.APP_NAME, self)
         self.infotext_captionlabel = qfw.CaptionLabel(BasicString.APP_COPYTYPE, self)
 
         # 组件布局

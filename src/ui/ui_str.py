@@ -29,14 +29,14 @@ class BasicString:
 
     # 项目本体信息
     APP_NAME = "Sankteco"
-    APP_FULL_NAME = "祈福Sankteco"
     APP_PLATFORM = "Python"
-    APP_VERSION = "VERSION Dev"
+    APP_GENERATION = "GENERATION" + " " + str("Dev")
+    APP_VERSION = "VERSION" + " " + str("Dev")
     APP_VERSION_TYPE = "Dev"
     APP_COPYTYPE = "Copyleft, GPL-3.0, SECTL, 2023~2026."
 
     # 窗口标题信息
-    APP_MAINWINDOW_TITLE = f"{APP_FULL_NAME} - {APP_VERSION}"
+    APP_MAINWINDOW_TITLE = f"{APP_NAME} {APP_GENERATION}"
     APP_DOCSRUI_TITLE = APP_MAINWINDOW_TITLE + ":" + _("文档阅读")
 
 
@@ -142,12 +142,12 @@ class SettUIString:
     TO_DEBUG_CARD_CONTEXT = _("高级调试选项")
 
 
-class SettBasicUIString:
-    """首选项-基本 孙页面字符串,
-    仅包含 setting_basic_ui.py 相关字符串,
-    不包含隶属于主程序多UI交互的字符串"""
+class SettNLUIString:
+    """首选项-名单 页面字符串"""
 
-    # 名单 部分
+    # 页面标题
+    FRAME_TITLE = _("名单管理")
+
     # 询问新名单的标识符对话框
     ASK_NEW_ID_MSG_TITLE = _("键入新名单标识符")
     ASK_NEW_ID_MSG_LINEEDIT_TEXT = _("以英文字母、汉字、数字组成, 不能以数字开头")
@@ -171,33 +171,6 @@ class SettBasicUIString:
     NAMETABLE_HEADER_LABEL_GENDER = _("性别")
     NAMETABLE_HEADER_LABEL_GROUP = _("小组")
     NAMETABLE_HEADER_LABEL_TIP = _("标签")
-
-    # 普通抽选 部分
-    # 动画精美度
-    CARTON_BEAUTY_LEVEL_CARD_TITLE = _("动画精美度")
-    CARTON_BEAUTY_LEVEL_CARD_CONTEXT = _("调节抽选时的动画精美程度")
-    CARTON_BEAUTY_LEVEL_CARD_TEXTS_AMAZED = _("华丽")
-    CARTON_BEAUTY_LEVEL_CARD_TEXTS_BEAUTY = _("精美")
-    CARTON_BEAUTY_LEVEL_CARD_TEXTS_BASIC = _("一般")
-    CARTON_BEAUTY_LEVEL_CARD_TEXTS_FAST = _("快速")
-
-    # 快速抽选 部分
-    # 结果推送
-    SHOW_RESULT_WAY_CARD_TITLE = _("结果推送方式")
-    SHOW_RESULT_WAY_CARD_CONTEXT = _("选择快速抽选的结果应怎样显示")
-    SHOW_RESULT_WAY_CARD_TEXTS_CI = _("显示在ClassIsland")
-    SHOW_RESULT_WAY_CARD_TEXTS_CW = _("显示在ClassWidget")
-    SHOW_RESULT_WAY_CARD_TEXTS_DIALOG = _("显示在临时弹窗")
-
-    # 各部分对象名称
-    NAMELIST_SETT_GR_OBJNAME = "namelist_sett_gr"
-    B_CHOOSE_SETT_GR_OBJNAME = "b_choose_sett_gr"
-    F_CHOOSE_SETT_GR_OBJNAME = "f_choose_sett_gr"
-
-    # 各部分显示字段
-    NAMELIST_SETT_GR_NAVNAME = _("名单")
-    B_CHOOSE_SETT_GR_NAVNAME = _("普通抽选")
-    F_CHOOSE_SETT_GR_NAVNAME = _("快速抽选")
 
     # 导入名单部分
     # 导入名单对话框
@@ -308,9 +281,10 @@ class SettAvUIString:
 
 
 class SettLangUIString:
-    """首选项-语言 孙页面字符串,
-    仅包含 setting_language_ui.py 相关字符串,
-    不包含隶属于主程序多UI交互的字符串"""
+    """首选项-语言 子页面字符串"""
+
+    # 页面标题
+    FRAME_TITLE = _("语言")
 
     # 语言选择
     SCREEN_LANGUAGE_TITLE = _("显示语言")
@@ -326,9 +300,7 @@ class SettLangUIString:
 
 
 class DocsRUIString:
-    """首选项-语言 孙页面字符串,
-    仅包含 setting_language_ui.py 相关字符串,
-    不包含隶属于主程序多UI交互的字符串"""
+    """信息-文档阅读 孙页面字符串"""
 
     # 当前文档
     NOW_DOC_CARD_TITLE = _("当前文档")
@@ -345,17 +317,25 @@ class MainUIString:
     SUBPAGE_SETTINGS_OBJNAME = "subpage_settings"
     SUBPAGE_PRAY_OBJNAME = "subpage_pray"
 
-    # 设置 孙页面对象名
-    SUBSUBPAGE_SETTIING_BASIC_OBJNAME = "subsubpage_setting_basic"
-    SUBSUBPAGE_SETTIING_AUDIOVISUAL_OBJNAME = "subsubpage_setting_audiovisual"
-    SUBSUBPAGE_SETTIING_LANGUAGE_OBJNAME = "subsubpage_setting_language"
-
     # 子页面导航窗口显示字段
     SUBPAGE_INFORMATION_NAVNAME = _("信息")
     SUBPAGE_SETTINGS_NAVNAME = _("首选项")
     SUBPAGE_PRAY_NAVNAME = _("祈福")
 
-    # 设置 孙页面导航窗口显示字段
-    SUBSUBPAGE_SETTIING_BASIC_NAVNAME = _("基本")
-    SUBSUBPAGE_SETTIING_AUDIOVISUAL_NAVNAME = _("视听")
-    SUBSUBPAGE_SETTIING_LANGUAGE_NAVNAME = _("语言")
+
+class SettWindowString:
+    """首选项 页面字符串,
+    包含 settings_window.py 相关字符串"""
+
+    # 子页面对象名
+    NAMELISTS_UI_OBJNAME = "namelists_ui"
+    LANGUAGE_UI_OBJNAME = "language_ui"
+
+    # 子页面导航窗口显示字段
+    NAMELISTS_UI_NAVNAME = _("名单管理")
+    LANGUAGE_UI_NAVNAME = _("语言")
+
+    # 窗口显示字段
+    SETTWINDOW_TITLE = f"{BasicString.APP_NAME} {BasicString.APP_GENERATION}: " + _(
+        "首选项"
+    )

@@ -325,7 +325,7 @@ class PluginStorePage(QWidget):
         self.loader.uninstall_plugin(plugin_id)
         # 再安装（复用安装逻辑）
         self._on_install_requested(plugin_id)
-        
+
     def _on_install_requested(self, plugin_id: str) -> None:
         """处理安装请求，进度反馈融入卡片"""
         plugin_info = None
@@ -336,10 +336,7 @@ class PluginStorePage(QWidget):
 
         if not plugin_info:
             InfoBar.error(
-                title="错误",
-                content="未找到插件信息",
-                parent=self,
-                duration=2000
+                title="错误", content="未找到插件信息", parent=self, duration=2000
             )
             return
 
@@ -347,7 +344,7 @@ class PluginStorePage(QWidget):
         card = self._online_cards.get(plugin_id)
         if card:
             card.set_installing_state(True)
-            
+
         # 连接进度信号
         def on_progress(value: int):
             if card:
@@ -358,7 +355,7 @@ class PluginStorePage(QWidget):
                     title="安装失败",
                     content=f"无法安装插件「{plugin_info.get('name')}」",
                     parent=self,
-                    duration=3000
+                    duration=3000,
                 )
                 plugin_signals.install_progress.disconnect(on_progress)
 
@@ -371,7 +368,7 @@ class PluginStorePage(QWidget):
                     title="安装成功",
                     content=f"插件「{plugin_info.get('name')}」已安装",
                     parent=self,
-                    duration=2000
+                    duration=2000,
                 )
                 self._refresh_plugin_list()
                 self._online_loaded = False
@@ -382,7 +379,7 @@ class PluginStorePage(QWidget):
                     title="安装失败",
                     content=f"无法安装插件「{plugin_info.get('name')}」",
                     parent=self,
-                    duration=3000
+                    duration=3000,
                 )
         finally:
             plugin_signals.install_progress.disconnect(on_progress)

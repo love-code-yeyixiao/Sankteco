@@ -41,6 +41,9 @@ class MainWindow(FluentWindow):
         self.plugin_store_page = None
         self.plugin_widgets = {}
 
+        # 初始化首选项引用
+        self.settings_window = None
+
         # 运行导入子页面的asyncio程序
         asyncio.run(self.import_ui())
 
@@ -65,32 +68,19 @@ class MainWindow(FluentWindow):
         if self.information_ui.docs_reader_ui is not None:
             self.information_ui.docs_reader_ui.setWindowIconText(self.windowIconText())
 
-    async def import_settings_ui(self) -> None:
-        """导入并重命名 设置 子页面其及所有孙页面的协程"""
-        from ui.settings_ui.settings_ui import SettingsUI
-        from ui.settings_ui.settings_basic_ui_logic import SettingsBasicUILogic
-        from ui.settings_ui.settings_audiovisual_ui_logic import (
-            SettingsAudiovisualUILogic,
-        )
-        from ui.settings_ui.settings_language_ui import SettingsLanguageUI
+    async def import_settings_window(self) -> None:
+        """创建打开 首选项窗口 按钮的协程"""
+        from qfluentwidgets import NavigationPushButton
 
-        self.settings_ui = SettingsUI(self)
-        self.settings_ui.setObjectName(MainUIString.SUBPAGE_SETTINGS_OBJNAME)
-
-        self.settings_basic_ui = SettingsBasicUILogic(self)
-        self.settings_basic_ui.setObjectName(
-            MainUIString.SUBSUBPAGE_SETTIING_BASIC_OBJNAME
+        # 创建一个按钮
+        self.settings_button = NavigationPushButton(
+            FI.SETTING,
+            MainUIString.SUBPAGE_SETTINGS_NAVNAME,
+            isSelectable=False,  # 不可选中（因为不切换页面）
+            parent=self.navigationInterface,
         )
-
-        self.settings_audiovisual_ui = SettingsAudiovisualUILogic(self)
-        self.settings_audiovisual_ui.setObjectName(
-            MainUIString.SUBSUBPAGE_SETTIING_AUDIOVISUAL_OBJNAME
-        )
-
-        self.settings_language_ui = SettingsLanguageUI(self)
-        self.settings_language_ui.setObjectName(
-            MainUIString.SUBSUBPAGE_SETTIING_LANGUAGE_OBJNAME
-        )
+        # 绑定点击事件
+        self.settings_button.clicked.connect(self.open_settings_window)
 
     async def import_pray_ui(self) -> None:
         """导入并重命名 祈福 子页面的协程"""
@@ -104,7 +94,7 @@ class MainWindow(FluentWindow):
         await asyncio.gather(
             self.import_pray_ui(),
             self.import_information_ui(),
-            self.import_settings_ui(),
+            self.import_settings_window(),
         )
 
     # ========== 导航栏初始化 ==========
@@ -125,29 +115,10 @@ class MainWindow(FluentWindow):
             "插件商店",
             NavigationItemPosition.BOTTOM,
         )
-        self.addSubInterface(
-            self.settings_ui,
-            FI.SETTING,
-            MainUIString.SUBPAGE_SETTINGS_NAVNAME,
-            NavigationItemPosition.BOTTOM,
-        )
-        self.addSubInterface(
-            self.settings_basic_ui,
-            FI.BRIGHTNESS,
-            MainUIString.SUBSUBPAGE_SETTIING_BASIC_NAVNAME,
-            parent=self.settings_ui,
-        )
-        self.addSubInterface(
-            self.settings_audiovisual_ui,
-            FI.MEDIA,
-            MainUIString.SUBSUBPAGE_SETTIING_AUDIOVISUAL_NAVNAME,
-            parent=self.settings_ui,
-        )
-        self.addSubInterface(
-            self.settings_language_ui,
-            FI.LANGUAGE,
-            MainUIString.SUBSUBPAGE_SETTIING_LANGUAGE_NAVNAME,
-            parent=self.settings_ui,
+        self.navigationInterface.addWidget(
+            "settings_button",
+            self.settings_button,
+            position=NavigationItemPosition.BOTTOM,
         )
         self.addSubInterface(
             self.information_ui,
@@ -196,16 +167,6 @@ class MainWindow(FluentWindow):
 
     def singal_connection(self) -> None:
         """信号连接函数"""
-        # 设置子页面导航信号
-        self.settings_ui.to_basic_card.clicked.connect(
-            lambda: self.switchTo(self.settings_basic_ui)
-        )
-        self.settings_ui.to_audiovisual_card.clicked.connect(
-            lambda: self.switchTo(self.settings_audiovisual_ui)
-        )
-        self.settings_ui.to_language_card.clicked.connect(
-            lambda: self.switchTo(self.settings_language_ui)
-        )
 
         # 主题更改信号
         self.cfg.DarkLight.valueChanged.connect(self._apply_theme)
@@ -234,10 +195,33 @@ class MainWindow(FluentWindow):
         plugin_signals.plugin_disabled.connect(self._on_plugin_disabled)
         plugin_signals.refresh_store_requested.connect(self._refresh_store)
 
+    # ========== 首选项窗口初始化 ==========
+
+    def open_settings_window(self):
+        """打开独立的设置窗口（单例模式）"""
+        from PySide2.QtCore import Qt
+        from ui.settings_window import SettWindow
+
+        if self.settings_window is None:
+            self.settings_window = SettWindow()
+            # 设置窗口关闭后自动销毁，并清空引用
+            self.settings_window.setAttribute(Qt.WA_DeleteOnClose, True)  # type: ignore
+            # 连接窗口的 destroyed 信号，以便在窗口关闭后清空引用
+            self.settings_window.destroyed.connect(self._on_settings_closed)
+        self.settings_window.show()
+        self.settings_window.raise_()
+        self.settings_window.activateWindow()
+
+    def _on_settings_closed(self):
+        """当设置窗口被关闭时，清空引用"""
+
+        self.settings_window = None
+
     # ========== 插件系统初始化 ==========
 
     def _init_plugin_system(self) -> None:
         """初始化插件系统（加载插件、创建商店页面、注册插件）"""
+
         # 1. 创建插件上下文
         self.plugin_context = PluginContext(self, self.cfg)
 
@@ -292,6 +276,7 @@ class MainWindow(FluentWindow):
 
     def _enable_plugin(self, plugin_id: str, plugin_name: str) -> None:
         """启用插件：加载并添加到导航栏"""
+
         try:
             register_func = self.plugin_loader.enable_plugin(
                 plugin_id, self.plugin_context
@@ -339,6 +324,7 @@ class MainWindow(FluentWindow):
 
     def _disable_plugin(self, plugin_id: str, plugin_name: str) -> None:
         """禁用插件：从导航栏移除"""
+
         try:
             self._remove_plugin_page(plugin_id)
             self.plugin_loader.disable_plugin(plugin_id)
@@ -349,6 +335,7 @@ class MainWindow(FluentWindow):
 
     def _uninstall_plugin(self, plugin_id: str) -> None:
         """卸载插件流程（内部）"""
+
         self._remove_plugin_page(plugin_id)
         success = self.plugin_loader.uninstall_plugin(plugin_id)
         if success:
@@ -359,6 +346,7 @@ class MainWindow(FluentWindow):
 
     def _load_single_plugin(self, plugin_id: str) -> None:
         """加载单个插件（用于安装后自动加载）"""
+
         register_func = self.plugin_loader._load_single_plugin(plugin_id)
         if register_func:
             self.plugin_context.set_plugin_id(plugin_id)
@@ -376,6 +364,7 @@ class MainWindow(FluentWindow):
 
     def _remove_plugin_page(self, plugin_id: str) -> bool:
         """从导航栏和堆叠中移除插件页面"""
+
         widget = self.plugin_widgets.pop(plugin_id, None)
         if not widget:
             target_name = f"plugin_page_{plugin_id}"
@@ -414,11 +403,13 @@ class MainWindow(FluentWindow):
 
     def _update_card_state(self, plugin_id: str, is_active: bool) -> None:
         """更新插件商店中对应卡片的状态"""
+
         if self.plugin_store_page is not None:
             self.plugin_store_page._update_card_state(plugin_id, is_active)
 
     def _refresh_store(self) -> None:
         """刷新插件商店页面"""
+
         if self.plugin_store_page is not None:
             self.plugin_store_page._refresh_plugin_list()
             self.plugin_store_page.refresh_online_list()
@@ -438,6 +429,7 @@ class MainWindow(FluentWindow):
 
     def _on_plugin_toggle(self, plugin_id: str, enable: bool) -> None:
         """处理启用/禁用请求"""
+
         meta = self.plugin_loader.get_plugin_meta(plugin_id)
         plugin_name = meta.get("name", plugin_id)
 
@@ -448,10 +440,10 @@ class MainWindow(FluentWindow):
 
     def _on_plugin_uninstall(self, plugin_id: str) -> None:
         """处理卸载请求（含确认对话框）"""
+        from qfluentwidgets import MessageBox
+
         meta = self.plugin_loader.get_plugin_meta(plugin_id)
         plugin_name = meta.get("name", plugin_id)
-
-        from qfluentwidgets import MessageBox
 
         msg_box = MessageBox(
             title="确认卸载",
@@ -463,28 +455,34 @@ class MainWindow(FluentWindow):
 
     def _on_plugin_install(self, plugin_id: str):
         """处理安装请求"""
+
         self._load_single_plugin(plugin_id)
         self._refresh_store()
 
     def _on_plugin_update(self, plugin_id: str) -> None:
         """处理更新请求（待实现）"""
+
         self._show_plugin_info(f"更新插件 {plugin_id} 功能开发中", "info")
 
     def _on_plugin_installed(self, plugin_id: str) -> None:
         """插件安装完成信号"""
+
         self._load_single_plugin(plugin_id)
         self._refresh_store()
 
     def _on_plugin_uninstalled(self, plugin_id: str) -> None:
         """插件卸载完成信号"""
+
         self._refresh_store()
 
     def _on_plugin_enabled(self, plugin_id: str) -> None:
         """插件启用信号"""
+
         # 由 _enable_plugin 实际处理，此处仅用于全局通知
         pass
 
     def _on_plugin_disabled(self, plugin_id: str) -> None:
         """插件禁用信号"""
+
         # 由 _disable_plugin 实际处理，此处仅用于全局通知
         pass

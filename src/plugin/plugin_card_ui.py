@@ -241,4 +241,3 @@ class OnlinePluginCard(SettingCard):
     def set_installing_state(self, is_installing: bool) -> None:
         """外部设置安装状态（用于恢复）"""
         self._is_installing = is_installing
-        
