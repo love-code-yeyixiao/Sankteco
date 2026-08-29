@@ -15,7 +15,7 @@ from qfluentwidgets import FluentIcon as FI
 from app_const_var import AssetsPathTXT
 from app_config import AppConfig
 from ui.ui_str import MainUIString, BasicString
-from ui.ui_loading import get_theme_from_config, apply_theme_from_config
+from ui.ui_loading import get_theme_from_config
 
 # 插件相关导入
 from plugin.loader import PluginLoader
@@ -157,11 +157,6 @@ class MainWindow(FluentWindow):
                 self.information_ui.docs_reader_ui.setWindowIcon(
                     QIcon(AssetsPathTXT.APP_ICON_LIGHT_PATH)
                 )
-
-        app_detailed_image = (
-            self.information_ui.information_board_card.app_detailed_image
-        )
-        apply_theme_from_config(app_detailed_image, mode)
 
     # ========== 信号连接 ==========
 

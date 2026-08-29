@@ -67,7 +67,7 @@ class WebUrl:
     HITOKOTO_API_URL = "https://v1.hitokoto.cn/"
     HITOKOTO_API_URL_WITH_FORMAT = "https://v1.hitokoto.cn/?c=i&encode=text"
 
-    # 加入翻译计划( 语言 孙页面)
+    # 加入翻译计划( 语言 子页面)
     JOIN_TRANSLATION_LINK = ""
 
 

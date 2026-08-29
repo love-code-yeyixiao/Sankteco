@@ -73,9 +73,10 @@ class PrayUIString:
 
 
 class InfoUIString:
-    """信息 子页面字符串,
-    仅包含 imformations_ui.py 相关字符串,
-    不包含隶属于主程序多UI交互的字符串"""
+    """信息 子页面字符串"""
+
+    # 页面标题
+    FRAME_TITLE = _("信息")
 
     # ShowInfobar 类
     SHOWINFOBAR_OFFLINE_TITLE = _("错误！")
@@ -91,55 +92,6 @@ class InfoUIString:
     SUPPTCARD_OFFLINEDOCGROUPCONTEXT = _("查看保存于本地的帮助文档, 如果有的话")
     SUPPTCARD_ONLINEDOCGROUPTITLE = _("在线帮助文档")
     SUPPTCARD_ONLINEDOCGROUPCONTEXT = _("访问项目官网获取在线帮助文档")
-
-    # 更新 部分
-    UPDATECARD_TITLE = _("更新")
-    UPDATECARD_PIPE_RELEASE = _("正式版")
-    UPDATECARD_PIPE_BETA = _("测试版")
-    UPDATECARD_UPDATESTATUS = _("检查更新")
-    UPDATECARD_PIPEGROUP_TITLE = _("更新通道")
-    UPDATECARD_PIPEGROUP_DETAIL = _("选择项目从何通道进行更新")
-    UPDATECARD_VERSTATUSGROUP_TITLE = _("当前版本已是最新版本")
-
-
-class SettUIString:
-    """首选项 子页面字符串,
-    仅包含 settings_ui.py 相关字符串,
-    不包含隶属于主程序多UI交互的字符串"""
-
-    # 提示文本
-    TIP_TITLE = _("在此处调整程序设置")
-    TIP_CONTEXT = _("从下面的孙页面中选择其一以更改相关选项")
-
-    # 基本设置
-    TO_BASIC_CARD_TEXT = _("跳转")
-    TO_BASIC_CARD_TITLE = _("基本")
-    TO_BASIC_CARD_CONTEXT = _("更改基本设置")
-
-    # 视听设置
-    TO_AUDIOVISUAL_CARD_TEXT = _("跳转")
-    TO_AUDIOVISUAL_CARD_TITLE = _("视听")
-    TO_AUDIOVISUAL_CARD_CONTEXT = _("更改背景音乐、音效、朗读等设置")
-
-    # 联动设置
-    TO_LINKAGE_CARD_TEXT = _("跳转")
-    TO_LINKAGE_CARD_TITLE = _("联动")
-    TO_LINKAGE_CARD_CONTEXT = _("更改与课表软件的联动设置")
-
-    # 语言设置
-    TO_LANGUAGE_CARD_TEXT = _("跳转")
-    TO_LANGUAGE_CARD_TITLE = _("语言")
-    TO_LANGUAGE_CARD_CONTEXT = _("更改界面显示语言")
-
-    # 更新设置
-    TO_UPDATE_CARD_TEXT = _("跳转")
-    TO_UPDATE_CARD_TITLE = _("更新")
-    TO_UPDATE_CARD_CONTEXT = _("更新程序")
-
-    # 调试设置
-    TO_DEBUG_CARD_TEXT = _("跳转")
-    TO_DEBUG_CARD_TITLE = _("调试")
-    TO_DEBUG_CARD_CONTEXT = _("高级调试选项")
 
 
 class SettNLUIString:

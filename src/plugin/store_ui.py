@@ -13,7 +13,7 @@ from PySide2.QtWidgets import QWidget, QVBoxLayout, QStackedWidget
 from PySide2.QtCore import Qt, Signal
 from qfluentwidgets import (
     FluentIcon,
-    TitleLabel,
+    SubtitleLabel,
     SubtitleLabel,
     PrimaryPushButton,
     InfoBar,
@@ -59,7 +59,7 @@ class PluginStorePage(QWidget):
 
         # 标题行（标题 + 刷新按钮）
         title_layout = QHBoxLayout()
-        self.title_label = TitleLabel("插件商店", self)
+        self.title_label = SubtitleLabel("插件商店", self)
         self.title_label.setObjectName("store_title")
         title_layout.addWidget(self.title_label)
 

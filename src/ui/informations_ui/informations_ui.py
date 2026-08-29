@@ -7,50 +7,12 @@
 from PySide2.QtWidgets import (
     QFrame,
     QVBoxLayout,
-    QGraphicsView,
 )
 from PySide2.QtCore import Qt
 import qfluentwidgets as qfw
 from qfluentwidgets import FluentIcon as FI
+from app_const_var import AssetsPathTXT
 from ui.ui_str import InfoUIString, BasicString
-
-
-class ImageViewer(QGraphicsView):
-    """图片显示控件，继承自 QGraphicsView"""
-
-    from typing import Optional
-    from PySide2.QtWidgets import QWidget
-
-    def __init__(self, parent: Optional[QWidget] = None):
-        from PySide2.QtWidgets import QGraphicsScene, QGraphicsPixmapItem
-        from PySide2.QtGui import QPainter
-
-        super(ImageViewer, self).__init__(parent)
-
-        # 创建一个 QGraphicsScene 对象并设置其父对象为当前的 ImageViewer
-        self.scene = QGraphicsScene(self)  # type: ignore
-
-        # 创建一个 QGraphicsPixmapItem 对象，用于显示图片
-        self.imageItem = QGraphicsPixmapItem()  # type: ignore
-
-        self.scene.addItem(self.imageItem)  # type: ignore
-        self.setScene(self.scene)  # type: ignore
-
-        # 启用平滑变换
-        self.setRenderHint(QPainter.SmoothPixmapTransform)  # type: ignore
-
-    def setPixmap(self, pic: str):
-        from PySide2.QtGui import QPixmap
-
-        pixmap = QPixmap(pic)
-        self.imageItem.setPixmap(pixmap)
-
-    def resizeEvent(self, event):
-
-        super(ImageViewer, self).resizeEvent(event)
-
-        # 根据窗口大小自动调整图片大小
-        self.fitInView(self.imageItem, Qt.KeepAspectRatio)  # type: ignore
 
 
 class ShowInfobar:
@@ -91,7 +53,12 @@ class InformationBoardCardGroup(qfw.ElevatedCardWidget):
         super().__init__(parent)
 
         # 项目详细图
-        self.app_detailed_image = ImageViewer()
+        self.app_detailed_image = qfw.ImageLabel(
+            AssetsPathTXT.APP_DETAILEDIMAGE_DARK_PATH
+        )
+        self.app_detailed_image.setBorderRadius(8, 8, 8, 8)
+        # 按比例缩放到指定的宽度
+        self.app_detailed_image.scaledToWidth(640)
 
         # 项目信息
         self.infotext_bodylabel = qfw.StrongBodyLabel(BasicString.APP_NAME, self)
@@ -147,11 +114,15 @@ class InformationUI(QFrame):
         """初始化子页面"""
         super().__init__(parent)
 
-        # 初始化卡片组件
+        # 初始化标题与卡片组件
+        self.frame_title = qfw.SubtitleLabel(InfoUIString.FRAME_TITLE)
         self.information_board_card = InformationBoardCardGroup(self)
         self.support_card = SupportCardGroup(self)
 
         # 组件布局
         self.main_layout = QVBoxLayout(self)
+        self.main_layout.setMargin(32)
+        self.main_layout.addWidget(self.frame_title)
         self.main_layout.addWidget(self.information_board_card)
         self.main_layout.addWidget(self.support_card)
+        self.main_layout.addStretch(1)
