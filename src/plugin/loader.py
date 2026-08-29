@@ -11,6 +11,7 @@ import zipfile
 import tempfile
 import json
 import urllib3
+import hashlib
 from typing import Dict, Callable, Optional, Any, List
 from pathlib import Path
 from stevedore import ExtensionManager
@@ -674,33 +675,87 @@ class PluginLoader:
             return False
 
     def download_plugin(self, plugin_info: Dict) -> Optional[Path]:
-        """下载插件 ZIP 包到临时文件"""
+        """
+        下载插件 ZIP 包到临时文件，带进度报告和 SHA256 校验
+        """
         download_url = plugin_info.get("download_url")
+        expected_sha256 = plugin_info.get("sha256")  # 可选，但强烈建议提供
+        
         if not download_url:
             logger.error("插件缺少 download_url")
             return None
+
         try:
-            response = requests.get(download_url, timeout=30, verify=False)
+            # 流式下载
+            response = requests.get(download_url, timeout=30, verify=False, stream=True)
             response.raise_for_status()
+            
+            total_size = int(response.headers.get('content-length', 0))
+            downloaded = 0
+            
+            # 使用 NamedTemporaryFile 保存
             with tempfile.NamedTemporaryFile(suffix=".zip", delete=False) as tmp_file:
-                tmp_file.write(response.content)
                 temp_zip = Path(tmp_file.name)
+                sha256_hash = hashlib.sha256()
+                
+                for chunk in response.iter_content(chunk_size=8192):
+                    if chunk:
+                        tmp_file.write(chunk)
+                        sha256_hash.update(chunk)
+                        downloaded += len(chunk)
+                        if total_size > 0:
+                            progress = int((downloaded / total_size) * 100)
+                            # 发射进度信号（通过 plugin_signals）
+                            from .signals import plugin_signals
+                            plugin_signals.install_progress.emit(progress)
+                
+                tmp_file.flush()
+            
+            # 校验 SHA256
+            if expected_sha256:
+                actual_sha256 = sha256_hash.hexdigest()
+                if actual_sha256.lower() != expected_sha256.lower():
+                    logger.error(f"SHA256 校验失败: 预期 {expected_sha256}, 实际 {actual_sha256}")
+                    temp_zip.unlink()
+                    return None
+                logger.info(f"SHA256 校验通过: {actual_sha256}")
+            else:
+                logger.warning("插件未提供 SHA256，跳过校验")
+            
             logger.info(f"插件下载成功: {temp_zip}")
             return temp_zip
+            
         except Exception as e:
             logger.error(f"下载插件失败: {e}")
+            if 'temp_zip' in locals() and temp_zip.exists():
+                temp_zip.unlink()
             return None
 
     def install_remote_plugin(self, plugin_info: Dict) -> bool:
-        """从远程插件信息安装（下载 + 解压）"""
+        """从远程插件信息安装（下载 + 解压 + 校验）"""
+        from .signals import plugin_signals
+        
+        # 重置进度
+        plugin_signals.install_progress.emit(0)
+        
+        # 1. 下载（带进度）
         zip_path = self.download_plugin(plugin_info)
         if not zip_path:
+            plugin_signals.install_progress.emit(-1)  # -1 表示失败
             return False
+        
+        # 2. 安装
         success = self.install_plugin_from_zip(zip_path)
+        
+        # 3. 清理临时文件
         if zip_path.exists():
             zip_path.unlink()
+        
         if success:
             logger.info(f"插件 {plugin_info.get('id')} 安装成功")
+            plugin_signals.install_progress.emit(100)
         else:
             logger.error(f"插件 {plugin_info.get('id')} 安装失败")
+            plugin_signals.install_progress.emit(-1)
+        
         return success

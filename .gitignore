@@ -11,3 +11,4 @@ start.build/*
 start.dist/*
 venv/*
 O:/*
+plugins/*

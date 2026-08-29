@@ -20,6 +20,7 @@ from qfluentwidgets import (
     ScrollArea,
     Pivot,
 )
+from .signals import plugin_signals
 
 from .loader import PluginLoader
 from .plugin_card_ui import PluginCard, OnlinePluginCard
@@ -318,13 +319,15 @@ class PluginStorePage(QWidget):
         """转发卸载请求"""
         self.plugin_uninstall_requested.emit(plugin_id)
 
+    def _on_update_requested(self, plugin_id: str) -> None:
+        """处理更新请求"""
+        # 先卸载
+        self.loader.uninstall_plugin(plugin_id)
+        # 再安装（复用安装逻辑）
+        self._on_install_requested(plugin_id)
+        
     def _on_install_requested(self, plugin_id: str) -> None:
-        """
-        处理安装请求
-        1. 从远程列表查找插件信息
-        2. 调用 loader 安装
-        3. 刷新列表并通知主窗口
-        """
+        """处理安装请求，进度反馈融入卡片"""
         plugin_info = None
         for p in self._remote_plugins:
             if p.get("id") == plugin_id:
@@ -333,35 +336,53 @@ class PluginStorePage(QWidget):
 
         if not plugin_info:
             InfoBar.error(
-                title="错误", content="未找到插件信息", parent=self, duration=2000
+                title="错误",
+                content="未找到插件信息",
+                parent=self,
+                duration=2000
             )
             return
 
-        success = self.loader.install_remote_plugin(plugin_info)
+        # 获取对应的卡片
+        card = self._online_cards.get(plugin_id)
+        if card:
+            card.set_installing_state(True)
+            
+        # 连接进度信号
+        def on_progress(value: int):
+            if card:
+                card.update_progress(value)
+            if value < 0:
+                # 错误处理
+                InfoBar.error(
+                    title="安装失败",
+                    content=f"无法安装插件「{plugin_info.get('name')}」",
+                    parent=self,
+                    duration=3000
+                )
+                plugin_signals.install_progress.disconnect(on_progress)
 
-        if success:
-            InfoBar.success(
-                title="安装成功",
-                content=f"插件「{plugin_info.get('name')}」已安装",
-                parent=self,
-                duration=2000,
-            )
-            # 刷新已安装列表
-            self._refresh_plugin_list()
-            # 刷新在线列表
-            self._online_loaded = False
-            self._fetch_online_plugins()
-            # 通知主窗口加载插件
-            self.plugin_install_requested.emit(plugin_id)
-        else:
-            InfoBar.error(
-                title="安装失败",
-                content=f"无法安装插件「{plugin_info.get('name')}」",
-                parent=self,
-                duration=3000,
-            )
+        plugin_signals.install_progress.connect(on_progress)
 
-    def _on_update_requested(self, plugin_id: str) -> None:
-        """处理更新请求：先卸载再安装"""
-        self.loader.uninstall_plugin(plugin_id)
-        self._on_install_requested(plugin_id)
+        try:
+            success = self.loader.install_remote_plugin(plugin_info)
+            if success:
+                InfoBar.success(
+                    title="安装成功",
+                    content=f"插件「{plugin_info.get('name')}」已安装",
+                    parent=self,
+                    duration=2000
+                )
+                self._refresh_plugin_list()
+                self._online_loaded = False
+                self._fetch_online_plugins()
+                self.plugin_install_requested.emit(plugin_id)
+            else:
+                InfoBar.error(
+                    title="安装失败",
+                    content=f"无法安装插件「{plugin_info.get('name')}」",
+                    parent=self,
+                    duration=3000
+                )
+        finally:
+            plugin_signals.install_progress.disconnect(on_progress)
