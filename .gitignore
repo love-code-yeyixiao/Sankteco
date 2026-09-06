@@ -12,3 +12,4 @@ start.dist/*
 venv/*
 O:/*
 plugins/*
+*.zip
