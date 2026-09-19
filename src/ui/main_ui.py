@@ -5,17 +5,14 @@
 """
 
 import asyncio
-from enum import Enum
-from typing import Optional
 
 from PySide2.QtWidgets import QWidget
-from qfluentwidgets import FluentWindow, qconfig
+from qfluentwidgets import FluentWindow, qconfig, Theme, setTheme, isDarkTheme
 from qfluentwidgets import FluentIcon as FI
 
 from app_const_var import AssetsPathTXT
 from app_config import AppConfig
 from ui.ui_str import MainUIString, BasicString
-from ui.ui_loading import get_theme_from_config
 
 # 插件相关导入
 from plugin.loader import PluginLoader
@@ -135,28 +132,26 @@ class MainWindow(FluentWindow):
         self.resize(1080, 768)
         self.setWindowTitle(BasicString.APP_MAINWINDOW_TITLE)
 
-    def _apply_theme(self, mode: Optional[Enum] = None) -> None:
-        """设置应用全局主题"""
+    def _apply_theme(self, theme: Theme = None) -> None:  # type: ignore
+        """读取内置配置项并应用主题 + 同步图标"""
         from PySide2.QtGui import QIcon
 
-        qconfig.save()
+        # 获取当前主题(Theme 枚举)
+        if theme is None:
+            theme = qconfig.get(qconfig.themeMode)
 
-        if mode is None:
-            mode = self.cfg.DarkLight.value
+        # 切换主题
+        setTheme(theme)
 
-        theme_mode = get_theme_from_config()
-        if theme_mode == "DARK":
-            self.setWindowIcon(QIcon(AssetsPathTXT.APP_ICON_DARK_PATH))
-            if self.information_ui.docs_reader_ui is not None:
-                self.information_ui.docs_reader_ui.setWindowIcon(
-                    QIcon(AssetsPathTXT.APP_ICON_DARK_PATH)
-                )
-        else:
-            self.setWindowIcon(QIcon(AssetsPathTXT.APP_ICON_LIGHT_PATH))
-            if self.information_ui.docs_reader_ui is not None:
-                self.information_ui.docs_reader_ui.setWindowIcon(
-                    QIcon(AssetsPathTXT.APP_ICON_LIGHT_PATH)
-                )
+        # 同步图标
+        icon_path = (
+            AssetsPathTXT.APP_ICON_DARK_PATH
+            if isDarkTheme()
+            else AssetsPathTXT.APP_ICON_LIGHT_PATH
+        )
+        self.setWindowIcon(QIcon(icon_path))
+        if self.information_ui.docs_reader_ui is not None:
+            self.information_ui.docs_reader_ui.setWindowIcon(QIcon(icon_path))
 
     # ========== 信号连接 ==========
 
@@ -164,7 +159,7 @@ class MainWindow(FluentWindow):
         """信号连接函数"""
 
         # 主题更改信号
-        self.cfg.DarkLight.valueChanged.connect(self._apply_theme)
+        qconfig.themeChanged.connect(self._apply_theme)
 
         # 插件信号（如果插件商店已创建）
         if self.plugin_store_page is not None:

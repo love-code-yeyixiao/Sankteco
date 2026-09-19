@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-08-09 20:25+0800\n"
-"PO-Revision-Date: 2026-08-09 20:48+0800\n"
+"POT-Creation-Date: 2026-09-19 14:54+0800\n"
+"PO-Revision-Date: 2026-09-19 15:16+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: eo\n"
@@ -31,7 +31,7 @@ msgstr "Gajni venkon ekde la komenco, akiri la ĉampionan titolon en unu paŝo!"
 msgid "别紧张"
 msgstr "Ne nervozu"
 
-#: src/ui/ui_str.py:55 src/ui/ui_str.py:353
+#: src/ui/ui_str.py:55 src/ui/ui_str.py:196
 msgid "祈福"
 msgstr "Sankteco"
 
@@ -87,475 +87,429 @@ msgstr "Sobra: "
 msgid "占位符"
 msgstr "Loktenilo"
 
-#: src/ui/ui_str.py:81
+#: src/ui/ui_str.py:79 src/ui/ui_str.py:194
+msgid "信息"
+msgstr "Informoj"
+
+#: src/ui/ui_str.py:82
 msgid "错误！"
 msgstr "Eraro!"
 
-#: src/ui/ui_str.py:82
+#: src/ui/ui_str.py:83
 msgid "无法找到离线文档！"
 msgstr "Ne eblas trovi la senretan dokumentaron!"
 
-#: src/ui/ui_str.py:83
+#: src/ui/ui_str.py:84
 msgid "警告！"
 msgstr "Averto!"
 
-#: src/ui/ui_str.py:84
+#: src/ui/ui_str.py:85
 msgid "无法连接到服务器！"
 msgstr "Ne eblas konekti al la servilo!"
 
-#: src/ui/ui_str.py:87
+#: src/ui/ui_str.py:88
 msgid "支持"
 msgstr "Subtenon"
 
-#: src/ui/ui_str.py:88 src/ui/ui_str.py:89
+#: src/ui/ui_str.py:89 src/ui/ui_str.py:90
 msgid "查看"
 msgstr "Vidi"
 
-#: src/ui/ui_str.py:90
+#: src/ui/ui_str.py:91
 msgid "离线帮助文档"
 msgstr "Senreta helpdokumentaro"
 
-#: src/ui/ui_str.py:91
+#: src/ui/ui_str.py:92
 msgid "查看保存于本地的帮助文档, 如果有的话"
 msgstr "Kontrolu la helpdokumentaron konservitan loke, se ĝi ekzistas"
 
-#: src/ui/ui_str.py:92
+#: src/ui/ui_str.py:93
 msgid "在线帮助文档"
 msgstr "Reta helpdokumentaro"
 
-#: src/ui/ui_str.py:93
+#: src/ui/ui_str.py:94
 msgid "访问项目官网获取在线帮助文档"
 msgstr ""
 "Vizitu la oficialan retejon de la projekto por aliri la retan "
 "helpodokumentaron"
 
-#: src/ui/ui_str.py:96 src/ui/ui_str.py:136
-msgid "更新"
-msgstr "Ĝisdatigi"
+#: src/ui/ui_str.py:101 src/ui/ui_str.py:209
+msgid "名单管理"
+msgstr "Listadministrado"
 
-#: src/ui/ui_str.py:97
-msgid "正式版"
-msgstr "Oficiala versio"
-
-#: src/ui/ui_str.py:98
-msgid "测试版"
-msgstr "Provetversio"
-
-#: src/ui/ui_str.py:99
-msgid "检查更新"
-msgstr "Testa versio"
-
-#: src/ui/ui_str.py:100
-msgid "更新通道"
-msgstr "Ĝisdatiga kanalo"
-
-#: src/ui/ui_str.py:101
-msgid "选择项目从何通道进行更新"
-msgstr "Elekti de kiu kanalo la projekto ricevos ĝisdatigojn"
-
-#: src/ui/ui_str.py:102
-msgid "当前版本已是最新版本"
-msgstr "La nuna versio jam estas la plej nova"
-
-#: src/ui/ui_str.py:111
-msgid "在此处调整程序设置"
-msgstr "Agordu programajn agordojn ĉi tie"
-
-#: src/ui/ui_str.py:112
-msgid "从下面的孙页面中选择其一以更改相关选项"
-msgstr "Elektu unu el la subaj subpaĝoj por ŝanĝi la rilatajn opciojn"
-
-#: src/ui/ui_str.py:115 src/ui/ui_str.py:120 src/ui/ui_str.py:125
-#: src/ui/ui_str.py:130 src/ui/ui_str.py:135 src/ui/ui_str.py:140
-#: src/ui/ui_str.py:322
-msgid "跳转"
-msgstr "Saltu"
-
-#: src/ui/ui_str.py:116 src/ui/ui_str.py:356
-msgid "基本"
-msgstr "Baza"
-
-#: src/ui/ui_str.py:117
-msgid "更改基本设置"
-msgstr "Ŝanĝi bazajn agordojn"
-
-#: src/ui/ui_str.py:121 src/ui/ui_str.py:357
-msgid "视听"
-msgstr "Aŭdikvido"
-
-#: src/ui/ui_str.py:122
-msgid "更改背景音乐、音效、朗读等设置"
-msgstr "Ŝanĝi fonaĵan muzikon, sonefektojn, legado ktp"
-
-#: src/ui/ui_str.py:126
-msgid "联动"
-msgstr "Kunligo"
-
-#: src/ui/ui_str.py:127
-msgid "更改与课表软件的联动设置"
-msgstr "Ŝanĝi la kunligajn agordojn kun horarprogramo"
-
-#: src/ui/ui_str.py:131 src/ui/ui_str.py:358
-msgid "语言"
-msgstr "Lingvo"
-
-#: src/ui/ui_str.py:132
-msgid "更改界面显示语言"
-msgstr "Ŝanĝi la interfacan montran lingvon"
-
-#: src/ui/ui_str.py:137
-msgid "更新程序"
-msgstr "Ĝisdatigi programon"
-
-#: src/ui/ui_str.py:141
-msgid "调试"
-msgstr "Rapidi"
-
-#: src/ui/ui_str.py:142
-msgid "高级调试选项"
-msgstr "Altnivelaj rapidigaj opcioj"
-
-#: src/ui/ui_str.py:152
+#: src/ui/ui_str.py:104
 msgid "键入新名单标识符"
 msgstr "Tajpu novan listan identigilojn"
 
-#: src/ui/ui_str.py:153
+#: src/ui/ui_str.py:105
 msgid "以英文字母、汉字、数字组成, 不能以数字开头"
 msgstr ""
 "Komponita el la angla alfabeto, ĉinaj karakteroj kaj ciferoj, ne povas "
 "komenci per cifero"
 
-#: src/ui/ui_str.py:156
+#: src/ui/ui_str.py:108
 msgid "当前名单"
 msgstr "Aktuala listo"
 
-#: src/ui/ui_str.py:157
+#: src/ui/ui_str.py:109
 msgid "选择要管理的名单"
 msgstr "Elekti la liston por administri"
 
-#: src/ui/ui_str.py:160
+#: src/ui/ui_str.py:112
 msgid "刷新"
 msgstr "Refreŝigi"
 
-#: src/ui/ui_str.py:161
+#: src/ui/ui_str.py:113
 msgid "新建名单"
 msgstr "Nova listo"
 
-#: src/ui/ui_str.py:162
+#: src/ui/ui_str.py:114
 msgid "重命名名单"
 msgstr "Ŝanĝi la nomon de la listo"
 
-#: src/ui/ui_str.py:163
+#: src/ui/ui_str.py:115
 msgid "删除名单"
 msgstr "Forigi la liston"
 
-#: src/ui/ui_str.py:164
+#: src/ui/ui_str.py:116
 msgid "导入..."
 msgstr "Enporti..."
 
-#: src/ui/ui_str.py:165
+#: src/ui/ui_str.py:117
 msgid "导出..."
 msgstr "Eksporti..."
 
-#: src/ui/ui_str.py:168
+#: src/ui/ui_str.py:120
 msgid "存在?"
 msgstr "Ĉu ekzistas?"
 
-#: src/ui/ui_str.py:169
+#: src/ui/ui_str.py:121
 msgid "学号"
 msgstr "Lernokodo"
 
-#: src/ui/ui_str.py:170
+#: src/ui/ui_str.py:122
 msgid "姓名"
 msgstr "Nomo"
 
-#: src/ui/ui_str.py:171
+#: src/ui/ui_str.py:123
 msgid "性别"
 msgstr "Sekso"
 
-#: src/ui/ui_str.py:172
+#: src/ui/ui_str.py:124
 msgid "小组"
 msgstr "Grupo"
 
-#: src/ui/ui_str.py:173
+#: src/ui/ui_str.py:125
 msgid "标签"
 msgstr "Etikedo"
 
-#: src/ui/ui_str.py:177
-msgid "动画精美度"
-msgstr "Animacia kvalito"
-
-#: src/ui/ui_str.py:178
-msgid "调节抽选时的动画精美程度"
-msgstr "Agordi la kvaliton de la animacio dum hazarda elektiĝo"
-
-#: src/ui/ui_str.py:179
-msgid "华丽"
-msgstr "Brila"
-
-#: src/ui/ui_str.py:180
-msgid "精美"
-msgstr "Eleganta"
-
-#: src/ui/ui_str.py:181
-msgid "一般"
-msgstr "Normala"
-
-#: src/ui/ui_str.py:182
-msgid "快速"
-msgstr "Rapida"
-
-#: src/ui/ui_str.py:186
-msgid "结果推送方式"
-msgstr "Modo de rezulteldono"
-
-#: src/ui/ui_str.py:187
-msgid "选择快速抽选的结果应怎样显示"
-msgstr "Elekti kiel montri la rezulton de rapida hazarda elektiĝo"
-
-#: src/ui/ui_str.py:188
-msgid "显示在ClassIsland"
-msgstr "Montri ĉe ClassIsland"
-
-#: src/ui/ui_str.py:189
-msgid "显示在ClassWidget"
-msgstr "Montri ĉe ClassWidget"
-
-#: src/ui/ui_str.py:190
-msgid "显示在临时弹窗"
-msgstr "Montri en provizora fenestro"
-
-#: src/ui/ui_str.py:198
-msgid "名单"
-msgstr "Listo"
-
-#: src/ui/ui_str.py:199
-msgid "普通抽选"
-msgstr "Generala selektado"
-
-#: src/ui/ui_str.py:200
-msgid "快速抽选"
-msgstr "Rapida selektado"
-
-#: src/ui/ui_str.py:204
+#: src/ui/ui_str.py:129
 msgid "选择一个名单文件"
 msgstr "Elekti listdosieron"
 
-#: src/ui/ui_str.py:205
+#: src/ui/ui_str.py:130
 msgid "选择一个储存名单文件的位置"
 msgstr "Elektu lokon por konservi la listdosieron"
 
-#: src/ui/ui_str.py:206
+#: src/ui/ui_str.py:131
 msgid "文本文件"
 msgstr "Teksto-dosiero"
 
-#: src/ui/ui_str.py:207
+#: src/ui/ui_str.py:132
 msgid "JSON文件"
 msgstr "JSON-dosiero"
 
-#: src/ui/ui_str.py:208
+#: src/ui/ui_str.py:133
 msgid "YAML配置文件"
 msgstr "YAML-agorddosiero"
 
-#: src/ui/ui_str.py:209
+#: src/ui/ui_str.py:134
 msgid "逗号分隔符文件"
 msgstr "Komad-separita dosiero"
 
-#: src/ui/ui_str.py:210
+#: src/ui/ui_str.py:135
 msgid "电子表格文档"
 msgstr "Elestra kalkultabelo"
 
-#: src/ui/ui_str.py:211
+#: src/ui/ui_str.py:136
+msgid "Excel2007~365电子表格文档"
+msgstr "Excel2007~365 kalkultabelaj dokumentoj"
+
+#: src/ui/ui_str.py:137
+msgid "Excel97~2003电子表格文档"
+msgstr "Excel97~2003 kalkultabelaj dokumentoj"
+
+#: src/ui/ui_str.py:138
+msgid "开放电子表格文档格式"
+msgstr "Malferma elektronika kalkultabelo dosierformato"
+
+#: src/ui/ui_str.py:139
 msgid "二维码"
 msgstr "QR-kodo"
 
-#: src/ui/ui_str.py:221
-msgid "音乐开关"
-msgstr "Muzika ŝaltilo"
-
-#: src/ui/ui_str.py:222
-msgid "控制是否在普通抽选时播放背景音乐"
-msgstr "Kontroli ĉu ludi fonmuzikon dum ĝenerala selektado"
-
-#: src/ui/ui_str.py:225
-msgid "音乐文件"
-msgstr "Muzikdosiero"
-
-#: src/ui/ui_str.py:226
-msgid "选择要启用的音乐文件"
-msgstr "Elekti la muzikdosieron por ebligi"
-
-#: src/ui/ui_str.py:227 src/ui/ui_str.py:249
-msgid "选择"
-msgstr "Elekti"
-
-#: src/ui/ui_str.py:230
-msgid "音乐音量"
-msgstr "Muzika volumo"
-
-#: src/ui/ui_str.py:231
-msgid "调节音乐在播放时的音量"
-msgstr "Aðusti la volumenon de la muziko dum ludo"
-
-#: src/ui/ui_str.py:234
-msgid "音乐渐入效果"
-msgstr "Muzika eniro-efekto"
-
-#: src/ui/ui_str.py:235
-msgid "调整音乐播放时渐入效果持续的秒数(s)"
-msgstr "Aðusti la daŭron (sekundoj) de la enira efekto de la muziko"
-
-#: src/ui/ui_str.py:238
-msgid "音乐渐出效果"
-msgstr "Muzika eliro-efekto"
-
-#: src/ui/ui_str.py:239
-msgid "调整音乐播放时渐出效果持续的秒数(s)"
-msgstr "Aðusti la daŭron (sekundoj) de la elira efekto de la muziko"
-
-#: src/ui/ui_str.py:243
-msgid "音效开关"
-msgstr "Sonefekto ŝaltilo"
-
-#: src/ui/ui_str.py:244
-msgid "控制是否在点名结束后播放抽选音效"
-msgstr "Kontroli ĉu ludi selektosonon post la vokado finiĝos"
-
-#: src/ui/ui_str.py:247
-msgid "音效路径"
-msgstr "Sonefekto vojo"
-
-#: src/ui/ui_str.py:248
-msgid "选择要启用的音效文件"
-msgstr "Elektu la sonefektdosierojn por aktivigi"
-
-#: src/ui/ui_str.py:252
-msgid "音效在何时播放"
-msgstr "Kiam ludi sonefektojn"
-
-#: src/ui/ui_str.py:253 src/ui/ui_str.py:264
-msgid "仅普通抽选后"
-msgstr "Nur post normala tirado"
-
-#: src/ui/ui_str.py:254 src/ui/ui_str.py:265
-msgid "仅快速抽选后"
-msgstr "Nur post rapida tirado"
-
-#: src/ui/ui_str.py:255 src/ui/ui_str.py:266
-msgid "两者后"
-msgstr "Post ambaŭ"
-
-#: src/ui/ui_str.py:259
-msgid "朗读开关"
-msgstr "Legado-sistemo"
-
-#: src/ui/ui_str.py:260
-msgid "控制是否在点名结束后朗读被抽中的名字"
-msgstr "Kontrolu ĉu legi la elektitan nomon post nomkalkulo"
-
-#: src/ui/ui_str.py:263
-msgid "在何时朗读"
-msgstr "Kiam legi"
-
-#: src/ui/ui_str.py:270
-msgid "深浅模式"
-msgstr "Malheluma/luma reĝimo"
-
-#: src/ui/ui_str.py:271
-msgid "选择程序显示时的深浅色模式"
-msgstr "Elektu la malhelan aŭ luman reĝimon dum la programo estas montrata"
-
-#: src/ui/ui_str.py:272
-msgid "深色"
-msgstr "Malhela"
-
-#: src/ui/ui_str.py:273
-msgid "浅色"
-msgstr "Luma"
-
-#: src/ui/ui_str.py:274 src/ui/ui_str.py:280
-msgid "跟随系统"
-msgstr "Sekvi la sistemon"
-
-#: src/ui/ui_str.py:277
-msgid "窗口效果"
-msgstr "Fenestrefektoj"
-
-#: src/ui/ui_str.py:278
-msgid "调整程序窗口的显示效果"
-msgstr "Agordu la montran efikon de la programfenestro"
-
-#: src/ui/ui_str.py:279
-msgid "Mica"
-msgstr "Mica"
-
-#: src/ui/ui_str.py:284
-msgid "一言API"
-msgstr "Hitokoto API"
-
-#: src/ui/ui_str.py:285
-msgid "调整一言所使用的API接口地址"
-msgstr "Agordi la API-adreson uzatan de Hitokoto"
-
-#: src/ui/ui_str.py:286 src/ui/ui_str.py:304
-msgid "一言"
-msgstr "Hitokoto"
-
-#: src/ui/ui_str.py:289
-msgid "刷新时间"
-msgstr "Refreŝigi tempon"
-
-#: src/ui/ui_str.py:290
-msgid "调整一言的刷新时间(s)"
-msgstr "Agordi la refreŝan tempon de Hitokoto(sekundoj)"
-
-#: src/ui/ui_str.py:300
-msgid "音乐"
-msgstr "Muziko"
-
-#: src/ui/ui_str.py:301
-msgid "音效"
-msgstr "Sonefektoj"
-
-#: src/ui/ui_str.py:302
-msgid "朗读"
-msgstr "Legado"
-
-#: src/ui/ui_str.py:303
+#: src/ui/ui_str.py:146 src/ui/ui_str.py:210
 msgid "主题"
 msgstr "Temo"
 
-#: src/ui/ui_str.py:313
+#: src/ui/ui_str.py:149
+msgid "显示主题"
+msgstr "Montri temon"
+
+#: src/ui/ui_str.py:150
+msgid "更改程序的显示主题"
+msgstr "Ŝanĝi la vidan temon de la programo"
+
+#: src/ui/ui_str.py:151
+msgid "浅色"
+msgstr "Luma"
+
+#: src/ui/ui_str.py:152
+msgid "深色"
+msgstr "Malhela"
+
+#: src/ui/ui_str.py:153
+msgid "跟随系统"
+msgstr "Sekvi la sistemon"
+
+#: src/ui/ui_str.py:160 src/ui/ui_str.py:211
+msgid "语言"
+msgstr "Lingvo"
+
+#: src/ui/ui_str.py:163
 msgid "显示语言"
 msgstr "Montrado de lingvo"
 
-#: src/ui/ui_str.py:314
+#: src/ui/ui_str.py:164
 msgid "选择将在屏幕上显示的语言"
 msgstr "Elektu la lingvon montratan sur la ekrano"
 
-#: src/ui/ui_str.py:320
+#: src/ui/ui_str.py:170
 msgid "加入翻译计划"
 msgstr "Aliĝi al la tradukprojekto"
 
-#: src/ui/ui_str.py:321
+#: src/ui/ui_str.py:171
 msgid "加入项目的在线翻译工程, 为本地化做出贡献"
 msgstr "Aliĝu al la reta tradukprojeto de la projekto por kontribui al lokigo"
 
-#: src/ui/ui_str.py:331
+#: src/ui/ui_str.py:172
+msgid "跳转"
+msgstr "Saltu"
+
+#: src/ui/ui_str.py:179
 msgid "当前文档"
 msgstr "Nuna dokumento"
 
-#: src/ui/ui_str.py:332
+#: src/ui/ui_str.py:180
 msgid "选择要查看的文档"
 msgstr "Elektu dokumenton por vidi"
 
-#: src/ui/ui_str.py:351
-msgid "信息"
-msgstr "Informoj"
-
-#: src/ui/ui_str.py:352
+#: src/ui/ui_str.py:195 src/ui/ui_str.py:215
 msgid "首选项"
 msgstr "Preferoj"
+
+#~ msgid "更新"
+#~ msgstr "Ĝisdatigi"
+
+#~ msgid "正式版"
+#~ msgstr "Oficiala versio"
+
+#~ msgid "测试版"
+#~ msgstr "Provetversio"
+
+#~ msgid "检查更新"
+#~ msgstr "Testa versio"
+
+#~ msgid "更新通道"
+#~ msgstr "Ĝisdatiga kanalo"
+
+#~ msgid "选择项目从何通道进行更新"
+#~ msgstr "Elekti de kiu kanalo la projekto ricevos ĝisdatigojn"
+
+#~ msgid "当前版本已是最新版本"
+#~ msgstr "La nuna versio jam estas la plej nova"
+
+#~ msgid "在此处调整程序设置"
+#~ msgstr "Agordu programajn agordojn ĉi tie"
+
+#~ msgid "从下面的孙页面中选择其一以更改相关选项"
+#~ msgstr "Elektu unu el la subaj subpaĝoj por ŝanĝi la rilatajn opciojn"
+
+#~ msgid "基本"
+#~ msgstr "Baza"
+
+#~ msgid "更改基本设置"
+#~ msgstr "Ŝanĝi bazajn agordojn"
+
+#~ msgid "视听"
+#~ msgstr "Aŭdikvido"
+
+#~ msgid "更改背景音乐、音效、朗读等设置"
+#~ msgstr "Ŝanĝi fonaĵan muzikon, sonefektojn, legado ktp"
+
+#~ msgid "联动"
+#~ msgstr "Kunligo"
+
+#~ msgid "更改与课表软件的联动设置"
+#~ msgstr "Ŝanĝi la kunligajn agordojn kun horarprogramo"
+
+#~ msgid "更改界面显示语言"
+#~ msgstr "Ŝanĝi la interfacan montran lingvon"
+
+#~ msgid "更新程序"
+#~ msgstr "Ĝisdatigi programon"
+
+#~ msgid "调试"
+#~ msgstr "Rapidi"
+
+#~ msgid "高级调试选项"
+#~ msgstr "Altnivelaj rapidigaj opcioj"
+
+#~ msgid "动画精美度"
+#~ msgstr "Animacia kvalito"
+
+#~ msgid "调节抽选时的动画精美程度"
+#~ msgstr "Agordi la kvaliton de la animacio dum hazarda elektiĝo"
+
+#~ msgid "华丽"
+#~ msgstr "Brila"
+
+#~ msgid "精美"
+#~ msgstr "Eleganta"
+
+#~ msgid "一般"
+#~ msgstr "Normala"
+
+#~ msgid "快速"
+#~ msgstr "Rapida"
+
+#~ msgid "结果推送方式"
+#~ msgstr "Modo de rezulteldono"
+
+#~ msgid "选择快速抽选的结果应怎样显示"
+#~ msgstr "Elekti kiel montri la rezulton de rapida hazarda elektiĝo"
+
+#~ msgid "显示在ClassIsland"
+#~ msgstr "Montri ĉe ClassIsland"
+
+#~ msgid "显示在ClassWidget"
+#~ msgstr "Montri ĉe ClassWidget"
+
+#~ msgid "显示在临时弹窗"
+#~ msgstr "Montri en provizora fenestro"
+
+#~ msgid "名单"
+#~ msgstr "Listo"
+
+#~ msgid "普通抽选"
+#~ msgstr "Generala selektado"
+
+#~ msgid "快速抽选"
+#~ msgstr "Rapida selektado"
+
+#~ msgid "音乐开关"
+#~ msgstr "Muzika ŝaltilo"
+
+#~ msgid "控制是否在普通抽选时播放背景音乐"
+#~ msgstr "Kontroli ĉu ludi fonmuzikon dum ĝenerala selektado"
+
+#~ msgid "音乐文件"
+#~ msgstr "Muzikdosiero"
+
+#~ msgid "选择要启用的音乐文件"
+#~ msgstr "Elekti la muzikdosieron por ebligi"
+
+#~ msgid "选择"
+#~ msgstr "Elekti"
+
+#~ msgid "音乐音量"
+#~ msgstr "Muzika volumo"
+
+#~ msgid "调节音乐在播放时的音量"
+#~ msgstr "Aðusti la volumenon de la muziko dum ludo"
+
+#~ msgid "音乐渐入效果"
+#~ msgstr "Muzika eniro-efekto"
+
+#~ msgid "调整音乐播放时渐入效果持续的秒数(s)"
+#~ msgstr "Aðusti la daŭron (sekundoj) de la enira efekto de la muziko"
+
+#~ msgid "音乐渐出效果"
+#~ msgstr "Muzika eliro-efekto"
+
+#~ msgid "调整音乐播放时渐出效果持续的秒数(s)"
+#~ msgstr "Aðusti la daŭron (sekundoj) de la elira efekto de la muziko"
+
+#~ msgid "音效开关"
+#~ msgstr "Sonefekto ŝaltilo"
+
+#~ msgid "控制是否在点名结束后播放抽选音效"
+#~ msgstr "Kontroli ĉu ludi selektosonon post la vokado finiĝos"
+
+#~ msgid "音效路径"
+#~ msgstr "Sonefekto vojo"
+
+#~ msgid "选择要启用的音效文件"
+#~ msgstr "Elektu la sonefektdosierojn por aktivigi"
+
+#~ msgid "音效在何时播放"
+#~ msgstr "Kiam ludi sonefektojn"
+
+#~ msgid "仅普通抽选后"
+#~ msgstr "Nur post normala tirado"
+
+#~ msgid "仅快速抽选后"
+#~ msgstr "Nur post rapida tirado"
+
+#~ msgid "两者后"
+#~ msgstr "Post ambaŭ"
+
+#~ msgid "朗读开关"
+#~ msgstr "Legado-sistemo"
+
+#~ msgid "控制是否在点名结束后朗读被抽中的名字"
+#~ msgstr "Kontrolu ĉu legi la elektitan nomon post nomkalkulo"
+
+#~ msgid "在何时朗读"
+#~ msgstr "Kiam legi"
+
+#~ msgid "深浅模式"
+#~ msgstr "Malheluma/luma reĝimo"
+
+#~ msgid "选择程序显示时的深浅色模式"
+#~ msgstr "Elektu la malhelan aŭ luman reĝimon dum la programo estas montrata"
+
+#~ msgid "窗口效果"
+#~ msgstr "Fenestrefektoj"
+
+#~ msgid "调整程序窗口的显示效果"
+#~ msgstr "Agordu la montran efikon de la programfenestro"
+
+#~ msgid "Mica"
+#~ msgstr "Mica"
+
+#~ msgid "一言API"
+#~ msgstr "Hitokoto API"
+
+#~ msgid "调整一言所使用的API接口地址"
+#~ msgstr "Agordi la API-adreson uzatan de Hitokoto"
+
+#~ msgid "一言"
+#~ msgstr "Hitokoto"
+
+#~ msgid "刷新时间"
+#~ msgstr "Refreŝigi tempon"
+
+#~ msgid "调整一言的刷新时间(s)"
+#~ msgstr "Agordi la refreŝan tempon de Hitokoto(sekundoj)"
+
+#~ msgid "音乐"
+#~ msgstr "Muziko"
+
+#~ msgid "音效"
+#~ msgstr "Sonefektoj"
+
+#~ msgid "朗读"
+#~ msgstr "Legado"
 
 #~ msgid "简体中文"
 #~ msgstr "Simpligita Ĉino"

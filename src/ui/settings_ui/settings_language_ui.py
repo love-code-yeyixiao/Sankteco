@@ -1,14 +1,19 @@
 """
 子页面：语言( 首选项 的子页面),
 此页面包含了程序显示语言的可调整设置选项,
-引用时可作 SettLangUI / setting_language_ui
+引用时可作 SettLangUI / settings_language_ui
 """
 
 from PySide2.QtWidgets import (
     QFrame,
     QLayout,
 )
-import qfluentwidgets as qfw
+from qfluentwidgets import (
+    qconfig,
+    SubtitleLabel,
+    ComboBoxSettingCard,
+    HyperlinkCard,
+)
 from qfluentwidgets import FluentIcon as FI
 from app_const_var import AssetsPathTXT, WebUrl
 from ui.ui_str import SettLangUIString
@@ -16,7 +21,7 @@ from app_config import AppConfig
 
 # 加载配置文件
 sett_lang_ui_cfg = AppConfig()
-qfw.qconfig.load(AssetsPathTXT.APP_CONFIG, sett_lang_ui_cfg)
+qconfig.load(AssetsPathTXT.APP_CONFIG, sett_lang_ui_cfg)
 
 
 def set_widget_to_layout(wlist: list, layout: QLayout):
@@ -57,10 +62,10 @@ class SettLangUI(QFrame):
         """初始化控件"""
 
         # 页面标题
-        self.frame_title = qfw.SubtitleLabel(SettLangUIString.FRAME_TITLE)
+        self.frame_title = SubtitleLabel(SettLangUIString.FRAME_TITLE)
 
         # 语言选择
-        self.screen_language = qfw.ComboBoxSettingCard(
+        self.screen_language = ComboBoxSettingCard(
             sett_lang_ui_cfg.Language,
             FI.LANGUAGE,
             SettLangUIString.SCREEN_LANGUAGE_TITLE,
@@ -72,7 +77,7 @@ class SettLangUI(QFrame):
         )
 
         # 加入翻译计划
-        self.join_translation = qfw.HyperlinkCard(
+        self.join_translation = HyperlinkCard(
             WebUrl.JOIN_TRANSLATION_LINK,
             SettLangUIString.JOIN_TRANSLATION_HYPERLINK_TEXT,
             FI.CLOUD,

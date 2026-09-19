@@ -139,97 +139,18 @@ class SettNLUIString:
     NAMELIST_DIALOG_FILTER_QR = _("二维码")
 
 
-class SettAvUIString:
-    """首选项-视听 孙页面字符串,
-    仅包含 setting_audiovisual_ui.py 相关字符串,
-    不包含隶属于主程序多UI交互的字符串"""
+class SettThemeUIString:
+    """首选项-主题 页面字符串"""
 
-    # 音乐 部分
-    # 音乐开关
-    MUSIC_SWITCH_CARD_TITLE = _("音乐开关")
-    MUSIC_SWITCH_CARD_CONTEXT = _("控制是否在普通抽选时播放背景音乐")
+    # 页面标题
+    FRAME_TITLE = _("主题")
 
-    # 音乐文件
-    MUSIC_PATH_CARD_TITLE = _("音乐文件")
-    MUSIC_PATH_CARD_CONTEXT = _("选择要启用的音乐文件")
-    MUSIC_PATH_CARD_BUTTON = _("选择")
-
-    # 音量调节
-    MUSIC_VOLUME_CARD_TITLE = _("音乐音量")
-    MUSIC_VOLUME_CARD_CONTEXT = _("调节音乐在播放时的音量")
-
-    # 渐入效果
-    MUSIC_PLAY_SMOOTHLY_CARD_TITLE = _("音乐渐入效果")
-    MUSIC_PLAY_SMOOTHLY_CARD_CONTEXT = _("调整音乐播放时渐入效果持续的秒数(s)")
-
-    # 渐出效果
-    MUSIC_PAUSE_SMOOTHLY_CARD_TITLE = _("音乐渐出效果")
-    MUSIC_PAUSE_SMOOTHLY_CARD_CONTEXT = _("调整音乐播放时渐出效果持续的秒数(s)")
-
-    # 音效 部分
-    # 音效开关
-    SOUND_SWITCH_CARD_TITLE = _("音效开关")
-    SOUND_SWITCH_CARD_CONTEXT = _("控制是否在点名结束后播放抽选音效")
-
-    # 音效路径
-    SOUND_PATH_CRAD_TITLE = _("音效路径")
-    SOUND_PATH_CRAD_CONTEXT = _("选择要启用的音效文件")
-    SOUND_PATH_CARD_BUTTON = _("选择")
-
-    # 音效在何时播放
-    SOUND_PLAY_TIME_CARD_TITLE = _("音效在何时播放")
-    SOUND_PLAY_TIME_CARD_TEXT_B_CHOOSE = _("仅普通抽选后")
-    SOUND_PLAY_TIME_CARD_TEXT_F_CHOOSE = _("仅快速抽选后")
-    SOUND_PLAY_TIME_CARD_TEXT_BOTH = _("两者后")
-
-    # 朗读 部分
-    # 朗读开关
-    READ_SWITCH_CARD_TITLE = _("朗读开关")
-    READ_SWITCH_CARD_CONTEXT = _("控制是否在点名结束后朗读被抽中的名字")
-
-    # 在何时朗读
-    READ_TIME_CARD_TITLE = _("在何时朗读")
-    READ_TIME_CARD_TEXT_B_CHOOSE = _("仅普通抽选后")
-    READ_TIME_CARD_TEXT_F_CHOOSE = _("仅快速抽选后")
-    READ_TIME_CARD_TEXT_BOTH = _("两者后")
-
-    # 主题
-    # 深浅模式
-    THEME_DARK_LIGHT_CARD_TITLE = _("深浅模式")
-    THEME_DARK_LIGHT_CARD_CONTEXT = _("选择程序显示时的深浅色模式")
-    THEME_DARK_LIGHT_CARD_TEXT_DARK = _("深色")
-    THEME_DARK_LIGHT_CARD_TEXT_LIGHT = _("浅色")
-    THEME_DARK_LIGHT_CARD_TEXT_AUTO = _("跟随系统")
-
-    # 窗口效果
-    THEME_WINDOW_EFFORT_CARD_TITLE = _("窗口效果")
-    THEME_WINDOW_EFFORT_CARD_CONTEXT = _("调整程序窗口的显示效果")
-    THEME_WINDOW_EFFORT_CARD_TEXT_MICA = _("Mica")
-    THEME_WINDOW_EFFORT_CARD_TEXT_AUTO = _("跟随系统")
-
-    # 一言
-    # API接口
-    HITOKOTO_API_CARD_TITLE = _("一言API")
-    HITOKOTO_API_CARD_CONTEXT = _("调整一言所使用的API接口地址")
-    HITOKOTO_API_CARD_TEXT_HITOKOTO = _("一言") + "https://v1.hitokoto.cn/"
-
-    # 刷新时间
-    HITOKOTO_RENEW_TIME_CARD_TITLE = _("刷新时间")
-    HITOKOTO_RENEW_TIME_CARD_CONTEXT = _("调整一言的刷新时间(s)")
-
-    # 各部分对象名称
-    MUSIC_SETT_GR_OBJNAME = "music_sett_gr"
-    SOUND_SETT_GR_OBJNAME = "sound_sett_gr"
-    READ_SETT_GR_OBJNAME = "read_sett_gr"
-    THEME_SETT_GR_OBJNAME = "theme_sett_gr"
-    HITOKOTO_SETT_GR_OBJNAME = "hitokoto_sett_gr"
-
-    # 各部分显示字段
-    MUSIC_SETT_GR_NAVNAME = _("音乐")
-    SOUND_SETT_GR_NAVNAME = _("音效")
-    READ_SETT_GR_NAVNAME = _("朗读")
-    THEME_SETT_GR_NAVNAME = _("主题")
-    HITOKOTO_SETT_GR_NAVNAME = _("一言")
+    # 显示主题
+    THEME_CARD_TITLE = _("显示主题")
+    THEME_CARD_CONTEXT = _("更改程序的显示主题")
+    THEME_CARD_TEXT_LIGHT = _("浅色")
+    THEME_CARD_TEXT_DARK = _("深色")
+    THEME_CARD_TEXT_AUTO = _("跟随系统")
 
 
 class SettLangUIString:
@@ -281,10 +202,12 @@ class SettWindowString:
 
     # 子页面对象名
     NAMELISTS_UI_OBJNAME = "namelists_ui"
+    THEME_UI_OBJNAME = "theme_ui"
     LANGUAGE_UI_OBJNAME = "language_ui"
 
     # 子页面导航窗口显示字段
     NAMELISTS_UI_NAVNAME = _("名单管理")
+    THEME_UI_NAVNAME = _("主题")
     LANGUAGE_UI_NAVNAME = _("语言")
 
     # 窗口显示字段
